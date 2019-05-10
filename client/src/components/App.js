@@ -10,6 +10,7 @@ import "../styles/main.css"
 
 const App = props => {
     return (
+      <div>
       <AuthProvider>
         <Provider store={store}>
           <Router>
@@ -24,6 +25,7 @@ const App = props => {
           </Router>
         </Provider>
       </AuthProvider>
+      </div>
     )
 }
 
