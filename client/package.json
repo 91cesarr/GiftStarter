@@ -31,8 +31,8 @@
     "nouislider": "13.1.0",
     "react-datetime": "2.16.3",
     "react-slick": "0.23.2",
-    "react-swipeable-views": "0.13.1",
-    "stripe": "^6.34.0"
+    "stripe": "^6.34.0",
+    "react-swipeable-views": "0.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
