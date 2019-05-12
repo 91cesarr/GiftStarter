@@ -5,75 +5,41 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "@material-ui/styles": "^3.0.0-alpha.10",
     "axios": "^0.18.0",
+    "cookie-parser": "^1.4.4",
+    "http-errors": "^1.7.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mysql": "^2.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^7.0.2",
+    "react-moment": "^0.9.2",
+    "react-redux": "7.1.0-alpha.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "redux": "^4.0.1",
-    "socket.io": "^2.2.0",
-    "chart.js": "^2.7.3",
-    "classnames": "^2.2.6",
-    "history": "^4.7.2",
-    "node-sass": "^4.11.0",
-    "prop-types": "^15.7.1",
-    "react-chartjs-2": "^2.7.4",
-    "react-perfect-scrollbar": "^1.4.4",
-    "react-router-config": "^5.0.0",
-    "recompose": "^0.30.0",
-    "underscore": "^1.9.1",
-    "validate.js": "^0.12.0",
-    "nouislider": "13.1.0",
-    "react-datetime": "2.16.3",
-    "react-slick": "0.23.2",
-    "stripe": "^6.34.0",
-    "react-swipeable-views": "0.13.1"
+    "semantic-ui-react": "^0.87.0",
+    "socket.io": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint:check": "eslint . --ext=js,jsx;  exit 0",
-    "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "build-package-css": "node-sass src/assets/scss/material-kit-react.scss dist/material-kit-react.css",
-    "build-package": "npm run build-package-css && babel src --out-dir dist",
-    "compile-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.css",
-    "minify-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.css --source-map true"
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "development": [
-    "last 1 chrome version",
-    "last 1 firefox version",
-    "last 1 safari version"
-  ],
-  "optionalDependencies": {
-    "eslint-config-prettier": "4.0.0",
-    "eslint-plugin-prettier": "3.0.1"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "devDependencies": {
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1",
-    "@babel/cli": "7.2.3",
-    "@babel/plugin-proposal-class-properties": "7.3.0",
-    "@babel/preset-env": "7.3.1",
-    "@babel/preset-react": "7.0.0"
-  }
+  "proxy": "http://localhost:3001"
 }
