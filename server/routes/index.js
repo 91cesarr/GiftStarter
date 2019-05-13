@@ -23,6 +23,7 @@ router.post("/register", (req, res, next) => {
 
       conn.query(sql, [username, password], (err, results, fields) => {
         if (err) {
+          console.log(err)
           throw new Error("register failed")
         } else {
           const token = jwt.sign({ username }, config.get("secret"))
