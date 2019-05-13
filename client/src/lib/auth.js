@@ -111,10 +111,10 @@ export const AuthRoute = ({ component: Component, ...rest }) => {
         auth.isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{ pathname: auth.redirectUrl, state: { from: props.location } }}
-          />
-        )
+            <Redirect
+              to={{ pathname: auth.redirectUrl, state: { from: props.location } }}
+            />
+          )
       }
     />
   )
