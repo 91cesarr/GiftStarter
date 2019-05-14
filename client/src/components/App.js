@@ -2,6 +2,7 @@ import React from "react"
 import { Provider } from "react-redux"
 import store from "../store"
 import Create from "./Create"
+import Donation from "./Donation"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
@@ -17,6 +18,7 @@ const App = props => {
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/donation" component={Donation} />
 
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
