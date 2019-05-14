@@ -64,7 +64,7 @@ router.post("/login", (req, res, next) => {
 // get user profile data
 router.get('/user/:user_id', (req, res, next) => {
   const sql = `
-  SELECT  username, user_id, fname
+  SELECT username, user_id, fname
   FROM users 
   WHERE user_id  = ?
   `
@@ -74,18 +74,18 @@ router.get('/user/:user_id', (req, res, next) => {
   })
 })
 
-// // get the specific item
-// router.get('/item/:id', (req, res, next) => {
-//   const sql = `
-//   SELECT  items.*
-//   FROM items
-//   WHERE id  = ?
-//   `
+// get the specific item
+router.get('/item/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  items.*
+  FROM items
+  WHERE item_id  = ?
+  `
 
-//   conn.query(sql, [req.params.id], (err, results, fields) => {
-//     res.json(results[0])
-//   })
-// })
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results[0])
+  })
+})
 
 // post new item
 router.post('/item', (req, res, next) => {
@@ -97,11 +97,12 @@ router.post('/item', (req, res, next) => {
     category,
     reason,
     amount,
-    pic_url
+    picture_url,
+    item_url
   )
   VALUES (?, ?, ?, ?, ?, ?, ?)
   `
-  conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, req.body.amount, req.body.pic_url], (err, results, fields) => {
+  conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, req.body.amount, req.body.picture_url, req.body.item.url], (err, results, fields) => {
 
     console.log(err)
     res.json({
@@ -111,7 +112,8 @@ router.post('/item', (req, res, next) => {
       category: req.body.category,
       reason: req.body.reason,
       amount: req.body.amount,
-      pic_url: req.body.pic_url
+      pic_url: req.body.pic_url,
+      item_url: req.body.item.url
     })
   })
 })

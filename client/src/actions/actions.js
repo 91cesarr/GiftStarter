@@ -1,9 +1,9 @@
-import io from "socket.io-client"
+// import io from "socket.io-client"
 import store from "../store"
 import axios from 'axios'
 
-const socket = io.connect("http://localhost:3001")
-console.log(socket)
+// const socket = io.connect("http://localhost:3001")
+// console.log(socket)
 
 // get user data
 export function getUser(user_id) {
@@ -15,15 +15,15 @@ export function getUser(user_id) {
   })
 }
 
-// // get single item
-// export function getItem(item_id) {
-//   axios.get('/api/item/' + item_id).then(resp => {
-//     store.dispatch({
-//       type: 'GET_ITEM',
-//       payload: resp.data
-//     })
-//   })
-// }
+// get single item
+export function getItem(item_id) {
+  axios.get('/api/item/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM',
+      payload: resp.data
+    })
+  })
+}
 
 // submit a new item
 export function sendItemData(item) {

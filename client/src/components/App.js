@@ -1,7 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import store from "../store"
-import Create from "./Create"
+import Create from "./Create.jsx"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
