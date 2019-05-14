@@ -1,4 +1,5 @@
 const initialState = {
+  user: {},
   item: {},
   // description: '',
   // category: '',
@@ -16,6 +17,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case "GET_ITEM":
       return { ...state, item: action.payload }
+    case "GET_USER":
+      return { ...state, user: action.payload }
     // case "ADD_MESSAGE":
     //   return { ...state, messages: [...state.messages, action.payload] }
     // case "SET_USERNAME":
