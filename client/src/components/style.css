@@ -3,15 +3,22 @@ html {
   background: #00B4DB;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  font-family: 'roboto';
 }
 *,* ::after, *::before {
   box-sizing: inherit;
   margin:0;
 }
+:root {
+ --mdc-theme-primary: #4527a0;
+ --mdc-theme-secondary: #b2dfdb;
+}
 .container {
   margin: 0 auto;
-  background: #F7F8FC;
+  background: #00B4DB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
 }
 .container h1 {
   text-align: center;
@@ -25,7 +32,10 @@ html {
 .temp-container {
   display: flex;
   justify-content: center;
-  background: rgb(252, 252, 252);
+  background: #00B4DB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.07);
   overflow: hidden;
@@ -142,4 +152,35 @@ html {
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
+}
+
+
+/* Create Page */
+.createUser {
+  background: #00B4DB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  margin-top:0;
+}
+.createForm {
+  width: 700px;
+
+}
+.createLine1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* .createName, .createCat, .createDesc, .createReason, .createAmount {
+  width: 50%;
+} */
+#createName, #createDesc, #createReason {
+  width: 300px;
+}
+#createAmount {
+  width: 300px;
+}
+#createCat {
+  width: 300px;
 }

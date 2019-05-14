@@ -8,19 +8,44 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import "../styles/main.css"
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: '#b085f5',
+      main: '#4527a0',
+      // dark: '#4d2c91',
+      contrastText: '#00B4DB',
+    },
+    secondary: {
+      // light: '#cfcfcf',
+      main: '#b2dfdb',
+      // dark: '#707070',
+      contrastText: '#0083B0',
+    },
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
+
 const App = props => {
   return (
     <AuthProvider>
       <Provider store={store}>
         <Router>
-          <div>
-            {/* public routes */}
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+          <MuiThemeProvider theme={theme}>
+            <div>
+              {/* public routes */}
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
 
-            {/* private routes */}
-            <AuthRoute path="/" exact component={Create} />
-          </div>
+              {/* private routes */}
+              <AuthRoute path="/" exact component={Create} />
+            </div>
+          </MuiThemeProvider>
         </Router>
       </Provider>
     </AuthProvider>
