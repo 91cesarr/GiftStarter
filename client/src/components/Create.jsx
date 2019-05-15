@@ -1,12 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 // import { AuthContext } from '../lib/auth'
 // import { sendItemData } from '../actions/actions'
 // nodejs library that concatenates classes
 import classNames from "classnames"
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles"
-import { makeStyles } from '@material-ui/styles';
+// import { makeStyles } from '@material-ui/styles';
 
 // @material-ui/icons
 
@@ -15,14 +15,13 @@ import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
+// import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
 // // Sections for this page
-import CreatePage from "./CreatePage.jsx";
 import CreateForm from "./CreateForm.jsx";
 
 const dashboardRoutes = [];
@@ -35,7 +34,7 @@ const CreateItem = props => {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Material Kit React"
+        brand="WishBig"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -52,15 +51,16 @@ const CreateItem = props => {
             <GridItem xs={12} sm={12} md={6}>
               <h1
                 className={classes.title}
-              >Your Story Starts With Us.</h1>
+              >What if you could have it all?</h1>
               <h4>
-                Every landing page needs a small description after the big
-                bold title, that's why we added this text here. Add here all
-                the information that can make you or your product create the
-                first impression.
+                It's your big day. You want something truly awesome, but your friends and family can't seem to coordinate.
+                <br></br><br></br>
+                {/* Don't just settle for a bunch of small, cute gifts (which would still be great, but...).
+                <br></br><br></br> */}
+                Let everyone know what your heart really desires. Create your gift request, send the link to your contacts, and get the financial help you need for the present you REALLY want. Don't forget to WISH BIG!
                 </h4>
               <br />
-              <Button
+              {/* <Button
                 color="danger"
                 size="lg"
                 href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -69,7 +69,7 @@ const CreateItem = props => {
               >
                 <i className="fas fa-play" />
                 Watch video
-                </Button>
+                </Button> */}
             </GridItem>
           </GridContainer>
         </div>
@@ -80,7 +80,6 @@ const CreateItem = props => {
         <div
           className={classes.container}
         >
-          <CreatePage />
           <CreateForm />
         </div>
       </div>

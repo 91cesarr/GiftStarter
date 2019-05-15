@@ -31,6 +31,11 @@ export function sendItemData(item) {
   axios.post('/api/item', item)
 }
 
+// // submit a donation
+// export function sendDonation(donation) {
+//   console.log(donation)
+//   axios.post('/api/donation', donation)
+// }
 
 // export function send(text) {
 //   socket.emit("new message", text)

@@ -1,20 +1,29 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { sendItemData } from '../actions/actions'
+import { sendItemData, getUser } from '../actions/actions'
 import { AuthContext } from '../lib/auth'
 import { connect } from 'react-redux'
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
+// import Button from "@material-ui/core/Button"
+import FormControl from "@material-ui/core/FormControl"
+import Input from "@material-ui/core/Input"
+import InputLabel from "@material-ui/core/InputLabel"
+// import TextField from '@material-ui/core/TextField';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
+// import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 import workStyle from "assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
+
 
 
 
@@ -40,11 +49,13 @@ const CreateForm = props => {
   const { user } = useContext(AuthContext)
 
   useEffect(() => {
+    // getUser()
     connect(user)
   }, [user])
 
+  // be sure to update the req ID
   const [values, setValues] = useState({
-    requestor_id: user.user_id,
+    requestor_id: 1,
     name: '',
     description: '',
     category: '',
@@ -62,7 +73,9 @@ const CreateForm = props => {
 
   function sendItemCreated(e) {
     e.preventDefault()
+    console.log(user)
     sendItemData(values)
+    // setValues("")
     // get item data and use to create url?
   }
 
@@ -87,60 +100,102 @@ const CreateForm = props => {
                 <CustomInput
                   labelText="Item title"
                   id="name"
-                  value={values.name}
-                  onChange={handleChange('name')}
+                  name="name"
+                  type="text"
                   formControlProps={{
                     fullWidth: true
                   }}
+                  inputProps={{
+                    onChange: handleChange('name')
+                  }}
                 />
-                <CustomDropdown
+
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="category">
+                    Category
+          </InputLabel>
+                  <Select
+                    value={values.category}
+                    onChange={handleChange('category')}
+                    input={<Input name="category" id="category" />}
+
+                    name="category"
+                    className={classes.selectEmpty}
+
+                  >
+                    <MenuItem value="">
+                    </MenuItem>
+                    <MenuItem value={'Birthday'}>Birthday</MenuItem>
+                    <MenuItem value={'Winter Holiday'}>Winter Holiday</MenuItem>
+                    <MenuItem value={'Anniversary'}>Anniversary</MenuItem>
+                    <MenuItem value={'Wedding'}>Wedding</MenuItem>
+                    <MenuItem value={'Other'}>Other</MenuItem>
+                  </Select>
+                </FormControl>
+
+                {/* <CustomDropdown
                   buttonText="Category"
                   id="category"
-                  value={values.category}
-                  onChange={handleChange('category')}
                   dropdownHeader="Select a Category"
                   dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
+                  native="false"
+                  value={values.category}
                   formControlProps={{
                     fullWidth: true
                   }}
-                />
+                  inputProps={{
+                    onChange: handleChange('category'),
+
+                  }}
+                /> */}
               </GridItem>
               <CustomInput
                 labelText="Description"
-                id="description" 
-                value={values.description}
-                onChange={handleChange('description')}
+                id="description"
                 formControlProps={{
                   fullWidth: true,
                   className: classes.textArea
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5
+                  rows: 5,
+                  onChange: handleChange('description')
                 }}
               />
               <CustomInput
                 labelText="Reason"
-                id="reason" 
-                value={values.reason}
-                onChange={handleChange('reason')}
+                id="reason"
                 formControlProps={{
                   fullWidth: true,
                   className: classes.textArea
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5
+                  rows: 5,
+                  onChange: handleChange('reason')
+                }}
+              />
+              <CustomInput
+                labelText="Picture link"
+                id="picture_url"
+                name="picture_url"
+                type="text"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: handleChange('picture_url')
                 }}
               />
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Amount"
-                  id="amount" 
-                  value={values.amount}
-                  onChange={handleChange('amount')}
+                  id="amount"
                   formControlProps={{
                     fullWidth: true
+                  }}
+                  inputProps={{
+                    onChange: handleChange('amount')
                   }}
                 />
               </GridItem>
