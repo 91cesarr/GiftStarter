@@ -12,6 +12,7 @@
     "cross-env": "^5.2.0",
     "history": "^4.7.2",
     "imgur-uploader": "^4.2.1",
+    "cross-env": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",

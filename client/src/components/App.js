@@ -1,7 +1,10 @@
 import React from "react"
 import { Provider } from "react-redux"
 import store from "../store"
+
 import Create from "./Create.jsx"
+import Donation from "./Donation"
+
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
@@ -37,14 +40,15 @@ const App = props => {
       <Provider store={store}>
         <Router>
           <MuiThemeProvider theme={theme}>
-            <div>
               {/* public routes */}
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-
-              {/* private routes */}
-              <AuthRoute path="/" exact component={Create} />
-            </div>
+            {/* public routes */}
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/donation" component={Donation} />
+            {/* private routes */}
+            <AuthRoute path="/" exact component={Create} />
           </MuiThemeProvider>
         </Router>
       </Provider>
