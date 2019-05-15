@@ -1,16 +1,15 @@
 const initialState = {
   user: {},
   item: {},
+  donation: {},
+  // name: '',
   // description: '',
   // category: '',
   // reason: '',
   // amount: '',
   // pic_url: '',
   // time: '',
-  // messages: [],
-  // username: "",
-  // currentlyTyping: false,
-  // onlineUser: ""
+  // count: 5
 }
 
 export default function (state = initialState, action) {
@@ -19,6 +18,8 @@ export default function (state = initialState, action) {
       return { ...state, item: action.payload }
     case "GET_USER":
       return { ...state, user: action.payload }
+    // case "GET_DONATION":
+    //   return { ...state, donation: action.payload }
     // case "ADD_MESSAGE":
     //   return { ...state, messages: [...state.messages, action.payload] }
     // case "SET_USERNAME":

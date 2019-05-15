@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
+    "cross-env": "^5.2.0",
     "history": "^4.7.2",
     "imgur-uploader": "^4.2.1",
     "cross-env": "^5.2.0",
