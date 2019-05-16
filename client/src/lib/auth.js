@@ -30,14 +30,29 @@ function getUser() {
 const initialContext = {
   isAuthenticated: false,
   redirectUrl: "/login",
-  user: null
+  user: null,
+  user_id: ""
 }
 
 export const AuthContext = React.createContext(initialContext)
 
+
+// ---------------------------------------->
+// This is using hooks created for state 
+const initContext = {
+  // create initial
+  isAuthenticated: false,
+  redirectUrl: "/login",
+  user: null
+}
+export const TestContext = React.createContext(initContext)
+// End
+// ---------------------------------------->
+
 export const AuthProvider = props => {
   const [isAuthenticated, setAuthenticated] = useState(isLoggedIn())
   const [user, setUser] = useState(getUser())
+  const [user_id, setUser_id] = useState(getUser())
 
   function signin(username, password) {
     return new Promise((resolve, reject) => {
@@ -48,6 +63,7 @@ export const AuthProvider = props => {
           axios.defaults.headers.common.Authorization = "Bearer " + token
           window.localStorage.setItem("authtoken", token)
           setUser(getUser())
+          setUser_id(getUser())
           setAuthenticated(true)
           resolve()
         })
@@ -78,6 +94,22 @@ export const AuthProvider = props => {
     })
   }
 
+// Donation function
+  function donation(amount,payment_type) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post("/api/donation", { amount, payment_type })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    })
+  }
+
+
+
   function signout() {
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common.Authorization = null
@@ -90,10 +122,12 @@ export const AuthProvider = props => {
   const value = {
     isAuthenticated: isAuthenticated,
     user: user,
+    user_id: user_id,
     redirectUrl: props.redirectUrl || "/login",
     signin: signin,
     register: register,
-    signout: signout
+    signout: signout,
+    donation: donation
   }
 
   return (

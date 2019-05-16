@@ -44,7 +44,7 @@ const App = props => {
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/donation" component={Donation} />
+            <Route path="/donation/:item_id" component={Donation} />
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
           </MuiThemeProvider>

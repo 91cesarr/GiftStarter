@@ -3,7 +3,6 @@ import store from "../store"
 import axios from 'axios'
 
 const socket = io.connect("http://localhost:3001")
-console.log(socket)
 
 // get user data
 export function getUser(user_id) {
@@ -15,15 +14,28 @@ export function getUser(user_id) {
   })
 }
 
-// // get single item
-// export function getItem(item_id) {
-//   axios.get('/api/item/' + item_id).then(resp => {
-//     store.dispatch({
-//       type: 'GET_ITEM',
-//       payload: resp.data
-//     })
-//   })
-// }
+// get user donation
+export function getDonation(item_id) {
+  axios.get('/api/donation/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_DONATION',
+      payload: resp.data
+    })
+    console.log(resp)
+  })
+}
+
+// get single item
+export function getItem(item_id) {
+  // const id = this.props.match.params.item_id
+  axios.get('/api/donation/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM',
+      payload: resp.data,
+      id: item_id
+    })
+  })
+}
 
 // submit a new item
 export function sendItemData(item) {
