@@ -9,8 +9,19 @@ import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
+import StripeCheckout from 'react-stripe-checkout';
 
 const Payment = props => {
+  onToken = (token) => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
+  }
   const [amount, setAmount] = useState("")
   const [payment_type, setPayment_type] = useState("")
   const { donation } = useContext(AuthContext)
@@ -145,6 +156,10 @@ const Payment = props => {
                 color="primary" size="lg">
                   Submit
                 </Button>
+                    <StripeCheckout
+                      token={this.onToken}
+                      stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
+                    />
               </GridItem>
             </GridContainer>
           </div>
