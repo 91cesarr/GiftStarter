@@ -6,6 +6,7 @@ import Main from "./Main"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import Payment from "./Payment"
 import "../styles/main.css"
 
 const App = props => {
@@ -17,6 +18,7 @@ const App = props => {
               {/* public routes */}
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/payment" component={Payment} />
 
               {/* private routes */}
               <AuthRoute path="/" exact component={Main} />
