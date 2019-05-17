@@ -8,7 +8,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
-import Checkout from './Checkout';
+import Checkout from 'react-stripe-checkout';
 
 const Payment = props => {
   const [amount, setAmount] = useState("")
