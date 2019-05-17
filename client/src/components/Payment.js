@@ -1,25 +1,35 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
-import Checkout from 'react-stripe-checkout';
+import ReactStripeCheckout from 'react-stripe-checkout';
+import { connect } from "react-redux"
+import { getItem } from "../actions/actions";
+
 
 const Payment = props => {
   const [amount, setAmount] = useState("")
-  const [payment_type, setPayment_type] = useState("")
+
+  const { user } = useContext(AuthContext)
   const { donation } = useContext(AuthContext)
-  console.log(amount)
+
+  useEffect(() => {
+    const id = props
+    console.log(id)
+    getItem(id)
+  }, [])
+
 
   function donate(e) {
     e.preventDefault()
-    donation(amount,payment_type)
+    donation(amount)
         .then(() => {
+          //Sends you to > /Thank you page
           props.history.push("/")
         })
   }
@@ -153,10 +163,15 @@ const Payment = props => {
                 </div>
                 <div>
                 </div>
-                    <Checkout
+                    {/* <Button
+                      type="submit"
+                      color="primary" size="lg">
+                      Submit
+                </Button> */}
+                    <ReactStripeCheckout
                       name={'Stripe Test'}
                       description={'Stripe'}
-                      amount={amount}
+                      amount={amount*100}
                       stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                       token={onToken}
                     />

@@ -1,5 +1,4 @@
-import React, { useState,useEffect, useContext, Component } from "react"
-import { AuthContext } from "../lib/auth"
+import React, { Component } from "react"
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -13,32 +12,26 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
-import profile from "assets/img/examples/redcharlie-1254208-unsplash.jpg";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 // Donation actions
 import { connect } from "react-redux"
 // Payment Module
-import Payment from "../components/Payment"
-import { getDonation, getItem } from "../actions/actions";
+import Payment from "../components/Payment" 
+import { getItem, getTotal } from "../actions/actions";
 
 class Donation extends Component {
+  
 componentDidMount() {
-  getItem()
-    console.log("props",this.props)
+  const id = this.props.match.params.item_id
+  getItem(id)
+  getTotal(id)
 }
   componentWillMount() {
     
   }
-  // const { item_id } = useContext(AuthContext)
-  // const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   render() {
+    const rem = this.props.amount - this.props.total
     const { classes, ...rest } = this.props;
-    const imageClasses = classNames(
-      classes.imgRaised,
-      classes.imgCard,
-      classes.imgFluid
-    );
-
   return (
     <div>
       <Header
@@ -57,20 +50,15 @@ componentDidMount() {
         <div>
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={12}>
+                  <img src={this.props.picture_url} alt="..." className="itemIMG" />
                 <div className={classes.profile}>
-                  <div>
-                    <img src={profile} alt="..." className={imageClasses} />
-                  </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>A Yacht Maybe 2</h3>
-                    <h2>{this.props.user_id}</h2>
-                    <h4>Total Amount</h4>
-                    {/* <h3>{props.amount}</h3> */}
-
-                    <br />
-                    <h4>Remaining Amount</h4>
-                    <h3>$9999</h3>
+                      <h1>{this.props.name}</h1>
+                    <h2>Total Amount</h2>
+                    <h3>${this.props.amount}</h3>
+                    <h2>Remaining Amount</h2>
+                    <h3>${rem}</h3>
                     <Button justIcon link className={classes.margin5}>
                       <i className={"fab fa-twitter"} />
                     </Button>
@@ -81,17 +69,20 @@ componentDidMount() {
                       <i className={"fab fa-facebook"} />
                     </Button>
                   </div>
+                  <div>
+                     <h2>Description</h2>
+                    <p>{this.props.description}{" "}
+                    </p>
+                  </div>
+                  <br />
+                  <div>
+                   <h2>Reason</h2>
+                    <p>{this.props.reason}{" "}
+                    </p>
+                  </div>
                 </div>
               </GridItem>
             </GridContainer>
-            <div className={classes.description}>
-              <p>
-                An artist of considerable range, Chet Faker — the name taken
-                by Melbourne-raised, Brooklyn-based Nick Murphy — writes,
-                performs and records all of his own music, giving it a warm,
-                  intimate feel with a solid groove structure.{" "}
-              </p>
-            </div>
             {/* Payment module does here */}
             <Payment/>
           </div>
@@ -105,11 +96,13 @@ componentDidMount() {
 
 function mapStateToProps(appState) {
   return { 
+    id: appState.item.id,
     user: appState.user,
     user_id: appState.user_id,
     item_id: appState.item.item_id,
     requestor_id: appState.item.requestor_id,
-    name: appState.user.name,
+    total: appState.donation_amount.total,
+    name: appState.item.name,
     description: appState.item.description,
     category: appState.item.category,
     reason: appState.item.reason,
