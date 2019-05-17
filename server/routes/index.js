@@ -62,14 +62,14 @@ router.post("/login", (req, res, next) => {
 
 // Create Item Page
 // get user profile data
-router.get('/user/:user_id', (req, res, next) => {
+router.get('/user/:username', (req, res, next) => {
   const sql = `
   SELECT username, user_id, fname
   FROM users 
-  WHERE user_id  = ?
+  WHERE username  = ?
   `
 
-  conn.query(sql, [req.params.user_id], (err, results, fields) => {
+  conn.query(sql, [req.params.username], (err, results, fields) => {
     res.json(results[0])
   })
 })

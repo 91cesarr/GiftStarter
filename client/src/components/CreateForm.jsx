@@ -7,7 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
 // import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
+// import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 // import TextField from '@material-ui/core/TextField';
@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-// import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
+import CustomSelect from "components/CustomInput/CustomSelectNA.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 import workStyle from "assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
@@ -49,35 +49,68 @@ const CreateForm = props => {
   const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    // getUser()
-    connect(user)
+    getUser(user)
   }, [user])
 
-  // be sure to update the req ID
+
   const [values, setValues] = useState({
-    requestor_id: 1,
+    requestor_id: '',
     name: '',
     description: '',
     category: '',
     reason: '',
     amount: '',
     picture_url: '',
-    item_url: '',
   });
 
-  const { classes, ...rest } = props;
+  const { classes,
+    // ...rest 
+  } = props;
 
   const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({ ...values, [prop]: event.target.value, requestor_id: props.userData.user_id });
   };
 
   function sendItemCreated(e) {
     e.preventDefault()
-    console.log(user)
     sendItemData(values)
-    // setValues("")
+    // setValues({
+    //   ...values,
+    //   name: '',
+    //   description: '',
+    //   category: '',
+    //   reason: '',
+    //   amount: '',
+    //   picture_url: '',
+    // })
     // get item data and use to create url?
   }
+
+  // const selectClass = classes.formControl;
+  // selectClass.display = 'flex';
+
+  const ranges = [
+    {
+      value: 'Birthday',
+      label: 'Birthday',
+    },
+    {
+      value: 'Winter Holiday',
+      label: 'Winter Holiday',
+    },
+    {
+      value: 'Anniversary',
+      label: 'Anniversary',
+    },
+    {
+      value: 'Wedding',
+      label: 'Wedding',
+    },
+    {
+      value: 'Other',
+      label: 'Other',
+    },
+  ];
 
   return (
     <div
@@ -109,45 +142,41 @@ const CreateForm = props => {
                     onChange: handleChange('name')
                   }}
                 />
-
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="category">
-                    Category
-          </InputLabel>
-                  <Select
-                    value={values.category}
-                    onChange={handleChange('category')}
-                    input={<Input name="category" id="category" />}
-
-                    name="category"
-                    className={classes.selectEmpty}
-
-                  >
-                    <MenuItem value="">
-                    </MenuItem>
-                    <MenuItem value={'Birthday'}>Birthday</MenuItem>
-                    <MenuItem value={'Winter Holiday'}>Winter Holiday</MenuItem>
-                    <MenuItem value={'Anniversary'}>Anniversary</MenuItem>
-                    <MenuItem value={'Wedding'}>Wedding</MenuItem>
-                    <MenuItem value={'Other'}>Other</MenuItem>
-                  </Select>
-                </FormControl>
-
-                {/* <CustomDropdown
-                  buttonText="Category"
-                  id="category"
+              </GridItem>
+              <GridItem xs={12} sm={12} md={6}>
+                <CustomSelect
+                  labelText="Category"
+                  value={values.category}
+                  onChange={handleChange('category')}
+                  input={<Input name="category" id="category" />}
+                  name="category"
                   dropdownHeader="Select a Category"
                   dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
-                  native="false"
-                  value={values.category}
                   formControlProps={{
                     fullWidth: true
                   }}
-                  inputProps={{
-                    onChange: handleChange('category'),
-
-                  }}
-                /> */}
+                >
+                </CustomSelect>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={6}>
+                <Select
+                  // labelText="Category"
+                  value={values.category}
+                  onChange={handleChange('category')}
+                  input={<Input name="category" id="category" />}
+                  name="category"
+                // dropdownHeader="Select a Category"
+                // dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
+                // formControlProps={{
+                //   fullWidth: true
+                // }}
+                >
+                  {ranges.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </GridItem>
               <CustomInput
                 labelText="Description"
@@ -175,18 +204,20 @@ const CreateForm = props => {
                   onChange: handleChange('reason')
                 }}
               />
-              <CustomInput
-                labelText="Picture link"
-                id="picture_url"
-                name="picture_url"
-                type="text"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: handleChange('picture_url')
-                }}
-              />
+              <GridItem xs={12} sm={12} md={6}>
+                <CustomInput
+                  labelText="Picture link"
+                  id="picture_url"
+                  name="picture_url"
+                  type="text"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    onChange: handleChange('picture_url')
+                  }}
+                />
+              </GridItem>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Amount"
@@ -199,16 +230,14 @@ const CreateForm = props => {
                   }}
                 />
               </GridItem>
-              <GridContainer justify="center">
-                <GridItem
-                  xs={12}
-                  sm={12}
-                  md={4}
-                  className={classes.textCenter}
-                >
-                  <Button type="submit" color="primary">Submit</Button>
-                </GridItem>
-              </GridContainer>
+              <GridItem
+                xs={12}
+                sm={12}
+                md={4}
+                className={classes.textCenter}
+              >
+                <Button type="submit" color="primary">Submit</Button>
+              </GridItem>
             </GridContainer>
           </form>
         </GridItem>
@@ -218,14 +247,11 @@ const CreateForm = props => {
 
 }
 
-// function mapStateToProps(appState) {
+function mapStateToProps(appState) {
+  return {
+    userData: appState.user,
+  }
+}
 
-//   return {
-//     user: appState.user,
-//     // values: ownProps.values
-//   }
-// }
-
-export default withStyles(workStyle)(CreateForm)
-// && connect(mapStateToProps)(CreateForm)
+export default withStyles(workStyle)(connect(mapStateToProps)(CreateForm))
 
