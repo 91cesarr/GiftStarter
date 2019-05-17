@@ -72,7 +72,7 @@ const CreateForm = props => {
   };
 
   function sendItemCreated(e) {
-    e.preventDefault()
+    // e.preventDefault()
     sendItemData(values)
     // setValues({
     //   ...values,
@@ -191,6 +191,7 @@ const CreateForm = props => {
                 md={4}
                 className={classes.textCenter}
               >
+              {/* set button to load the item after submit? */}
                 <Button type="submit" color="primary">Submit</Button>
               </GridItem>
             </GridContainer>
