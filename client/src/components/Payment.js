@@ -5,26 +5,16 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
-import StripeCheckout from 'react-stripe-checkout';
+import Checkout from './Checkout';
 
 const Payment = props => {
-  onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
-  }
   const [amount, setAmount] = useState("")
   const [payment_type, setPayment_type] = useState("")
   const { donation } = useContext(AuthContext)
+  console.log(amount)
 
   function donate(e) {
     e.preventDefault()
@@ -69,6 +59,18 @@ const Payment = props => {
   // }
   // render() {
     const { classes } = props;
+
+  const onToken = (token) => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
+  }
+
     return (
       <div className={classes.sections}>
         <div className={classes.container}>
@@ -102,7 +104,7 @@ const Payment = props => {
 }}
 />
               </GridItem>
-              <GridItem xs={12} sm={4} md={4} lg={3}>
+              {/* <GridItem xs={12} sm={4} md={4} lg={3}>
                 <CustomInput
                   labelText="Credit Card Number"
                   name="amount"
@@ -120,7 +122,7 @@ const Payment = props => {
                     )
                   }}
                 />
-              </GridItem>
+              </GridItem> */}
             </GridContainer>
           <div id="checkRadios">
             <GridContainer>
@@ -151,14 +153,12 @@ const Payment = props => {
                 </div>
                 <div>
                 </div>
-                <Button
-                type="submit"
-                color="primary" size="lg">
-                  Submit
-                </Button>
-                    <StripeCheckout
-                      token={this.onToken}
+                    <Checkout
+                      name={'Stripe Test'}
+                      description={'Stripe'}
+                      amount={amount}
                       stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
+                      token={onToken}
                     />
               </GridItem>
             </GridContainer>
