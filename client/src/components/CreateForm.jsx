@@ -9,11 +9,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // import Button from "@material-ui/core/Button"
 // import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
-import InputLabel from "@material-ui/core/InputLabel"
+// import InputLabel from "@material-ui/core/InputLabel"
 // import TextField from '@material-ui/core/TextField';
 // import InputAdornment from '@material-ui/core/InputAdornment';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+// import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -86,32 +86,6 @@ const CreateForm = props => {
     // get item data and use to create url?
   }
 
-  // const selectClass = classes.formControl;
-  // selectClass.display = 'flex';
-
-  const ranges = [
-    {
-      value: 'Birthday',
-      label: 'Birthday',
-    },
-    {
-      value: 'Winter Holiday',
-      label: 'Winter Holiday',
-    },
-    {
-      value: 'Anniversary',
-      label: 'Anniversary',
-    },
-    {
-      value: 'Wedding',
-      label: 'Wedding',
-    },
-    {
-      value: 'Other',
-      label: 'Other',
-    },
-  ];
-
   return (
     <div
       className={classes.section}
@@ -147,36 +121,17 @@ const CreateForm = props => {
                 <CustomSelect
                   labelText="Category"
                   value={values.category}
-                  onChange={handleChange('category')}
                   input={<Input name="category" id="category" />}
                   name="category"
-                  dropdownHeader="Select a Category"
                   dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
                   formControlProps={{
                     fullWidth: true
                   }}
+                  inputProps={{
+                    onChange: handleChange('category'),
+                  }}
                 >
                 </CustomSelect>
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <Select
-                  // labelText="Category"
-                  value={values.category}
-                  onChange={handleChange('category')}
-                  input={<Input name="category" id="category" />}
-                  name="category"
-                // dropdownHeader="Select a Category"
-                // dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
-                // formControlProps={{
-                //   fullWidth: true
-                // }}
-                >
-                  {ranges.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
               </GridItem>
               <CustomInput
                 labelText="Description"

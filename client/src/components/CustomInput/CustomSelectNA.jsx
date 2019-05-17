@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from "@material-ui/core/MenuList";
+// import MenuList from "@material-ui/core/MenuList";
 
 import customSelectStyle from "assets/jss/material-kit-react/components/customSelectStyleNA.jsx";
 
@@ -22,11 +22,11 @@ function CustomSelect({ ...props }) {
     labelProps,
     inputProps,
     error,
-    white,
+    // white,
     inputRootCustomClasses,
     success,
     dropdownList,
-    dropdownHeader,
+    // dropdownHeader,
     hoverColor,
     rtlActive,
     noLiPadding
@@ -43,19 +43,19 @@ function CustomSelect({ ...props }) {
     [" " + classes.labelRootError]: error,
     [" " + classes.labelRootSuccess]: success && !error
   });
-  const underlineClasses = classNames({
-    [classes.underlineError]: error,
-    [classes.underlineSuccess]: success && !error,
-    [classes.underline]: true,
-    [classes.whiteUnderline]: white
-  });
+  // const underlineClasses = classNames({
+  //   [classes.underlineError]: error,
+  //   [classes.underlineSuccess]: success && !error,
+  //   [classes.underline]: true,
+  //   [classes.whiteUnderline]: white
+  // });
   const marginTop = classNames({
     [inputRootCustomClasses]: inputRootCustomClasses !== undefined
   });
-  const inputClasses = classNames({
-    [classes.input]: true,
-    [classes.whiteInput]: white
-  });
+  // const inputClasses = classNames({
+  //   [classes.input]: true,
+  //   [classes.whiteInput]: white
+  // });
   var formControlClasses;
   if (formControlProps !== undefined) {
     formControlClasses = classNames(
@@ -88,28 +88,16 @@ function CustomSelect({ ...props }) {
         id={id}
         {...inputProps}
       >
-        <MenuList role="menu" className={classes.menuList}>
-          {/* {dropdownHeader !== undefined ? (
-            <MenuItem
-              // onClick={() => this.handleClose(dropdownHeader)}
-              className={classes.dropdownHeader}
-            >
-              {dropdownHeader}
-            </MenuItem>
-          ) : null} */}
-          {dropdownList.map((prop, key) => {
-            return (
-              <MenuItem
-                key={key}
-                // onClick={() => this.handleClose(prop)}
-                className={dropdownItem}
-                value={prop.value}
-              >
-                {prop}
-              </MenuItem>
-            );
-          })}
-        </MenuList>
+        {dropdownList.map((prop, key) => (
+          <MenuItem
+            key={key}
+            className={dropdownItem}
+            value={prop}
+          >
+            {prop}
+          </MenuItem>
+        )
+        )}
       </Select>
     </FormControl>
   );
