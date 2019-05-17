@@ -6,8 +6,8 @@ import axios from 'axios'
 // console.log(socket)
 
 // get user data
-export function getUser(user_id) {
-  axios.get('/api/user/' + user_id).then(resp => {
+export function getUser(username) {
+  axios.get('/api/user/' + username).then(resp => {
     store.dispatch({
       type: 'GET_USER',
       payload: resp.data
