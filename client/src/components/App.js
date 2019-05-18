@@ -45,7 +45,7 @@ const App = props => {
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/donation/:item_id" component={Donation} />
+            <Route path="/donation/:item_id" exact component={Donation} />
             <Route path="/payment" component={Payment} />
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />

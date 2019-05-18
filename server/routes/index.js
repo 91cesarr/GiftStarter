@@ -90,7 +90,20 @@ router.get('/donation/:item_id', (req, res, next) => {
   WHERE item_id = ?
   `
 
-  conn.query(sql, [req.body.item_id], (err, results, fields) => {
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results[0])
+  })
+})
+
+// get total amount of donations 
+router.get('/donation/:item_id', (req, res, next) => {
+  const sql = `
+SELECT
+SUM(amount) as total
+FROM donations
+WHERE item_id = ?
+  `
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
     res.json(results[0])
   })
 })
