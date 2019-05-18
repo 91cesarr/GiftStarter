@@ -14,6 +14,7 @@ import StripeCheckout from 'react-stripe-checkout';
 const Payment = props => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   // onToken = (token) => {
   //   fetch('/save-stripe-token', {
   //     method: 'POST',
@@ -48,6 +49,8 @@ const Payment = props => {
         })
   }
 =======
+=======
+>>>>>>> parent of 5c52f7be... stripe old files
   onToken = (token) => {
     fetch('/save-stripe-token', {
       method: 'POST',
@@ -196,7 +199,11 @@ const Payment = props => {
                     <StripeCheckout
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                       // token={this.onToken}
+=======
+                      token={this.onToken}
+>>>>>>> parent of 5c52f7be... stripe old files
 =======
                       token={this.onToken}
 >>>>>>> parent of 5c52f7be... stripe old files
