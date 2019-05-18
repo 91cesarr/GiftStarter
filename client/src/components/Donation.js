@@ -19,11 +19,13 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 import { connect } from "react-redux"
 // Payment Module
 import Payment from "../components/Payment"
-import { getDonation, getItem } from "../actions/actions";
+import { getTotal, getItem } from "../actions/actions";
 
 class Donation extends Component {
 componentDidMount() {
-  getItem()
+  const id = this.props.match.params.item_id
+  getItem(id)
+  getTotal(id)
     console.log("props",this.props)
 }
   componentWillMount() {

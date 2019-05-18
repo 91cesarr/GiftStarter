@@ -36,6 +36,17 @@ export function getItem(item_id) {
     })
   })
 }
+// get total item
+export function getTotal(item_id) {
+  // const id = this.props.match.params.item_id
+  axios.get('/api/donation/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM',
+      payload: resp.data,
+      id: item_id
+    })
+  })
+}
 
 // submit a new item
 export function sendItemData(item) {
