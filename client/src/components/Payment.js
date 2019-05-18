@@ -9,7 +9,11 @@ import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
+<<<<<<< HEAD
 import StripeCheckout from 'react-stripe-checkout';
+=======
+import Checkout from './Checkout';
+>>>>>>> parent of 532bcdb0... new stripe implementation
 
 const Payment = props => {
   // onToken = (token) => {
