@@ -12,6 +12,7 @@ import { AuthContext } from "../lib/auth"
 import StripeCheckout from 'react-stripe-checkout';
 
 const Payment = props => {
+<<<<<<< HEAD
   // onToken = (token) => {
   //   fetch('/save-stripe-token', {
   //     method: 'POST',
@@ -22,6 +23,18 @@ const Payment = props => {
   //     });
   //   });
   // }
+=======
+  onToken = (token) => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
+  }
+>>>>>>> parent of 5c52f7be... stripe old files
   const [amount, setAmount] = useState("")
   const [payment_type, setPayment_type] = useState("")
   const { donation } = useContext(AuthContext)
@@ -122,7 +135,11 @@ const Payment = props => {
                   Submit
                 </Button>
                     <StripeCheckout
+<<<<<<< HEAD
                       // token={this.onToken}
+=======
+                      token={this.onToken}
+>>>>>>> parent of 5c52f7be... stripe old files
                       stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                     />
               </GridItem>
