@@ -12,16 +12,16 @@ import { AuthContext } from "../lib/auth"
 import StripeCheckout from 'react-stripe-checkout';
 
 const Payment = props => {
-  onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
-  }
+  // onToken = (token) => {
+  //   fetch('/save-stripe-token', {
+  //     method: 'POST',
+  //     body: JSON.stringify(token),
+  //   }).then(response => {
+  //     response.json().then(data => {
+  //       alert(`We are in business, ${data.email}`);
+  //     });
+  //   });
+  // }
   const [amount, setAmount] = useState("")
   const [payment_type, setPayment_type] = useState("")
   const { donation } = useContext(AuthContext)
@@ -33,41 +33,6 @@ const Payment = props => {
           props.history.push("/")
         })
   }
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     checked: [24, 22],
-  //     selectedEnabled: "b",
-  //     checkedA: true,
-  //     checkedB: false
-  //   };
-  //   this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
-  // }
-  // componentDidMount() {
-
-  // }
-  // handleChange = name => event => {
-  //   this.setState({ [name]: event.target.checked });
-  // };
-  // handleChangeEnabled(event) {
-  //   this.setState({ selectedEnabled: event.target.value });
-  // }
-  // handleToggle(value) {
-  //   const { checked } = this.state;
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-
-  //   this.setState({
-  //     checked: newChecked
-  //   });
-  // }
-  // render() {
     const { classes } = props;
     return (
       <div className={classes.sections}>
@@ -157,7 +122,7 @@ const Payment = props => {
                   Submit
                 </Button>
                     <StripeCheckout
-                      token={this.onToken}
+                      // token={this.onToken}
                       stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                     />
               </GridItem>

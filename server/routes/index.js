@@ -5,6 +5,14 @@ const jwt = require("jsonwebtoken")
 const sha512 = require("js-sha512")
 const conn = require("../db")
 
+// backend stripe 
+const paymentApi = require('./payment');
+
+const configureRoutes = app => {
+  paymentApi(app);
+};
+
+
 router.post("/register", (req, res, next) => {
   const username = req.body.username
   const password = sha512(req.body.password + config.get("salt"))
