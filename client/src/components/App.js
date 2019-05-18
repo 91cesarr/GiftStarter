@@ -4,6 +4,7 @@ import store from "../store"
 
 import Create from "./Create.jsx"
 import Donation from "./Donation"
+import Dashboard from "./Dashboard"
 
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
@@ -40,15 +41,16 @@ const App = props => {
       <Provider store={store}>
         <Router>
           <MuiThemeProvider theme={theme}>
-              {/* public routes */}
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+            {/* public routes */}
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/donation" component={Donation} />
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
+            <AuthRoute path="/dashboard" exact component={Dashboard} />
           </MuiThemeProvider>
         </Router>
       </Provider>

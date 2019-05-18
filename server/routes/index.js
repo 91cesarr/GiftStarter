@@ -162,4 +162,33 @@ router.post('/item', (req, res, next) => {
 //   })
 // })
 
+// Dashboard Page
+// get item list
+router.get('/items/:requestor_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  WHERE requestor_id  = ?
+  `
+
+  conn.query(sql, [req.params.requestor_id], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+// get item donations list
+router.get('/donations/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  donations.*
+  FROM donations
+  WHERE item_id  = ?
+  `
+
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+
 module.exports = router

@@ -15,6 +15,16 @@ export function getUser(username) {
   })
 }
 
+// get item list
+export function getItems(requestor_id) {
+  axios.get('/api/items/' + requestor_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM_LIST',
+      payload: resp.data
+    })
+  })
+}
+
 // get single item
 export function getItem(item_id) {
   axios.get('/api/item/' + item_id).then(resp => {
@@ -31,51 +41,18 @@ export function sendItemData(item) {
   axios.post('/api/item', item)
 }
 
+// get donation list
+export function getDonList(item_id) {
+  axios.get('/api/donations/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_DONATION_LIST',
+      payload: resp.data
+    })
+  })
+}
+
 // // submit a donation
 // export function sendDonation(donation) {
 //   console.log(donation)
 //   axios.post('/api/donation', donation)
 // }
-
-// export function send(text) {
-//   socket.emit("new message", text)
-// }
-
-// export function createUsername(username) {
-//   store.dispatch({
-//     type: 'SET_USERNAME',
-//     payload: username
-//   })
-// }
-
-// export function setCurrentlyTyping(currentlyTyping) {
-//   socket.emit("currentlyTyping", currentlyTyping)
-// }
-// export function setOnlineUser(onlineUser) {
-//   socket.emit("onlineUser", onlineUser)
-// }
-
-// socket.on("new message", text => {
-//   const username = store.getState().username
-//   store.dispatch({
-//     type: "ADD_MESSAGE",
-//     payload: {
-//       text: text,
-//       username: username
-//     }
-//   })
-// })
-
-// socket.on("currentlyTyping", currentlyTyping => {
-//   store.dispatch({
-//     type: 'TOGGLE_TYPING',
-//     payload: currentlyTyping
-//   })
-// })
-
-// socket.on("onlineUser", onlineUser => {
-//   store.dispatch({
-//     type: 'ONLINE_USER',
-//     payload: onlineUser
-//   })
-// })

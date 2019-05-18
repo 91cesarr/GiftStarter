@@ -2,6 +2,8 @@ const initialState = {
   user: {},
   item: {},
   donation: {},
+  items: [],
+  donations: [],
   // name: '',
   // description: '',
   // category: '',
@@ -20,8 +22,10 @@ export default function (state = initialState, action) {
       return { ...state, user: action.payload }
     // case "GET_DONATION":
     //   return { ...state, donation: action.payload }
-    // case "ADD_MESSAGE":
-    //   return { ...state, messages: [...state.messages, action.payload] }
+    case "GET_ITEM_LIST":
+      return { ...state, items: action.payload }
+    case "GET_DONATION_LIST":
+      return { ...state, donations: [action.payload] }
     // case "SET_USERNAME":
     //   return { ...state, username: action.payload }
     // case "TOGGLE_TYPING":
