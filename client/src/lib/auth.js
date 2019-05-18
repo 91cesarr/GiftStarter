@@ -95,10 +95,10 @@ export const AuthProvider = props => {
   }
 
 // Donation function
-  function donation(amount) {
+  function donation(amount,payment_type) {
     return new Promise((resolve, reject) => {
       axios
-        .post("/api/donation", { amount})
+        .post("/api/donation", { amount, payment_type })
         .then(function (response) {
           console.log(response.data);
         })

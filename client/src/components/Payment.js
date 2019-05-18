@@ -22,16 +22,16 @@ const Payment = props => {
   //     });
   //   });
   // }
-  onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
-  }
+  // onToken = (token) => {
+  //   fetch('/save-stripe-token', {
+  //     method: 'POST',
+  //     body: JSON.stringify(token),
+  //   }).then(response => {
+  //     response.json().then(data => {
+  //       alert(`We are in business, ${data.email}`);
+  //     });
+  //   });
+  // }
   const [amount, setAmount] = useState("")
   const [payment_type, setPayment_type] = useState("")
   const { donation } = useContext(AuthContext)
@@ -53,9 +53,9 @@ const Payment = props => {
       });
     });
   }
-  const [amount, setAmount] = useState("")
-  const [payment_type, setPayment_type] = useState("")
-  const { donation } = useContext(AuthContext)
+  // const [amount, setAmount] = useState("")
+  // const [payment_type, setPayment_type] = useState("")
+  // const { donation } = useContext(AuthContext)
 
   function donate(e) {
     e.preventDefault()
@@ -188,7 +188,7 @@ const Payment = props => {
                   Submit
                 </Button>
                     <StripeCheckout
-                      token={this.onToken}
+                      token={onToken}
                       stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                     />
               </GridItem>

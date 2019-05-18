@@ -83,72 +83,59 @@ router.get('/user/:user_id', (req, res, next) => {
 })
 
 // get items
-router.get('/item/:item_id', (req, res, next) => {
-  const sql = `
-  SELECT  items.*
-  FROM items
-  WHERE item_id  = ?
-  `
-
-  conn.query(sql, [req.params.item_id], (err, results, fields) => {
-    res.json(results[0])
-  })
-})
-// get total amount of donations 
 router.get('/donation/:item_id', (req, res, next) => {
   const sql = `
-SELECT
-SUM(amount) as total
-FROM donations
-WHERE item_id = ?
+  SELECT  items.*
+  FROM items 
+  WHERE item_id = ?
   `
 
-  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+  conn.query(sql, [req.body.item_id], (err, results, fields) => {
     res.json(results[0])
   })
 })
 
-// / donation page
+  // / donation page
 // post new donation
 router.post("/donation", (req, res, next) => {
-  // const sql = `
-  // INSERT INTO donations (
-  //   donor_id,
-  //   requestor_id,
-  //   item_id,
-  //   amount,
-  //   anon,
-  //   payment_type
-  // )
-  // VALUES (?, ?, ?, ?, ?, ?)
-  // `
+ // const sql = `
+ // INSERT INTO donations (
+ //   donor_id,
+ //   requestor_id,
+ //   item_id,
+ //   amount,
+ //   anon,
+ //   payment_type
+ // )
+ // VALUES (?, ?, ?, ?, ?, ?)
+ // `
 
-  const sql = `
+ const sql = `
  INSERT INTO donations (
    amount,
    payment_type
  )
  VALUES (?, ?)
  `
-  conn.query(sql, [
-    // Number(req.body.donor_id),
-    // Number(req.body.requestor_id),
-    // Number(req.body.item_id),
-    Number(req.body.amount),
-    // Number(req.body.anon),
-    req.body.payment_type
-  ], (err, results, fields) => {
+conn.query(sql, [
+  // Number(req.body.donor_id),
+  // Number(req.body.requestor_id),
+  // Number(req.body.item_id),
+  Number(req.body.amount),
+  // Number(req.body.anon),
+  req.body.payment_type
+], (err, results, fields) => {
 
-    console.log(err)
-    res.json({
-      // donor_id: req.body.donor_id,
-      // requestor_id: req.body.requestor_id,
-      // item_id: req.body.item_id,
-      amount: req.body.amount,
-      // anon: req.body.anon,
-      payment_type: req.body.payment_type
-    })
+  console.log(err)
+  res.json({
+    // donor_id: req.body.donor_id,
+    // requestor_id: req.body.requestor_id,
+    // item_id: req.body.item_id,
+    amount: req.body.amount,
+    // anon: req.body.anon,
+    payment_type: req.body.payment_type
   })
+})
 })
 
 // // post new item
