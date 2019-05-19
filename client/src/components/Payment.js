@@ -23,16 +23,17 @@ const Payment = props => {
 
   function donate(e) {
     e.preventDefault()
-    donation(amount)
-        .then(() => {
-          //Sends you to > /Thank you page
-          props.history.push("/")
-        })
+    // donation(amount)
+    //     .then(() => {
+    //       //Sends you to > /Thank you page
+    //       props.history.push("/")
+    //     })
   }
 
   const { classes } = props;
 
   const onToken = (token) => {
+    donation(amount)
     fetch('/api/donation', {
       method: 'POST',
       body: JSON.stringify(token),
@@ -53,15 +54,6 @@ const Payment = props => {
             </div>
             <form onSubmit={donate}>
             <GridContainer>
-              {/* <GridItem xs={12} sm={4} md={4} lg={3}>
-                <CustomInput
-                  labelText="Name"
-                  id="float"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                />
-              </GridItem> */}
               <GridItem xs={12} sm={4} md={4} lg={3}>
                 <CustomInput
                   labelText="Donation Amount"
@@ -72,64 +64,13 @@ const Payment = props => {
                     fullWidth: true
                   }}
                   inputProps={{
-                  onChange: (e) => setAmount(e.target.value)
-}}
-/>
+                  onChange: (e) => setAmount(e.target.value)}}/>
               </GridItem>
-              {/* <GridItem xs={12} sm={4} md={4} lg={3}>
-                <CustomInput
-                  labelText="Credit Card Number"
-                  name="amount"
-                  type="text"
-                  id="font-awesome"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                  onChange: (e) => setPayment_type(e.target.value),
-                  endAdornment: (
-                      <InputAdornment position="end">
-                        <i className="fas fa-credit-card" />
-                      </InputAdornment>
-                    )
-                  }}
-                />
-              </GridItem> */}
             </GridContainer>
           <div id="checkRadios">
             <GridContainer>
             <GridItem xs={12} sm={6} md={4} lg={3}>
-                <div className={classes.title}>
-                </div>
-                <div>
-                  {/* <FormControlLabel
-                    control={
-                      <Switch
-                        checked={this.state.checkedA}
-                        onChange={this.handleChange("checkedA")}
-                        value="checkedA"
-                        classes={{
-                          switchBase: classes.switchBase,
-                          checked: classes.switchChecked,
-                          icon: classes.switchIcon,
-                          iconChecked: classes.switchIconChecked,
-                          bar: classes.switchBar
-                        }}
-                      />
-                    }
-                    classes={{
-                      label: classes.label
-                    }}
-                    label="Stay anonymous"
-                  /> */}
-                </div>
-                <div>
-                </div>
-                    {/* <Button
-                      type="submit"
-                      color="primary" size="lg">
-                      Submit
-                </Button> */}
+                <div className={classes.title}></div>
                     <ReactStripeCheckout
                       name={'Stripe Test'}
                       description={'Stripe'}
