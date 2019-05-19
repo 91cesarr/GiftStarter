@@ -17,6 +17,10 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Schedule from "@material-ui/icons/Schedule";
 import NavPills from "components/NavPills/NavPills.jsx";
 
+// share page buttons
+import { Facebook, Twitter } from 'react-sharingbuttons'
+import 'react-sharingbuttons/dist/main.css'
+
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 // Donation actions
@@ -36,6 +40,9 @@ class Donation extends Component {
 
   }
   render() {
+    const url = 'http://localhost:3000' + this.props.match.url
+    const shareText = 'Check this out! ' + this.props.name
+    console.log(this.props)
     const rem = this.props.amount - this.props.total
     const { classes, ...rest } = this.props;
     return (
@@ -71,15 +78,8 @@ class Donation extends Component {
                         <h5>${rem}</h5>
                       <i className={"fas fa-info-circle"} /></div>
 
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-instagram"} />
-                      </Button>
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-facebook"} />
-                      </Button>
+                      <Facebook url={url} />
+                      <Twitter url={url} shareText={shareText} />
                     </div>
                     {/* <div>
                       <h2>Description</h2>
