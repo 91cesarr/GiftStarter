@@ -124,21 +124,14 @@ router.post("/donation", (req, res, next) => {
 
  const sql = `
  INSERT INTO donations (
-   donor_id,
-   requestor_id,
    item_id,
-   amount,
-   payment_type
+   amount
  )
- VALUES (?, ?, ?, ?, ?)
+ VALUES (?, ?)
  `
 conn.query(sql, [
-  Number(req.body.donor_id),
-  Number(req.body.requestor_id),
-  Number(req.body.item_id),
-  Number(req.body.amount),
-  // Number(req.body.anon),
-  req.body.payment_type
+  req.body.item_id,
+  req.body.amount,
 ], (err, results, fields) => {
 
   console.log(err)

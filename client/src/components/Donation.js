@@ -12,6 +12,12 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
+// @material-ui/icons
+import Dashboard from "@material-ui/icons/Dashboard";
+import Schedule from "@material-ui/icons/Schedule";
+import NavPills from "components/NavPills/NavPills.jsx";
+
+
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 // Donation actions
 import { connect } from "react-redux"
@@ -25,7 +31,6 @@ class Donation extends Component {
     const id = this.props.match.params.item_id
     getItem(id)
     getTotal(id)
-    console.log("test", this.props)
   }
   componentWillMount() {
 
@@ -56,10 +61,16 @@ class Donation extends Component {
                   <div className={classes.profile}>
                     <div className={classes.name}>
                       <h1>{this.props.name}</h1>
-                      <h2>Total Amount</h2>
-                      <h3>${this.props.amount}</h3>
-                      <h2>Remaining Amount</h2>
-                      <h3>${rem}</h3>
+                      <h3>Total Amount</h3>
+                      <div>
+                        <h5>${this.props.amount}</h5>
+                      <i className={"fas fa-info-circle"} /></div>
+
+                      <h3>Remaining Amount</h3>
+                      <div>
+                        <h5>${rem}</h5>
+                      <i className={"fas fa-info-circle"} /></div>
+
                       <Button justIcon link className={classes.margin5}>
                         <i className={"fab fa-twitter"} />
                       </Button>
@@ -70,18 +81,57 @@ class Donation extends Component {
                         <i className={"fab fa-facebook"} />
                       </Button>
                     </div>
-                    <div>
+                    {/* <div>
                       <h2>Description</h2>
-                      <p>{this.props.description}{" "}
+                      <p>{this.prop justify="center"s.description}{" "}
                       </p>
-                    </div>
+                    </div> */}
+                      
                     <br />
-                    <div>
+                    {/* <div>
                       <h2>Reason</h2>
                       <p>{this.props.reason}{" "}
                       </p>
-                    </div>
+                    </div> */}
+
+                    <GridContainer justify="center">
+                    <GridItem xs={12} sm={12} md={12} lg={6}>
+                      <NavPills
+                        color="primary"
+                        horizontal={{
+                          tabsGrid: { xs: 12, sm: 4, md: 4 },
+                          contentGrid: { xs: 12, sm: 8, md: 8 }
+                        }}
+                        tabs={[
+                          {
+                            tabButton: "Description",
+                            tabIcon: Dashboard,
+                            tabContent: (
+                              <span>
+                                <h5 className={classes.description}>
+                                  {this.props.description}{" "}</h5>
+                              </span>
+                            )
+                          },
+                          {
+                            tabButton: "Reason",
+                            tabIcon: Schedule,
+                            tabContent: (
+                              <span>
+                                <h5 className={classes.description}>
+                                  {this.props.reason}{" "}</h5>
+
+                              </span>
+                            )
+                          }
+                        ]}
+                      />
+                    </GridItem>
+            </GridContainer>
+
+
                   </div>
+
                 </GridItem>
               </GridContainer>
               {/* Payment module does here */}
