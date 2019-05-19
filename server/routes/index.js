@@ -7,7 +7,6 @@ const conn = require("../db")
 
 // backend stripe 
 const paymentApi = require('./payment');
-
 const configureRoutes = app => {
   paymentApi(app);
 };
@@ -83,7 +82,7 @@ router.get('/user/:user_id', (req, res, next) => {
 })
 
 // get items
-router.get('/donation/:item_id', (req, res, next) => {
+router.get('/item/:item_id', (req, res, next) => {
   const sql = `
   SELECT  items.*
   FROM items 
@@ -125,15 +124,18 @@ router.post("/donation", (req, res, next) => {
 
  const sql = `
  INSERT INTO donations (
+   donor_id,
+   requestor_id,
+   item_id,
    amount,
    payment_type
  )
- VALUES (?, ?)
+ VALUES (?, ?, ?, ?, ?)
  `
 conn.query(sql, [
-  // Number(req.body.donor_id),
-  // Number(req.body.requestor_id),
-  // Number(req.body.item_id),
+  Number(req.body.donor_id),
+  Number(req.body.requestor_id),
+  Number(req.body.item_id),
   Number(req.body.amount),
   // Number(req.body.anon),
   req.body.payment_type
@@ -141,9 +143,9 @@ conn.query(sql, [
 
   console.log(err)
   res.json({
-    // donor_id: req.body.donor_id,
-    // requestor_id: req.body.requestor_id,
-    // item_id: req.body.item_id,
+    donor_id: req.body.donor_id,
+    requestor_id: req.body.requestor_id,
+    item_id: req.body.item_id,
     amount: req.body.amount,
     // anon: req.body.anon,
     payment_type: req.body.payment_type

@@ -1,8 +1,8 @@
 const initialState = {
-  user: {},
-  item: {},
-  donation: {},
-  donation_amount: {},
+  user: [],
+  item: [],
+  donation: [],
+  donation_amount: [],
   user_id: [],
   // description: '',
   // category: '',

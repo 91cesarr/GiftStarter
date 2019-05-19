@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext } from "react"
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
@@ -8,21 +8,17 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
 import { AuthContext } from "../lib/auth"
 import ReactStripeCheckout from 'react-stripe-checkout';
-import { connect } from "react-redux"
-import { getItem } from "../actions/actions";
-
 
 const Payment = props => {
   const [amount, setAmount] = useState("")
 
-  const { user } = useContext(AuthContext)
   const { donation } = useContext(AuthContext)
 
-  useEffect(() => {
-    const id = props
-    console.log(id)
-    getItem(id)
-  }, [])
+  // useEffect(() => {
+  //   const id = props
+  //   // console.log(id)
+  //   getItem(id)
+  // }, [])
 
 
   function donate(e) {
