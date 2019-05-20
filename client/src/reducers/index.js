@@ -4,16 +4,14 @@ const initialState = {
   donation: [],
   donation_amount: [],
   user_id: [],
+  // name: '',
   // description: '',
   // category: '',
   // reason: '',
   // amount: '',
   // pic_url: '',
   // time: '',
-  // messages: [],
-  // username: "",
-  // currentlyTyping: false,
-  // onlineUser: ""
+  // count: 5
 }
 
 export default function (state = initialState, action) {
@@ -21,7 +19,7 @@ export default function (state = initialState, action) {
     case "GET_ITEM":
       return { ...state, item: action.payload }
     case "GET_USER":
-      return { ...state, user: action.payload, user_id: action.payload }
+      return { ...state, user: action.payload }
     case "GET_DONATION":
       return { ...state, donation: action.payload}
     case "GET_DONATION_TOTAL":

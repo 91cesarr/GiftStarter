@@ -32,7 +32,7 @@ function Footer({ ...props }) {
                 className={classes.block}
                 target="_blank"
               >
-                GiftStarter
+                WishBig
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -65,14 +65,14 @@ function Footer({ ...props }) {
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()}{" "}
-
+          &copy; {1900 + new Date().getYear()} , made with{" "}
+          <Favorite className={classes.icon} /> by{" "}
           <a
             href="#"
             className={aClasses}
             target="_blank"
           >
-          GiftStarter
+            Cesar &amp; Nova
           </a>
         </div>
       </div>
