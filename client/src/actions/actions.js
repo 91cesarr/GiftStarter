@@ -32,6 +32,23 @@ export function getDonation(item_id) {
   })
 }
 
+// Donation function
+export function donation(amount, item_id) {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/api/donation", { amount, item_id })
+      .then(function (response) {
+        // console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+}
+export function donate(e) {
+  e.preventDefault()
+}
+
 // get single item
 export function getItem(item_id) {
   axios.get('/api/item/' + item_id).then(resp => {
@@ -41,6 +58,7 @@ export function getItem(item_id) {
     })
   })
 }
+
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
@@ -54,7 +72,7 @@ export function getTotal(item_id) {
 
 // submit a new item
 export function sendItemData(item) {
-  axios.post('/api/item', item)
+  return axios.post('/api/item', item)
 }
 
 // get donation list
@@ -73,3 +91,12 @@ export function getDonList(item_id) {
 //   axios.post('/api/donation', donation)
 // }
 
+// get newest item
+export function getNewItem(user_id) {
+  axios.get('/api/item/' + user_id).then(resp => {
+    store.dispatch({
+      type: 'GET_NEW_ITEM',
+      payload: resp.data
+    })
+  })
+}

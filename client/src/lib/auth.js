@@ -37,18 +37,6 @@ const initialContext = {
 export const AuthContext = React.createContext(initialContext)
 
 
-// ---------------------------------------->
-// This is using hooks created for state 
-const initContext = {
-  // create initial
-  isAuthenticated: false,
-  redirectUrl: "/login",
-  user: null
-}
-export const TestContext = React.createContext(initContext)
-// End
-// ---------------------------------------->
-
 export const AuthProvider = props => {
   const [isAuthenticated, setAuthenticated] = useState(isLoggedIn())
   const [user, setUser] = useState(getUser())
@@ -94,20 +82,6 @@ export const AuthProvider = props => {
     })
   }
 
-// Donation function
-  function donation(amount,item_id) {
-    return new Promise((resolve, reject) => {
-      axios
-        .post("/api/donation", { amount, item_id })
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    })
-  }
-
 
 
   function signout() {
@@ -126,8 +100,7 @@ export const AuthProvider = props => {
     redirectUrl: props.redirectUrl || "/login",
     signin: signin,
     register: register,
-    signout: signout,
-    donation: donation
+    signout: signout
   }
 
   return (

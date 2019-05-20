@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { sendItemData, getUser } from '../actions/actions'
+import { sendItemData, getUser, getNewItem } from '../actions/actions'
 import { AuthContext } from '../lib/auth'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -72,18 +73,17 @@ const CreateForm = props => {
   };
 
   function sendItemCreated(e) {
-    // e.preventDefault()
-    sendItemData(values)
-    // setValues({
-    //   ...values,
-    //   name: '',
-    //   description: '',
-    //   category: '',
-    //   reason: '',
-    //   amount: '',
-    //   picture_url: '',
+    e.preventDefault()
+    sendItemData(values).then(resp => {
+      props.history.push('/donation/' + resp.data.id)
+    })
     // })
     // get item data and use to create url?
+  }
+
+  function openItemPage(e) {
+    e.preventDefault()
+    getNewItem(values.requestor_id)
   }
 
   return (
@@ -101,7 +101,7 @@ const CreateForm = props => {
             Let your donors know what you want and why you want it.<br></br>
             Be sure to add all the pertinent details.
             </h4>
-          <form onSubmit={sendItemCreated}>
+          <form onSubmit={sendItemCreated} href={"/donation/" + props.item_id}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
@@ -142,7 +142,7 @@ const CreateForm = props => {
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5,
+                  rows: 2,
                   onChange: handleChange('description')
                 }}
               />
@@ -155,7 +155,7 @@ const CreateForm = props => {
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5,
+                  rows: 2,
                   onChange: handleChange('reason')
                 }}
               />
@@ -191,7 +191,7 @@ const CreateForm = props => {
                 md={4}
                 className={classes.textCenter}
               >
-              {/* set button to load the item after submit? */}
+                {/* set button to load the item after submit? */}
                 <Button type="submit" color="primary">Submit</Button>
               </GridItem>
             </GridContainer>
@@ -209,5 +209,5 @@ function mapStateToProps(appState) {
   }
 }
 
-export default withStyles(workStyle)(connect(mapStateToProps)(CreateForm))
+export default withStyles(workStyle)(connect(mapStateToProps)(withRouter(CreateForm)))
 

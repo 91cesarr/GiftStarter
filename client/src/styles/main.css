@@ -37,3 +37,14 @@ html {
     max-width: 1440px;
     transform: translate3d(0, -12%, 0);
 } 
+
+.wrap_pricing {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  
+}
+
+.total_amount,.remaining_amount {
+  padding: 30px 85px;
+}
