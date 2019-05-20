@@ -136,12 +136,12 @@ conn.query(sql, [
 
   console.log(err)
   res.json({
-    donor_id: req.body.donor_id,
-    requestor_id: req.body.requestor_id,
+    // donor_id: req.body.donor_id,
+    // requestor_id: req.body.requestor_id,
     item_id: req.body.item_id,
     amount: req.body.amount,
     // anon: req.body.anon,
-    payment_type: req.body.payment_type
+    // payment_type: req.body.payment_type
   })
 })
 })

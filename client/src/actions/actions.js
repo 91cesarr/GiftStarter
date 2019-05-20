@@ -29,7 +29,7 @@ export function donation(amount, item_id) {
     axios
       .post("/api/donation", { amount, item_id })
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

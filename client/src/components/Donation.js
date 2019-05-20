@@ -26,7 +26,7 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 // Donation actions
 import { connect } from "react-redux"
 // Payment Module
-import Payment from "../components/Payment"
+// import Payment from "../components/Payment"
 import { getItem, getTotal, donation, donate } from "../actions/actions";
 import ReactStripeCheckout from 'react-stripe-checkout';
 
@@ -52,23 +52,25 @@ class Donation extends Component {
     this.setState({ value: e.target.value });
   };
   render() {
-    const amount = this.props.amount
+    const value = this.state.value
+    const item_id = this.props.item_id
+    const url = 'http://localhost:3000' + this.props.match.url
+    const shareText = 'Check this out! ' + this.props.name
+    const rem = this.props.amount - this.props.total
+    const { classes, ...rest } = this.props;
     const onToken = (token) => {
-      donation(amount)
+      donation(value,item_id)
       fetch('/api/donation', {
         method: 'POST',
         body: JSON.stringify(token),
       }).then(response => {
         response.json().then(data => {
-          alert(`We are in business, ${data.email}`);
+          alert(`Thank you for your donation!`
+          //insert inside `` above  ${data.email}
+          );
         });
       });
     }
-    
-    const url = 'http://localhost:3000' + this.props.match.url
-    const shareText = 'Check this out! ' + this.props.name
-    const rem = this.props.amount - this.props.total
-    const { classes, ...rest } = this.props;
     return (
       <div>
         <Header
@@ -152,7 +154,8 @@ class Donation extends Component {
                                         }}
                                         inputProps={{
                                           onChange: this.handleChange,
-                                          value: this.state.value
+                                          value: this.state.value,
+                                          autoComplete: "off"
                                         }} />
                                     </GridItem>
                                   </GridContainer>
@@ -162,6 +165,7 @@ class Donation extends Component {
                                       <ReactStripeCheckout
                                         name={this.props.name}
                                         amount={this.state.value*100}
+                                        item_id={this.props.item_id}
                                         stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                                         token={onToken}
                                       />
