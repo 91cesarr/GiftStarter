@@ -12,19 +12,21 @@ export function getUser(username) {
   })
 }
 
-<<<<<<< HEAD
 // get item list
 export function getItems(requestor_id) {
   axios.get('/api/items/' + requestor_id).then(resp => {
     store.dispatch({
       type: 'GET_ITEM_LIST',
-=======
+      payload: resp.data
+    })
+  })
+}
+
 // get user donation
 export function getDonation(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
     store.dispatch({
       type: 'GET_DONATION',
->>>>>>> master
       payload: resp.data
     })
   })
@@ -46,7 +48,7 @@ export function getTotal(item_id) {
       type: 'GET_DONATION_TOTAL',
       payload: resp.data
     })
-    console.log("this>",resp.data)
+    console.log("this>", resp.data)
   })
 }
 
@@ -69,9 +71,5 @@ export function getDonList(item_id) {
 // export function sendDonation(donation) {
 //   console.log(donation)
 //   axios.post('/api/donation', donation)
-<<<<<<< HEAD
-// }
-=======
 // }
 
->>>>>>> master

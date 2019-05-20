@@ -42,12 +42,6 @@ const App = props => {
       <Provider store={store}>
         <Router>
           <MuiThemeProvider theme={theme}>
-<<<<<<< HEAD
-            {/* public routes */}
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-=======
->>>>>>> master
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
