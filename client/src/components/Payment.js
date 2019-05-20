@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
@@ -6,30 +6,12 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
-import { AuthContext } from "../lib/auth"
 import ReactStripeCheckout from 'react-stripe-checkout';
+import { donation, donate } from "../actions/actions";
+
 
 const Payment = props => {
   const [amount, setAmount] = useState("")
-
-  const { donation } = useContext(AuthContext)
-
-  // useEffect(() => {
-  //   const id = props
-  //   // console.log(id)
-  //   getItem(id)
-  // }, [])
-
-
-  function donate(e) {
-    e.preventDefault()
-    // donation(amount)
-    //     .then(() => {
-    //       //Sends you to > /Thank you page
-    //       props.history.push("/")
-    //     })
-  }
-
   const { classes } = props;
 
   const onToken = (token) => {

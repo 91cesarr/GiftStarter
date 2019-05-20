@@ -6,7 +6,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -62,8 +61,8 @@ class Donation extends Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
             <div className={classes.container}>
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={12}>
+              <GridContainer>
+                <GridItem>
                   <img src={this.props.picture_url} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
@@ -77,7 +76,6 @@ class Donation extends Component {
                       <div>
                         <h5>${rem}</h5>
                       <i className={"fas fa-info-circle"} /></div>
-
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
                     </div>
@@ -94,8 +92,8 @@ class Donation extends Component {
                       </p>
                     </div> */}
 
-                    <GridContainer justify="center">
-                    <GridItem xs={12} sm={12} md={12} lg={6}>
+                    <GridContainer>
+                    <GridItem>
                       <NavPills
                         color="primary"
                         horizontal={{

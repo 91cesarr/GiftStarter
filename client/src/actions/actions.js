@@ -23,6 +23,23 @@ export function getDonation(item_id) {
   })
 }
 
+// Donation function
+export function donation(amount, item_id) {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/api/donation", { amount, item_id })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+}
+export function donate(e) {
+  e.preventDefault()
+}
+
 // get single item
 export function getItem(item_id) {
   axios.get('/api/item/' + item_id).then(resp => {
