@@ -56,7 +56,6 @@ export function getTotal(item_id) {
       type: 'GET_DONATION_TOTAL',
       payload: resp.data
     })
-    console.log("this>",resp.data)
   })
 }
 
