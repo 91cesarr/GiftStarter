@@ -178,8 +178,8 @@ class Donation extends Component {
                   </div>
                 </GridItem>
               </GridContainer>
-              {/* Payment module goes here */}
-              <Payment />
+              {/* Payment module goes here
+              <Payment /> */}
             </div>
           </div>
         </div>
