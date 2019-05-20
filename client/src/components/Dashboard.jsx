@@ -14,8 +14,8 @@ import withStyles from "@material-ui/core/styles/withStyles"
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
+// import GridContainer from "components/Grid/GridContainer.jsx";
+// import GridItem from "components/Grid/GridItem.jsx";
 // import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
@@ -33,7 +33,6 @@ const Dashboard = props => {
 
   useEffect(() => {
     getUser(user)
-    console.log(user)
   }, [user])
 
   return (
@@ -56,7 +55,7 @@ const Dashboard = props => {
         >
           <h1
             className={classes.title}
-          >Hello, {props.userData.fname}</h1>
+          >Hello, {user}!</h1>
         </div>
       </Parallax>
       <div

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import moment, { Date } from "moment"
+// import moment, { Date } from "moment"
 import { getUser, getItems, getItem, getDonList } from "../actions/actions"
 import { AuthContext } from '../lib/auth'
 import { connect } from 'react-redux'
@@ -34,9 +34,9 @@ import CardHeader from "components/Card/CardHeader.jsx";
 // import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 // import CardFooter from "components/Card/CardFooter.jsx";
-import Header from "components/Header/Header.jsx";
+// import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
+// import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 // alternate dashboard items
@@ -53,7 +53,7 @@ import { bugs, website, server } from "variables/general.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
-const dashboardRoutes = [];
+// const dashboardRoutes = [];
 
 const DashData = props => {
   const { user } = useContext(AuthContext)
@@ -67,7 +67,11 @@ const DashData = props => {
     getItems(props.userData.user_id)
   }
 
-  // getItem(item_id)
+  // function openItem(e) {
+  //   e.preventDefault()
+  //   getItem(props.items.item_id)
+  // }
+
   // getDonList(props.item.item_id)
 
   // const myItems = items.filter((user_id, requestor_id) => {
@@ -80,18 +84,19 @@ const DashData = props => {
 
   // const remaining = props.item.amount - donTotal
 
-  const state = {
-    value: 0
-  };
-  const handleChange = (event, value) => {
-    this.setState({ value });
-  };
+  // const state = {
+  //   value: 0
+  // };
 
-  const handleChangeIndex = index => {
-    this.setState({ value: index });
-  };
+  // const handleChange = (event, value) => {
+  //   this.setState({ value });
+  // };
 
-  const { classes, ...rest } = props;
+  // const handleChangeIndex = index => {
+  //   this.setState({ value: index });
+  // };
+
+  const { classes } = props;
   return (
     <div>
       {/* <div height="400px">
@@ -125,12 +130,7 @@ const DashData = props => {
               tableData=
               {props.items}
 
-            // {[
-            //   ["1", "Dakota Rice", "$36,738", "Niger"],
-            //   ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-            //   ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-            //   ["4", "Philip Chaney", "$38,735", "Korea, South"]
-            // ]}
+            // add link for each line
             />
           </CardBody>
         </Card>
