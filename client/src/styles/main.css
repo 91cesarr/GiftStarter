@@ -29,3 +29,11 @@ html {
   font-weight: lighter;
 }
 /* end login and registration */
+
+
+.itemIMG {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+    transform: translate3d(0, -12%, 0);
+} 
