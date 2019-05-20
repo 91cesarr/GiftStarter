@@ -40,9 +40,6 @@ const App = props => {
       <Provider store={store}>
         <Router>
           <MuiThemeProvider theme={theme}>
-              {/* public routes */}
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
