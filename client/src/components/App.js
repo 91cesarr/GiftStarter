@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import Payment from "./Payment"
 import "../styles/main.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -46,7 +47,8 @@ const App = props => {
             {/* public routes */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/donation" component={Donation} />
+            <Route path="/donation/:item_id" component={Donation} />
+            <Route path="/payment" component={Payment} />
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
           </MuiThemeProvider>
