@@ -48,6 +48,7 @@ export function getItem(item_id) {
     })
   })
 }
+
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
@@ -60,7 +61,7 @@ export function getTotal(item_id) {
 
 // submit a new item
 export function sendItemData(item) {
-  axios.post('/api/item', item)
+  return axios.post('/api/item', item)
 }
 
 // // submit a donation
@@ -69,3 +70,12 @@ export function sendItemData(item) {
 //   axios.post('/api/donation', donation)
 // }
 
+// get newest item
+export function getNewItem(user_id) {
+  axios.get('/api/item/' + user_id).then(resp => {
+    store.dispatch({
+      type: 'GET_NEW_ITEM',
+      payload: resp.data
+    })
+  })
+}

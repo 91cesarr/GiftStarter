@@ -81,18 +81,18 @@ router.get('/user/:username', (req, res, next) => {
   })
 })
 
-// get items
-router.get('/item/:item_id', (req, res, next) => {
-  const sql = `
-  SELECT  items.*
-  FROM items 
-  WHERE item_id = ?
-  `
+// // get items
+// router.get('/item/:item_id', (req, res, next) => {
+//   const sql = `
+//   SELECT  items.*
+//   FROM items 
+//   WHERE item_id = ?
+//   `
 
-  conn.query(sql, [req.params.item_id], (err, results, fields) => {
-    res.json(results[0])
-  })
-})
+//   conn.query(sql, [req.params.item_id], (err, results, fields) => {
+//     res.json(results[0])
+//   })
+// })
 
 // get total amount of donations 
 router.get('/donation/:item_id', (req, res, next) => {
@@ -107,43 +107,43 @@ WHERE item_id = ?
   })
 })
 
-  // / donation page
+// / donation page
 // post new donation
 router.post("/donation", (req, res, next) => {
- // const sql = `
- // INSERT INTO donations (
- //   donor_id,
- //   requestor_id,
- //   item_id,
- //   amount,
- //   anon,
- //   payment_type
- // )
- // VALUES (?, ?, ?, ?, ?, ?)
- // `
+  // const sql = `
+  // INSERT INTO donations (
+  //   donor_id,
+  //   requestor_id,
+  //   item_id,
+  //   amount,
+  //   anon,
+  //   payment_type
+  // )
+  // VALUES (?, ?, ?, ?, ?, ?)
+  // `
 
- const sql = `
+  const sql = `
  INSERT INTO donations (
    item_id,
    amount
  )
  VALUES (?, ?)
  `
-conn.query(sql, [
-  req.body.item_id,
-  req.body.amount,
-], (err, results, fields) => {
+  conn.query(sql, [
+    req.body.item_id,
+    req.body.amount,
+  ], (err, results, fields) => {
 
-  console.log(err)
-  res.json({
-    // donor_id: req.body.donor_id,
-    // requestor_id: req.body.requestor_id,
-    item_id: req.body.item_id,
-    amount: req.body.amount,
-    // anon: req.body.anon,
-    // payment_type: req.body.payment_type
+    console.log(err)
+    res.json({
+      // donor_id: req.body.donor_id,
+      // requestor_id: req.body.requestor_id,
+      item_id: req.body.item_id,
+      amount: req.body.amount,
+      // anon: req.body.anon,
+      // payment_type: req.body.payment_type
+    })
   })
-})
 })
 
 // // post new item
@@ -171,6 +171,7 @@ conn.query(sql, [
 //       reason: req.body.reason,
 //       amount: req.body.amount,
 //       pic_url: req.body.pic_url
+
 // get the specific item
 router.get('/item/:item_id', (req, res, next) => {
   const sql = `
@@ -202,7 +203,7 @@ router.post('/item', (req, res, next) => {
   `
   conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, Number(req.body.amount), req.body.picture_url, req.body.item_url], (err, results, fields) => {
 
-    console.log(err)
+    console.log(results.insertId)
     res.json({
       requestor_id: req.body.requestor_id,
       name: req.body.name,
@@ -211,52 +212,25 @@ router.post('/item', (req, res, next) => {
       reason: req.body.reason,
       amount: req.body.amount,
       pic_url: req.body.picture_url,
-      item_url: req.body.item_url
+      item_url: '',
+      id: results.insertId
     })
   })
 })
 
-// // donation page
-// // post new donation
-// router.post('/donation', (req, res, next) => {
-//   // const sql = `
-//   // INSERT INTO donations (
-//   //   donor_id,
-//   //   requestor_id,  
-//   //   item_id,
-//   //   amount,
-//   //   anon,
-//   //   payment_type
-//   // )
-//   // VALUES (?, ?, ?, ?, ?, ?)
-//   // `
 
-//   const sql = `
-//   INSERT INTO donations (
-//     amount,
-//     payment_type
-//   )
-//   VALUES (?, ?)
-//   `
-//   conn.query(sql, [
-//     // Number(req.body.donor_id),
-//     // Number(req.body.requestor_id),
-//     // Number(req.body.item_id),
-//     Number(req.body.amount),
-//     // Number(req.body.anon),
-//     req.body.payment_type
-//   ], (err, results, fields) => {
+// get last posted item
+router.get('/item/:user_id', (req, res, next) => {
+  const sql = `
+  SELECT  items.*
+  FROM items
+  ORDER BY item_id DESC
+  WHERE user_id  = ?
+  `
 
-//     console.log(err)
-//     res.json({
-//       // donor_id: req.body.donor_id,
-//       // requestor_id: req.body.requestor_id,
-//       // item_id: req.body.item_id,
-//       amount: req.body.amount,
-//       // anon: req.body.anon,
-//       payment_type: req.body.payment_type
-//     })
-//   })
-// })
+  conn.query(sql, (err, results, fields) => {
+    res.json(results[0].item_id)
+  })
+})
 
 module.exports = router
