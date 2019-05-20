@@ -1,7 +1,8 @@
 const initialState = {
   user: [],
-  item: {},
-  donation: {},
+  item: [],
+  donation: [],
+  donation_amount: [],
   user_id: [],
   // name: '',
   // description: '',
@@ -21,6 +22,8 @@ export default function (state = initialState, action) {
       return { ...state, user: action.payload }
     case "GET_DONATION":
       return { ...state, donation: action.payload}
+    case "GET_DONATION_TOTAL":
+      return { ...state, donation_amount: action.payload }
     // case "ADD_MESSAGE":
     //   return { ...state, messages: [...state.messages, action.payload] }
     // case "SET_USERNAME":

@@ -1,5 +1,4 @@
-import React, { useState,useEffect, useContext, Component } from "react"
-import { AuthContext } from "../lib/auth"
+import React, { Component } from "react"
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -13,113 +12,154 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
-import profile from "assets/img/examples/redcharlie-1254208-unsplash.jpg";
+// @material-ui/icons
+import Dashboard from "@material-ui/icons/Dashboard";
+import Schedule from "@material-ui/icons/Schedule";
+import NavPills from "components/NavPills/NavPills.jsx";
+
+// share page buttons
+import { Facebook, Twitter } from 'react-sharingbuttons'
+import 'react-sharingbuttons/dist/main.css'
+
+
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 // Donation actions
 import { connect } from "react-redux"
 // Payment Module
 import Payment from "../components/Payment"
-import { getDonation, getItem } from "../actions/actions";
+import { getItem, getTotal } from "../actions/actions";
 
 class Donation extends Component {
-componentDidMount() {
-  getItem()
-    console.log("props",this.props)
-}
-  componentWillMount() {
-    
+
+  componentDidMount() {
+    const id = this.props.match.params.item_id
+    getItem(id)
+    getTotal(id)
   }
-  // const { item_id } = useContext(AuthContext)
-  // const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  componentWillMount() {
+
+  }
   render() {
+    const url = 'http://localhost:3000' + this.props.match.url
+    const shareText = 'Check this out! ' + this.props.name
+    console.log(this.props)
+    const rem = this.props.amount - this.props.total
     const { classes, ...rest } = this.props;
-    const imageClasses = classNames(
-      classes.imgRaised,
-      classes.imgCard,
-      classes.imgFluid
-    );
+    return (
+      <div>
+        <Header
+          color="transparent"
+          brand="Donation Page"
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: "white"
+          }}
+          {...rest}
+        />
+        <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+        <div className={classNames(classes.main, classes.mainRaised)}>
+          <div>
+            <div className={classes.container}>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={12}>
+                  <img src={this.props.picture_url} alt="..." className="itemIMG" />
+                  <div className={classes.profile}>
+                    <div className={classes.name}>
+                      <h1>{this.props.name}</h1>
+                      <h3>Total Amount</h3>
+                      <div>
+                        <h5>${this.props.amount}</h5>
+                      <i className={"fas fa-info-circle"} /></div>
 
-  return (
-    <div>
-      <Header
-        color="transparent"
-        brand="Donation Page"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "white"
-        }}
-        {...rest}
-      />
-      <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
-                <div className={classes.profile}>
-                  <div>
-                    <img src={profile} alt="..." className={imageClasses} />
-                  </div>
-                  <div className={classes.name}>
-                    <h3 className={classes.title}>A Yacht Maybe 2</h3>
-                    <h2>{this.props.user_id}</h2>
-                    <h4>Total Amount</h4>
-                    {/* <h3>{props.amount}</h3> */}
+                      <h3>Remaining Amount</h3>
+                      <div>
+                        <h5>${rem}</h5>
+                      <i className={"fas fa-info-circle"} /></div>
 
+                      <Facebook url={url} />
+                      <Twitter url={url} shareText={shareText} />
+                    </div>
+                    {/* <div>
+                      <h2>Description</h2>
+                      <p>{this.prop justify="center"s.description}{" "}
+                      </p>
+                    </div> */}
+                      
                     <br />
-                    <h4>Remaining Amount</h4>
-                    <h3>$9999</h3>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-twitter"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-instagram"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-facebook"} />
-                    </Button>
-                  </div>
-                </div>
-              </GridItem>
+                    {/* <div>
+                      <h2>Reason</h2>
+                      <p>{this.props.reason}{" "}
+                      </p>
+                    </div> */}
+
+                    <GridContainer justify="center">
+                    <GridItem xs={12} sm={12} md={12} lg={6}>
+                      <NavPills
+                        color="primary"
+                        horizontal={{
+                          tabsGrid: { xs: 12, sm: 4, md: 4 },
+                          contentGrid: { xs: 12, sm: 8, md: 8 }
+                        }}
+                        tabs={[
+                          {
+                            tabButton: "Description",
+                            tabIcon: Dashboard,
+                            tabContent: (
+                              <span>
+                                <h5 className={classes.description}>
+                                  {this.props.description}{" "}</h5>
+                              </span>
+                            )
+                          },
+                          {
+                            tabButton: "Reason",
+                            tabIcon: Schedule,
+                            tabContent: (
+                              <span>
+                                <h5 className={classes.description}>
+                                  {this.props.reason}{" "}</h5>
+
+                              </span>
+                            )
+                          }
+                        ]}
+                      />
+                    </GridItem>
             </GridContainer>
-            <div className={classes.description}>
-              <p>
-                An artist of considerable range, Chet Faker — the name taken
-                by Melbourne-raised, Brooklyn-based Nick Murphy — writes,
-                performs and records all of his own music, giving it a warm,
-                  intimate feel with a solid groove structure.{" "}
-              </p>
+
+
+                  </div>
+
+                </GridItem>
+              </GridContainer>
+              {/* Payment module does here */}
+              <Payment />
             </div>
-            {/* Payment module does here */}
-            <Payment/>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
   }
 }
 
 function mapStateToProps(appState) {
-  return { 
+  return {
+    id: appState.item.id,
     user: appState.user,
     user_id: appState.user_id,
     item_id: appState.item.item_id,
     requestor_id: appState.item.requestor_id,
-    name: appState.user.name,
+    name: appState.item.name,
     description: appState.item.description,
     category: appState.item.category,
     reason: appState.item.reason,
     amount: appState.item.amount,
+    total: appState.donation_amount.total,
     picture_url: appState.item.picture_url,
     item_url: appState.item.item_url
-    // user: appState.user,
-    // thumbnail: appState.user.avatar_url,
-    // name: appState.user.name,
-    // username: appState.user.login
   };
 }
 export default withStyles(profilePageStyle)(connect(mapStateToProps)(Donation))

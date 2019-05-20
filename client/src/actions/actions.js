@@ -4,6 +4,7 @@ import axios from 'axios'
 // get user data
 export function getUser(username) {
   axios.get('/api/user/' + username).then(resp => {
+
     store.dispatch({
       type: 'GET_USER',
       payload: resp.data
@@ -18,25 +19,31 @@ export function getDonation(item_id) {
       type: 'GET_DONATION',
       payload: resp.data
     })
-    console.log(resp)
   })
 }
 
 // get single item
 export function getItem(item_id) {
-  // const id = this.props.match.params.item_id
-  axios.get('/api/donation/' + item_id).then(resp => {
+  axios.get('/api/item/' + item_id).then(resp => {
     store.dispatch({
       type: 'GET_ITEM',
-      payload: resp.data,
-      id: item_id
+      payload: resp.data
     })
+  })
+}
+// get donation amount
+export function getTotal(item_id) {
+  axios.get('/api/donation/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_DONATION_TOTAL',
+      payload: resp.data
+    })
+    console.log("this>",resp.data)
   })
 }
 
 // submit a new item
 export function sendItemData(item) {
-  console.log(item)
   axios.post('/api/item', item)
 }
 

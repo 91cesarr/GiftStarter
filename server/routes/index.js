@@ -5,6 +5,13 @@ const jwt = require("jsonwebtoken")
 const sha512 = require("js-sha512")
 const conn = require("../db")
 
+// backend stripe 
+const paymentApi = require('./payment');
+const configureRoutes = app => {
+  paymentApi(app);
+};
+
+
 router.post("/register", (req, res, next) => {
   const username = req.body.username
   const password = sha512(req.body.password + config.get("salt"))
@@ -75,14 +82,27 @@ router.get('/user/:username', (req, res, next) => {
 })
 
 // get items
-router.get('/donation/:item_id', (req, res, next) => {
+router.get('/item/:item_id', (req, res, next) => {
   const sql = `
   SELECT  items.*
   FROM items 
   WHERE item_id = ?
   `
 
-  conn.query(sql, [req.body.item_id], (err, results, fields) => {
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results[0])
+  })
+})
+
+// get total amount of donations 
+router.get('/donation/:item_id', (req, res, next) => {
+  const sql = `
+SELECT
+SUM(amount) as total
+FROM donations
+WHERE item_id = ?
+  `
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
     res.json(results[0])
   })
 })
@@ -104,25 +124,21 @@ router.post("/donation", (req, res, next) => {
 
  const sql = `
  INSERT INTO donations (
-   amount,
-   payment_type
+   item_id,
+   amount
  )
  VALUES (?, ?)
  `
 conn.query(sql, [
-  // Number(req.body.donor_id),
-  // Number(req.body.requestor_id),
-  // Number(req.body.item_id),
-  Number(req.body.amount),
-  // Number(req.body.anon),
-  req.body.payment_type
+  req.body.item_id,
+  req.body.amount,
 ], (err, results, fields) => {
 
   console.log(err)
   res.json({
-    // donor_id: req.body.donor_id,
-    // requestor_id: req.body.requestor_id,
-    // item_id: req.body.item_id,
+    donor_id: req.body.donor_id,
+    requestor_id: req.body.requestor_id,
+    item_id: req.body.item_id,
     amount: req.body.amount,
     // anon: req.body.anon,
     payment_type: req.body.payment_type
