@@ -84,13 +84,6 @@ class Donation extends Component {
         });
       });
     }
-  // If remaining amount is zero 
-  // alert user that the amount for the gift has been met
- if (this.props.amount === 0) {
-
- }
-
-
   
     return (
       <div>
