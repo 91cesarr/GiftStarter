@@ -21,6 +21,7 @@ import headerLinksStyle from "assets/jss/material-kit-react/components/headerLin
 
 function HeaderLinks({ ...props }) {
   const { signout } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext)
   const { classes } = props;
 
   // function logout() {
@@ -108,7 +109,7 @@ function HeaderLinks({ ...props }) {
       <ListItem className={classes.listItem}>
         <Tooltip
           id="logoutButton"
-          title="Logout"
+          title={(isAuthenticated === true ? "Logout" : "Login")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >        
@@ -119,7 +120,9 @@ function HeaderLinks({ ...props }) {
             className={classes.navLink}
             onClick={signout}
           >
-            <i className={classes.socialIcons + " fas fa-sign-out-alt"} />
+          
+
+            <i className={(isAuthenticated === true ? classes.socialIcons + " fas fa-sign-out-alt" : classes.socialIcons + " fas fa-sign-in-alt")} />
           </Button>
         </Tooltip>
       </ListItem>
