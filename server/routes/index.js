@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken")
 const sha512 = require("js-sha512")
 const conn = require("../db")
 
-// backend stripe 
-const paymentApi = require('./payment');
-const configureRoutes = app => {
-  paymentApi(app);
-};
+// // backend stripe 
+// const paymentApi = require('./payment');
+// const configureRoutes = app => {
+//   paymentApi(app);
+// };
 
 
 router.post("/register", (req, res, next) => {
@@ -237,10 +237,12 @@ router.get('/item/:user_id', (req, res, next) => {
 // get item list
 router.get('/items/:requestor_id', (req, res, next) => {
   const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, i.requestor_id, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
   WHERE requestor_id  = ?
+  LIMIT 5
   `
 
   conn.query(sql, [req.params.requestor_id], (err, results, fields) => {

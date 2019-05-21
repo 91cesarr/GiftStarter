@@ -1,16 +1,15 @@
 import React from "react"
 import { Provider } from "react-redux"
 import store from "../store"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import { AuthProvider, AuthRoute } from "../lib/auth"
 
 import Create from "./Create.jsx"
 import Donation from "./Donation"
 import Dashboard from "./Dashboard"
-
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
-import Payment from "./Payment"
+// import Payment from "./Payment"
 import "../styles/main.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -46,7 +45,7 @@ const App = props => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/donation/:item_id" exact component={Donation} />
-            <Route path="/payment" component={Payment} />
+            {/* <Route path="/payment" component={Payment} /> */}
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
             <AuthRoute path="/dashboard" exact component={Dashboard} />
