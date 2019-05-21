@@ -33,23 +33,25 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 import { connect } from "react-redux"
 // Payment Module
 // import Payment from "../components/Payment"
-import { getItem, getTotal, donation, donate, getUser } from "../actions/actions";
+import { getItem, getTotal, donation, donate } from "../actions/actions";
 import ReactStripeCheckout from 'react-stripe-checkout';
+import { getUserId } from "../lib/auth"
+
 
 
 class Donation extends Component {
   state = {
     // initial state
     value: "",
-    user: ""
+    user_id: ""
   }
 
   componentDidMount() {
     const id = this.props.match.params.item_id
-    const user = this.props.match.params.user_id
+    const user_id = this.props.user_id
     getItem(id)
     getTotal(id)
-    getUser(user)
+    getUserId(user_id)
     this.setState({
       value: ""
     })
@@ -61,16 +63,15 @@ class Donation extends Component {
     this.setState({ value: e.target.value });
   };
   render() {
+
     let requestor_id = this.props.requestor_id
     const value = this.state.value
     const item_id = this.props.item_id
+    console.log(this.props)
     const url = 'http://localhost:3000' + this.props.match.url
     const shareText = 'Check this out! ' + this.props.name
     const rem = this.props.amount - this.props.total
     const { classes, ...rest } = this.props;
-    console.log("userId",this.props.user_id)
-    console.log("user",this.props.user)
-    console.log(this.props)
     const onToken = (token) => {
       donation(value,item_id,requestor_id)
       fetch('/api/donation', {
@@ -235,6 +236,7 @@ class Donation extends Component {
                                         label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
                                         amount={this.state.value*100}
                                         item_id={this.props.item_id}
+                                        user_id={this.props.user_id}
                                         requestor_id={this.props.requestor_id}
                                         stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                                         token={onToken}
@@ -267,7 +269,7 @@ function mapStateToProps(appState) {
   return {
     id: appState.item.id,
     user: appState.user.user_id,
-    user_id: appState.user_id,
+    user_id: appState.user_id.user_id,
     item_id: appState.item.item_id,
     requestor_id: appState.item.requestor_id,
     name: appState.item.name,

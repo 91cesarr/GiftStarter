@@ -17,6 +17,16 @@ function isTokenExpired(token) {
   }
 }
 
+export function getUserId() {
+  try {
+    const token = localStorage.getItem('authtoken')
+    const decoded = decode(token)
+    return decoded.user_id
+  } catch (err) {
+    return null
+  }
+}
+
 function getUser() {
   try {
     const token = localStorage.getItem("authtoken")
@@ -31,7 +41,7 @@ const initialContext = {
   isAuthenticated: false,
   redirectUrl: "/login",
   user: null,
-  user_id: ""
+  user_id: null
 }
 
 export const AuthContext = React.createContext(initialContext)
@@ -40,7 +50,7 @@ export const AuthContext = React.createContext(initialContext)
 export const AuthProvider = props => {
   const [isAuthenticated, setAuthenticated] = useState(isLoggedIn())
   const [user, setUser] = useState(getUser())
-  const [user_id, setUser_id] = useState(getUser())
+  const [user_id, setUser_id] = useState(getUserId())
 
   function signin(username, password) {
     return new Promise((resolve, reject) => {
@@ -51,7 +61,7 @@ export const AuthProvider = props => {
           axios.defaults.headers.common.Authorization = "Bearer " + token
           window.localStorage.setItem("authtoken", token)
           setUser(getUser())
-          setUser_id(getUser())
+          setUser_id(getUserId())
           setAuthenticated(true)
           resolve()
         })
@@ -72,6 +82,7 @@ export const AuthProvider = props => {
           const token = resp.data.token
           axios.defaults.headers.common.Authorization = "Bearer " + token
           setUser(getUser())
+          setUser_id(getUserId())
           setAuthenticated(true)
           resolve()
         })

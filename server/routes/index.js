@@ -33,7 +33,8 @@ router.post("/register", (req, res, next) => {
           console.log(err)
           throw new Error("register failed")
         } else {
-          const token = jwt.sign({ username }, config.get("secret"))
+          const user_id = results.insertId
+          const token = jwt.sign({ username, user_id }, config.get("secret"))
           res.json({
             token: token
           })
@@ -54,10 +55,14 @@ router.post("/login", (req, res, next) => {
     const count = results[0].count
 
     if (count >= 1) {
-      const token = jwt.sign({ username }, config.get("secret"))
+      const sql2 = 'SELECT user_id FROM users WHERE username = ?'
+      conn.query(sql2, [username], (err2, results2, fields2) => {
+        const user_id = results2[0].user_id
+        const token = jwt.sign({ username, user_id }, config.get("secret"))
 
-      res.json({
-        token
+        res.json({
+          token
+        })
       })
     } else {
       res.status(401).json({

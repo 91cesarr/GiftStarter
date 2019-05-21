@@ -22,8 +22,10 @@ import headerLinksStyle from "assets/jss/material-kit-react/components/headerLin
 function HeaderLinks({ ...props }) {
   const { signout } = useContext(AuthContext)
   const { isAuthenticated } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  const { user_id } = useContext(AuthContext)
   const { classes } = props;
-
+  console.log(user)
   // function logout() {
   //   signout()
   //   props.history.push("/")
@@ -34,7 +36,7 @@ function HeaderLinks({ ...props }) {
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Welcome"
+          buttonText={(isAuthenticated === true ? "Welcome " + user : "Welcome")}
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
