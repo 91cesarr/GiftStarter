@@ -26,7 +26,7 @@ function HeaderLinks({ ...props }) {
     signout()
     props.history.push("/")
   }
-  // if (this.props.logged_in) {
+  
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
