@@ -70,6 +70,7 @@ class Donation extends Component {
     const { classes, ...rest } = this.props;
     console.log("userId",this.props.user_id)
     console.log("user",this.props.user)
+    console.log(this.props)
     const onToken = (token) => {
       donation(value,item_id,requestor_id)
       fetch('/api/donation', {
@@ -83,6 +84,14 @@ class Donation extends Component {
         });
       });
     }
+  // If remaining amount is zero 
+  // alert user that the amount for the gift has been met
+ if (this.props.amount === 0) {
+
+ }
+
+
+  
     return (
       <div>
         <Header
@@ -226,7 +235,8 @@ class Donation extends Component {
                                   <GridContainer>
                                     <GridItem>
                                       <div className={classes.title}></div>
-                                      <ReactStripeCheckout
+                                      <ReactStripeCheckout 
+                                        disabled={(rem === 0 ? true : false)}
                                         name={this.props.name}
                                         amount={this.state.value*100}
                                         item_id={this.props.item_id}
