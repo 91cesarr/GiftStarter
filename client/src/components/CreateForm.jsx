@@ -181,7 +181,9 @@ const CreateForm = props => {
                     fullWidth: true
                   }}
                   inputProps={{
-                    onChange: handleChange('amount')
+                    onChange: handleChange('amount'),
+                    type: "number",
+                    inputProps: { min: 0, step: 0.01 }
                   }}
                 />
               </GridItem>

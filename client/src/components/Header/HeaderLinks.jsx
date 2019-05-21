@@ -26,13 +26,13 @@ function HeaderLinks({ ...props }) {
     signout()
     props.history.push("/")
   }
-
+  // if (this.props.logged_in) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Explore other donations"
+          buttonText="Welcome"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -40,14 +40,13 @@ function HeaderLinks({ ...props }) {
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
-              See More
+              Create
             </Link>,
             <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
-              target="_blank"
+              href="http://localhost:3000/dashboard/"
               className={classes.dropdownLink}
             >
-              Testing
+              Dashboard
             </a>
           ]}
         />
@@ -111,7 +110,7 @@ function HeaderLinks({ ...props }) {
           title="Logout"
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
-        >
+        >        
           <Button
             color="transparent"
             href="/login"

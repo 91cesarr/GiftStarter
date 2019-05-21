@@ -125,13 +125,15 @@ router.post("/donation", (req, res, next) => {
  const sql = `
  INSERT INTO donations (
    item_id,
-   amount
+   amount,
+   requestor_id
  )
- VALUES (?, ?)
+ VALUES (?, ?, ?)
  `
 conn.query(sql, [
   req.body.item_id,
   req.body.amount,
+  req.body.requestor_id
 ], (err, results, fields) => {
 
   console.log(err)
@@ -140,6 +142,7 @@ conn.query(sql, [
     // requestor_id: req.body.requestor_id,
     item_id: req.body.item_id,
     amount: req.body.amount,
+    requestor_id: req.body.requestor_id
     // anon: req.body.anon,
     // payment_type: req.body.payment_type
   })
@@ -215,6 +218,7 @@ router.post('/item', (req, res, next) => {
     })
   })
 })
+
 
 // // donation page
 // // post new donation

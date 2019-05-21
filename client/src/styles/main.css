@@ -3,6 +3,7 @@ html {
 }
 *,* ::after, *::before {
   box-sizing: inherit;
+  margin:0;
 }
 
 /* begin styles for login and registration */
@@ -47,4 +48,9 @@ html {
 
 .total_amount,.remaining_amount {
   padding: 30px 85px;
+}
+
+/* donate form */
+.donate_form {
+  overflow: hidden;
 }

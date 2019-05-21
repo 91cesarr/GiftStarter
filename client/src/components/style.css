@@ -7,7 +7,6 @@ html {
 }
 *,* ::after, *::before {
   box-sizing: inherit;
-  margin:0;
 }
 :root {
  --mdc-theme-primary: #4527a0;

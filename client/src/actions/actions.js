@@ -23,10 +23,10 @@ export function getDonation(item_id) {
 }
 
 // Donation function
-export function donation(amount, item_id) {
+export function donation(amount, item_id, requestor_id) {
   return new Promise((resolve, reject) => {
     axios
-      .post("/api/donation", { amount, item_id })
+      .post("/api/donation", { amount, item_id, requestor_id })
       .then(function (response) {
         // console.log(response.data);
       })
