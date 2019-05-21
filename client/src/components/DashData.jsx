@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-// import moment, { Date } from "moment"
-import { getUser, getItems, getItem, getDonList } from "../actions/actions"
+import moment from "moment"
+import { getUser, getItems, getDonList } from "../actions/actions"
 import { AuthContext } from '../lib/auth'
 import { connect } from 'react-redux'
 
@@ -25,7 +25,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 // import GridContainer from "components/Grid/GridContainer.jsx";
-import Table from "components/Table/Table.jsx";
+import Table from "components/Table/TableLinked.jsx";
 // import Tasks from "components/Tasks/Tasks.jsx";
 // import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
 // import Danger from "components/Typography/Danger.jsx";
@@ -65,24 +65,14 @@ const DashData = props => {
   function getItemsList(e) {
     e.preventDefault()
     getItems(props.userData.user_id)
+    getDonList(props.item.item_id)
   }
 
-  // function openItem(e) {
+  // function getItemData(e) {
   //   e.preventDefault()
-  //   getItem(props.items.item_id)
+  //   getItem(props.item.item_id)
+  //   // also show data windows
   // }
-
-  // getDonList(props.item.item_id)
-
-  // const myItems = items.filter((user_id, requestor_id) => {
-  //   return user_id === requestor_id
-  // })
-
-  // const donTotal = donations.reduce(function (a, b) {
-  //   return a + b.amount
-  // }, 0)
-
-  // const remaining = props.item.amount - donTotal
 
   // const state = {
   //   value: 0
@@ -104,8 +94,8 @@ const DashData = props => {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>My Wishes</h4>
             <p className={classes.cardCategoryWhite}>
-              Requested items as of
-              {/* <span>{Date()}</span> */}
+              Requested items as of&nbsp;
+              <span>{moment().format("MMMM DD, YYYY")}</span>
             </p>
           </CardHeader>
           <CardBody>
@@ -113,10 +103,7 @@ const DashData = props => {
             <Table
               tableHeaderColor="primary"
               tableHead={["ID", "Name", "Amount", "Donated", "Remaining"]}
-              tableData=
-              {props.items}
-
-            // add link for each line
+              tableData={props.items}
             />
           </CardBody>
         </Card>
@@ -130,13 +117,10 @@ DashData.propTypes = {
 };
 
 function mapStateToProps(appState) {
-  console.log("full:", appState)
-  console.log("state:", appState.items)
-  // console.log('mapped', appState.items.map(item => [item.item_id, item.name, item.amount]));
   return {
     userData: appState.user,
     item: appState.item,
-    items: appState.items.map(item => ['' + item.item_id, item.name, '' + item.amount]),
+    items: appState.items.map(item => ['' + item.item_id, item.name, '' + '$' + item.amount, '' + '$' + item.donAmount, '' + '$' + item.remainder]),
     donations: appState.donations
   }
 }

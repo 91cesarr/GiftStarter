@@ -81,18 +81,6 @@ router.get('/user/:username', (req, res, next) => {
   })
 })
 
-// // get items
-// router.get('/item/:item_id', (req, res, next) => {
-//   const sql = `
-//   SELECT  items.*
-//   FROM items 
-//   WHERE item_id = ?
-//   `
-
-//   conn.query(sql, [req.params.item_id], (err, results, fields) => {
-//     res.json(results[0])
-//   })
-// })
 
 // get total amount of donations 
 router.get('/donation/:item_id', (req, res, next) => {
@@ -185,6 +173,20 @@ router.get('/item/:item_id', (req, res, next) => {
   })
 })
 
+router.get('/dashboard/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
+  HAVING item_id  = ?
+  `
+
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results[0])
+  })
+})
+
 // post new item
 router.post('/item', (req, res, next) => {
   console.log('req body =>', req.body);
@@ -241,11 +243,12 @@ router.get('/items/:requestor_id', (req, res, next) => {
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
-  WHERE requestor_id  = ?
+  HAVING requestor_id  = ?
   LIMIT 5
   `
 
   conn.query(sql, [req.params.requestor_id], (err, results, fields) => {
+    console.log(err)
     res.json(results)
   })
 })

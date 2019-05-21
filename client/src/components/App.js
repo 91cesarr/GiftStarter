@@ -4,9 +4,11 @@ import store from "../store"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
 
+import Footer from './Footer/Footer.jsx'
 import Create from "./Create.jsx"
 import Donation from "./Donation"
 import Dashboard from "./Dashboard"
+import DashItemData from "./DashItemData"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 // import Payment from "./Payment"
@@ -48,7 +50,9 @@ const App = props => {
             {/* <Route path="/payment" component={Payment} /> */}
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
-            <AuthRoute path="/dashboard" exact component={Dashboard} />
+            <AuthRoute path="/dashboard" component={Dashboard} />
+            <AuthRoute path="/dashboard/:item_id" component={DashItemData} />
+            <Footer />
           </MuiThemeProvider>
         </Router>
       </Provider>
