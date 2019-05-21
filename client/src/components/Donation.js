@@ -231,6 +231,7 @@ class Donation extends Component {
                                       <ReactStripeCheckout 
                                         disabled={(rem === 0 ? true : false)}
                                         name={this.props.name}
+                                        label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
                                         amount={this.state.value*100}
                                         item_id={this.props.item_id}
                                         requestor_id={this.props.requestor_id}

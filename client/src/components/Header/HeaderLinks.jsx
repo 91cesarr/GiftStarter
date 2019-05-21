@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useContext } from "react"
+import React from "react";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -16,18 +16,17 @@ import { Apps, CloudDownload } from "@material-ui/icons";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import { AuthContext } from "../../lib/auth"
+
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
 
 function HeaderLinks({ ...props }) {
-  const { signout } = useContext(AuthContext)
   const { classes } = props;
 
-  // function logout() {
-  //   signout()
-  //   props.history.push("/")
-  // }
-  
+  function logout() {
+    signout()
+    props.history.push("/")
+  }
+  // if (this.props.logged_in) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -117,7 +116,7 @@ function HeaderLinks({ ...props }) {
             href="/login"
             target=""
             className={classes.navLink}
-            onClick={signout}
+            onClick={logout}
           >
             <i className={classes.socialIcons + " fas fa-sign-out-alt"} />
           </Button>
