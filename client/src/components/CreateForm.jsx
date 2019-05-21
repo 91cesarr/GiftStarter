@@ -182,6 +182,7 @@ const CreateForm = props => {
                   }}
                   inputProps={{
                     onChange: handleChange('amount'),
+                    placeholder: "$",
                     type: "number",
                     inputProps: { min: 0, step: 0.01 }
                   }}

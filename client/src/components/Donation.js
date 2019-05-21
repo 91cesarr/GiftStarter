@@ -220,6 +220,7 @@ class Donation extends Component {
                                           type:"number",
                                           inputProps: { min: 0,step: 0.01 },
                                           onChange: this.handleChange,
+                                          placeholder: "$",
                                           value: this.state.value,
                                           autoComplete: "off"
                                     }} />                                      
