@@ -1,15 +1,15 @@
 import React from "react"
 import { Provider } from "react-redux"
 import store from "../store"
-
-import Create from "./Create.jsx"
-import Donation from "./Donation"
-
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "../lib/auth"
+
+import Footer from './Footer/Footer.jsx'
+import Create from "./Create.jsx"
+import Donation from "./Donation"
+import Dashboard from "./Dashboard"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
-import Payment from "./Payment"
 import "../styles/main.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -19,15 +19,15 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       // light: '#b085f5',
-      main: '#4527a0',
+      main: '#8e24aa',
       // dark: '#4d2c91',
-      contrastText: '#00B4DB',
+      contrastText: '#fff',
     },
     secondary: {
       // light: '#cfcfcf',
-      main: '#b2dfdb',
+      main: '#00acc1',
       // dark: '#707070',
-      contrastText: '#0083B0',
+      contrastText: '#fff',
     },
   },
   typography: {
@@ -45,9 +45,10 @@ const App = props => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/donation/:item_id" exact component={Donation} />
-            <Route path="/payment" component={Payment} />
             {/* private routes */}
             <AuthRoute path="/" exact component={Create} />
+            <AuthRoute path="/dashboard" component={Dashboard} />
+            <Footer />
           </MuiThemeProvider>
         </Router>
       </Provider>

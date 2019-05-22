@@ -12,6 +12,16 @@ export function getUser(username) {
   })
 }
 
+// get item list
+export function getItems(requestor_id) {
+  axios.get('/api/items/' + requestor_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM_LIST',
+      payload: resp.data
+    })
+  })
+}
+
 // get user donation
 export function getDonation(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
@@ -28,7 +38,6 @@ export function donation(amount, item_id) {
     axios
       .post("/api/donation", { amount, item_id })
       .then(function (response) {
-        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -49,6 +58,15 @@ export function getItem(item_id) {
   })
 }
 
+export function getItemData(item_id) {
+  axios.get('/api/dashboard/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM_DATA',
+      payload: resp.data
+    })
+  })
+}
+
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
@@ -56,6 +74,7 @@ export function getTotal(item_id) {
       type: 'GET_DONATION_TOTAL',
       payload: resp.data
     })
+    console.log("this>", resp.data)
   })
 }
 
@@ -64,13 +83,22 @@ export function sendItemData(item) {
   return axios.post('/api/item', item)
 }
 
+// get donation list
+export function getDonList(item_id) {
+  axios.get('/api/donations/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_DONATION_LIST',
+      payload: resp.data
+    })
+  })
+}
+
 // // submit a donation
 // export function sendDonation(donation) {
-//   console.log(donation)
 //   axios.post('/api/donation', donation)
 // }
 
-// get newest item
+// get newest item	
 export function getNewItem(user_id) {
   axios.get('/api/item/' + user_id).then(resp => {
     store.dispatch({
@@ -78,4 +106,4 @@ export function getNewItem(user_id) {
       payload: resp.data
     })
   })
-}
+} 
