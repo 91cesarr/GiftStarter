@@ -123,22 +123,22 @@ router.post("/donation", (req, res, next) => {
  )
  VALUES (?, ?, ?)
  `
-conn.query(sql, [
-  req.body.item_id,
-  req.body.amount,
-  req.body.requestor_id
-], (err, results, fields) => {
+  conn.query(sql, [
+    req.body.item_id,
+    req.body.amount,
+    req.body.requestor_id
+  ], (err, results, fields) => {
 
-  console.log(err)
-  res.json({
-    // donor_id: req.body.donor_id,
-    // requestor_id: req.body.requestor_id,
-    item_id: req.body.item_id,
-    amount: req.body.amount,
-    requestor_id: req.body.requestor_id
-    // anon: req.body.anon,
-    // payment_type: req.body.payment_type
-  })
+    console.log(err)
+    res.json({
+      // donor_id: req.body.donor_id,
+      // requestor_id: req.body.requestor_id,
+      item_id: req.body.item_id,
+      amount: req.body.amount,
+      requestor_id: req.body.requestor_id
+      // anon: req.body.anon,
+      // payment_type: req.body.payment_type
+    })
   })
 })
 
@@ -169,6 +169,7 @@ router.get('/dashboard/:item_id', (req, res, next) => {
     res.json(results[0])
   })
 })
+
 // post new item
 router.post('/item', (req, res, next) => {
   const sql = `

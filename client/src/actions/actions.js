@@ -44,6 +44,7 @@ export function donation(amount, item_id, requestor_id) {
       });
   })
 }
+
 export function donate(e) {
   e.preventDefault()
 }
@@ -57,6 +58,7 @@ export function getItem(item_id) {
     })
   })
 }
+
 export function getItemData(item_id) {
   axios.get('/api/dashboard/' + item_id).then(resp => {
     store.dispatch({
@@ -65,6 +67,7 @@ export function getItemData(item_id) {
     })
   })
 }
+
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {
