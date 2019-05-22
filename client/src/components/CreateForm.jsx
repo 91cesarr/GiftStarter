@@ -1,20 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { sendItemData, getUser, getNewItem } from '../actions/actions'
+import { sendItemData, getUser } from '../actions/actions'
 import { AuthContext } from '../lib/auth'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
-// import Button from "@material-ui/core/Button"
-// import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
-// import InputLabel from "@material-ui/core/InputLabel"
-// import TextField from '@material-ui/core/TextField';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import Select from '@material-ui/core/Select';
-// import MenuItem from '@material-ui/core/MenuItem';
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -64,9 +58,7 @@ const CreateForm = props => {
     picture_url: '',
   });
 
-  const { classes,
-    // ...rest 
-  } = props;
+  const { classes } = props;
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value, requestor_id: props.userData.user_id });
@@ -77,14 +69,8 @@ const CreateForm = props => {
     sendItemData(values).then(resp => {
       props.history.push('/donation/' + resp.data.id)
     })
-    // })
-    // get item data and use to create url?
   }
 
-  function openItemPage(e) {
-    e.preventDefault()
-    getNewItem(values.requestor_id)
-  }
 
   return (
     <div
@@ -194,7 +180,6 @@ const CreateForm = props => {
                 md={4}
                 className={classes.textCenter}
               >
-                {/* set button to load the item after submit? */}
                 <Button type="submit" color="primary">Submit</Button>
               </GridItem>
             </GridContainer>

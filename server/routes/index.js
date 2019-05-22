@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken")
 const sha512 = require("js-sha512")
 const conn = require("../db")
 
-// backend stripe 
-const paymentApi = require('./payment');
-const configureRoutes = app => {
-  paymentApi(app);
-};
+// // backend stripe 
+// const paymentApi = require('./payment');
+// const configureRoutes = app => {
+//   paymentApi(app);
+// };
 
 
 router.post("/register", (req, res, next) => {
@@ -86,18 +86,6 @@ router.get('/user/:username', (req, res, next) => {
   })
 })
 
-// // get items
-// router.get('/item/:item_id', (req, res, next) => {
-//   const sql = `
-//   SELECT  items.*
-//   FROM items 
-//   WHERE item_id = ?
-//   `
-
-//   conn.query(sql, [req.params.item_id], (err, results, fields) => {
-//     res.json(results[0])
-//   })
-// })
 
 // get total amount of donations 
 router.get('/donation/:item_id', (req, res, next) => {
@@ -176,13 +164,28 @@ router.get('/dashboard/:item_id', (req, res, next) => {
   HAVING item_id  = ?
   `
 
+<<<<<<< HEAD
+=======
+router.get('/dashboard/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
+  HAVING item_id  = ?
+  `
+
+>>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
   conn.query(sql, [req.params.item_id], (err, results, fields) => {
     res.json(results[0])
   })
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
 // post new item
 router.post('/item', (req, res, next) => {
-  console.log('req body =>', req.body);
   const sql = `
   INSERT INTO items (
     requestor_id,  
@@ -197,8 +200,6 @@ router.post('/item', (req, res, next) => {
   VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `
   conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, Number(req.body.amount), req.body.picture_url, req.body.item_url], (err, results, fields) => {
-
-    console.log(results.insertId)
     res.json({
       requestor_id: req.body.requestor_id,
       name: req.body.name,
@@ -227,5 +228,37 @@ router.get('/item/:user_id', (req, res, next) => {
     res.json(results[0].item_id)
   })
 })
+
+// Dashboard Page
+// get item list
+router.get('/items/:requestor_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, i.requestor_id, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
+  HAVING requestor_id  = ?
+  LIMIT 5
+  `
+
+  conn.query(sql, [req.params.requestor_id], (err, results, fields) => {
+    console.log(err)
+    res.json(results)
+  })
+})
+
+// get item donations list
+router.get('/donations/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  donations.*
+  FROM donations
+  WHERE item_id  = ?
+  `
+
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
 
 module.exports = router
