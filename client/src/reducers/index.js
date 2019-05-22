@@ -7,14 +7,6 @@ const initialState = {
   items: [],
   donations: [],
   item_id: {}
-  // name: '',
-  // description: '',
-  // category: '',
-  // reason: '',
-  // amount: '',
-  // pic_url: '',
-  // time: '',
-  // count: 5
 }
 
 export default function (state = initialState, action) {
