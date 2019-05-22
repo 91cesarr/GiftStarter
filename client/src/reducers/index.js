@@ -6,7 +6,8 @@ const initialState = {
   user_id: {},
   items: [],
   donations: [],
-  item_id: {}
+  item_id: {},
+  user_id: {},
 }
 
 export default function (state = initialState, action) {
