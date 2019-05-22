@@ -20,28 +20,37 @@ function CustomLinkTable({ ...props }) {
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
             <TableRow>
               {tableHead.map((prop, key) => {
-                return (
-                  <TableCell
-                    className={classes.tableCell + " " + classes.tableHeadCell}
-                    key={key}
-                  >
-                    {prop}
-                  </TableCell>
-                );
+                if (key !== 0) {
+                  return (
+                    <TableCell
+                      className={classes.tableCell + " " + classes.tableHeadCell}
+                      key={'table-header-' + key}
+                    >
+                      {prop}
+                    </TableCell>
+                  );
+                } else {
+                  return null
+                }
+
               })}
             </TableRow>
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          {tableData.map((prop, tableKey) => {
             return (
-              <TableRow key={key}>
-                {prop.map((prop, key) => {
-                  return (
-                    <TableCell className={classes.tableCell} key={key}>
-                      <Link to={'/dashboard/' + prop}>{prop}</Link>
-                    </TableCell>
-                  );
+              <TableRow key={'item-row-' + tableKey}>
+                {prop.map((prop, rowKey) => {
+                  if (rowKey !== 0) {
+                    return (
+                      <TableCell className={classes.tableCell} key={'item-cell-' + rowKey}>
+                        <Link to={'/dashboard/' + tableData[tableKey][0]}>{prop}</Link>
+                      </TableCell>
+                    );
+                  } else {
+                    return null
+                  }
                 })}
               </TableRow>
             );

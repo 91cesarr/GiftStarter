@@ -38,7 +38,6 @@ export function donation(amount, item_id) {
     axios
       .post("/api/donation", { amount, item_id })
       .then(function (response) {
-        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -96,6 +95,5 @@ export function getDonList(item_id) {
 
 // // submit a donation
 // export function sendDonation(donation) {
-//   console.log(donation)
 //   axios.post('/api/donation', donation)
 // }

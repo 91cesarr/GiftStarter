@@ -22,9 +22,8 @@ import Parallax from "components/Parallax/Parallax.jsx";
 
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
-// // Sections for this page
+// Sections for this page
 import DashData from "./DashData.jsx";
-// import DashItemData from "./DashItemData.jsx";
 
 const dashboardRoutes = [];
 
@@ -45,7 +44,7 @@ const Dashboard = props => {
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
+          height: 150,
           color: "white"
         }}
         {...rest}
@@ -56,7 +55,7 @@ const Dashboard = props => {
         >
           <h1
             className={classes.title}
-          >Hello, {user}!</h1>
+          >Hello, {user}! Welcome to your dashboard.</h1>
         </div>
       </Parallax>
       <div
@@ -66,7 +65,6 @@ const Dashboard = props => {
           className={classes.container}
         >
           <DashData />
-          {/* <DashItemData /> */}
         </div>
       </div>
     </div>
