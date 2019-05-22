@@ -48,6 +48,14 @@ export function getItem(item_id) {
     })
   })
 }
+export function getItemData(item_id) {
+  axios.get('/api/dashboard/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_ITEM_DATA',
+      payload: resp.data
+    })
+  })
+}
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {

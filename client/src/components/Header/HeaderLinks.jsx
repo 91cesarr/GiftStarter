@@ -25,7 +25,7 @@ function HeaderLinks({ ...props }) {
   const { user } = useContext(AuthContext)
   const { user_id } = useContext(AuthContext)
   const { classes } = props;
-  console.log(user)
+  console.log(user_id)
   // function logout() {
   //   signout()
   //   props.history.push("/")

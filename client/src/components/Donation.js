@@ -1,4 +1,5 @@
-import React, { Component } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { AuthContext } from '../lib/auth'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -33,59 +34,41 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 import { connect } from "react-redux"
 // Payment Module
 // import Payment from "../components/Payment"
-import { getItem, getTotal, donation, donate } from "../actions/actions";
+import { getUser, getItemData, getTotal, donation, donate, } from "../actions/actions";
 import ReactStripeCheckout from 'react-stripe-checkout';
-import { getUserId } from "../lib/auth"
 
 
+const Donation = (props) => {
+  const { user } = useContext(AuthContext)
+  const { item_id } = useContext(AuthContext)
+  const [value, setValue] = useState("")
 
-class Donation extends Component {
-  state = {
-    // initial state
-    value: "",
-    user_id: ""
-  }
-
-  componentDidMount() {
-    const id = this.props.match.params.item_id
-    const user_id = this.props.user_id
-    getItem(id)
+  useEffect(() => {
+    getUser(user)
     getTotal(id)
-    getUserId(user_id)
-    this.setState({
-      value: ""
-    })
-  }
-  componentWillMount() {
+    getItemData(id)
+  }, [user, id])
 
-  }
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  };
-  render() {
-
-    let requestor_id = this.props.requestor_id
-    const value = this.state.value
-    const item_id = this.props.item_id
-    console.log(this.props)
-    const url = 'http://localhost:3000' + this.props.match.url
-    const shareText = 'Check this out! ' + this.props.name
-    const rem = this.props.amount - this.props.total
-    const { classes, ...rest } = this.props;
-    const onToken = (token) => {
-      donation(value,item_id,requestor_id)
-      fetch('/api/donation', {
-        method: 'POST',
-        body: JSON.stringify(token),
-      }).then(response => {
-        response.json().then(data => {
-          alert(`Thank you for your donation!`
-          //insert inside `` above  ${data.email}
-          );
-        });
-      });
-    }
+  const id = props.match.params.item_id
+  let requestor_id = props.requestor_id
+  const url = 'http://localhost:3000' + props.match.url
+  const shareText = 'Check this out! ' + props.name
+  const rem = props.item.amount - props.total.total
   
+  const { classes, ...rest } = props;
+  const onToken = (token) => {
+    donation(value, item_id, requestor_id)
+    fetch('/api/donation', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`Thank you for your donation!`
+          //insert inside `` above  ${data.email}
+        );
+      });
+    });
+  }
     return (
       <div>
         <Header
@@ -105,10 +88,10 @@ class Donation extends Component {
             <div className={classes.container}>
               <GridContainer>
                 <GridItem>
-                  <img src={this.props.picture_url} alt="..." className="itemIMG" />
+                  <img src={props.item.picture} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
-                      <h1>{this.props.name}</h1>
+                      <h1>{props.name}</h1>
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
                       <div className="wrap_pricing">
@@ -121,7 +104,7 @@ class Donation extends Component {
                           >
                             <i className={"fas fa-info-circle"} />
                           </Tooltip></h3>                          
-                        <h5>${this.props.amount}</h5>
+                        <h5>${props.item.amount}</h5>
                       </div>
                       <div className="remaining_amount">
                           <h3>Remaining Amount <Tooltip
@@ -188,7 +171,7 @@ class Donation extends Component {
                             tabContent: (
                               <span>
                                 <h5 className={classes.description}>
-                                  {this.props.description}{" "}</h5>
+                                  {props.item.description}{" "}</h5>
                               </span>
                             )
                           },
@@ -198,7 +181,7 @@ class Donation extends Component {
                             tabContent: (
                               <span>
                                 <h5 className={classes.description}>
-                                  {this.props.reason}{" "}</h5>
+                                  {props.item.reason}{" "}</h5>
                               </span>
                             )
                           },
@@ -219,12 +202,14 @@ class Donation extends Component {
                                         }}
                                         inputProps={{
                                           type:"number",
-                                          inputProps: { min: 0,step: 0.01 },
-                                          onChange: this.handleChange,
+                                          inputProps: { min: 0,step: 1.00 },
+                                          disabled:(rem === 0 ? true : false),                                          
                                           placeholder: "$",
-                                          value: this.state.value,
+                                          value:value,
+                                          onChange: (e) => setValue(e.target.value),                                  
                                           autoComplete: "off"
-                                    }} />                                      
+                        }} />               
+                                             
                                     </GridItem>
                                   </GridContainer>
                                   <GridContainer>
@@ -232,12 +217,12 @@ class Donation extends Component {
                                       <div className={classes.title}></div>
                                       <ReactStripeCheckout 
                                         disabled={(rem === 0 ? true : false)}
-                                        name={this.props.name}
+                                        name={props.name}
                                         label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
-                                        amount={this.state.value*100}
-                                        item_id={this.props.item_id}
-                                        user_id={this.props.user_id}
-                                        requestor_id={this.props.requestor_id}
+                                        amount={value*100}
+                                        item_id={props.item_id}
+                                        user_id={props.user_id}
+                                        requestor_id={props.requestor_id}
                                         stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                                         token={onToken}
                                       />
@@ -254,8 +239,6 @@ class Donation extends Component {
                   </div>
                 </GridItem>
               </GridContainer>
-              {/* Payment module goes here
-              <Payment /> */}
             </div>
           </div>
         </div>
@@ -263,23 +246,11 @@ class Donation extends Component {
       </div>
     );
   }
-}
-
 function mapStateToProps(appState) {
   return {
-    id: appState.item.id,
-    user: appState.user.user_id,
-    user_id: appState.user_id.user_id,
-    item_id: appState.item.item_id,
-    requestor_id: appState.item.requestor_id,
-    name: appState.item.name,
-    description: appState.item.description,
-    category: appState.item.category,
-    reason: appState.item.reason,
-    amount: appState.item.amount,
-    total: appState.donation_amount.total,
-    picture_url: appState.item.picture_url,
-    item_url: appState.item.item_url,
-  };
+    user: appState.user,
+    item: appState.item,
+    total: appState.donation_amount
+    }
 }
 export default withStyles(profilePageStyle)(connect(mapStateToProps)(Donation))

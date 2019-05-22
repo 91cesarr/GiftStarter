@@ -191,7 +191,19 @@ router.get('/item/:item_id', (req, res, next) => {
     res.json(results[0])
   })
 })
+router.get('/dashboard/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.description as description, i.reason as reason
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
+  HAVING item_id  = ?
+  `
 
+  conn.query(sql, [req.params.item_id], (err, results, fields) => {
+    res.json(results[0])
+  })
+})
 // post new item
 router.post('/item', (req, res, next) => {
   console.log('req body =>', req.body);
