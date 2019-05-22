@@ -6,8 +6,12 @@ const initialState = {
   user_id: {},
   items: [],
   donations: [],
+<<<<<<< HEAD
   item_id: {},
   user_id: {},
+=======
+  item_id: {}
+>>>>>>> d4db5875d59947d68056aad3115e6e171f514fd2
   // name: '',
   // description: '',
   // category: '',
