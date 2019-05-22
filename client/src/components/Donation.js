@@ -90,10 +90,10 @@ const Donation = (props) => {
             <div className={classes.container}>
               <GridContainer>
                 <GridItem>
+                  <h2 className={classes.title}>{props.item.name}</h2>
                   <img src={props.item.picture} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
-                      <h2 className={classes.title}>{props.item.name}</h2>
                       <div>
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
