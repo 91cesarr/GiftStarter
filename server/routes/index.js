@@ -157,16 +157,7 @@ router.get('/item/:item_id', (req, res, next) => {
 })
 router.get('/dashboard/:item_id', (req, res, next) => {
   const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.description as description, i.reason as reason
-  FROM items i
-  LEFT JOIN donations d ON i.item_id = d.item_id
-  GROUP BY item_id DESC
-  HAVING item_id  = ?
-  `
-
-router.get('/dashboard/:item_id', (req, res, next) => {
-  const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status, i.description as description, i.reason as reason
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
