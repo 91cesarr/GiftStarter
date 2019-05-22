@@ -57,10 +57,6 @@ export function getItem(item_id) {
     })
   })
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
 export function getItemData(item_id) {
   axios.get('/api/dashboard/' + item_id).then(resp => {
     store.dispatch({
@@ -69,10 +65,6 @@ export function getItemData(item_id) {
     })
   })
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
 // get donation amount
 export function getTotal(item_id) {
   axios.get('/api/donation/' + item_id).then(resp => {

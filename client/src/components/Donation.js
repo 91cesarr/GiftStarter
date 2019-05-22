@@ -216,7 +216,6 @@ const Donation = (props) => {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

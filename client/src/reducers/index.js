@@ -2,19 +2,12 @@ const initialState = {
   user: {},
   item: {},
   donation: {},
-<<<<<<< HEAD
   donation_amount: {},
   user_id: {},
-  items: [],
-  donations: [],
-  item_id: {}
-=======
-  items: [],
-  donations: [],
-  donation_amount: [],
-  user_id: {},
   item_id: {},
->>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
+  items: [],
+  donations: [],
+  donation_amount: {},
   // name: '',
   // description: '',
   // category: '',

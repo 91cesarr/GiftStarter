@@ -155,35 +155,20 @@ router.get('/item/:item_id', (req, res, next) => {
     res.json(results[0])
   })
 })
+
 router.get('/dashboard/:item_id', (req, res, next) => {
   const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.description as description, i.reason as reason
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status, i.description as description, i.reason as reason
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
   HAVING item_id  = ?
   `
 
-<<<<<<< HEAD
-=======
-router.get('/dashboard/:item_id', (req, res, next) => {
-  const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status
-  FROM items i
-  LEFT JOIN donations d ON i.item_id = d.item_id
-  GROUP BY item_id DESC
-  HAVING item_id  = ?
-  `
-
->>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
   conn.query(sql, [req.params.item_id], (err, results, fields) => {
     res.json(results[0])
   })
 })
-<<<<<<< HEAD
-=======
-
->>>>>>> 94f3437bb616808105b4b6df0f7f5a40e2a7f3bb
 // post new item
 router.post('/item', (req, res, next) => {
   const sql = `
@@ -233,7 +218,7 @@ router.get('/item/:user_id', (req, res, next) => {
 // get item list
 router.get('/items/:requestor_id', (req, res, next) => {
   const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, i.requestor_id, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, i.requestor_id, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status, i.description as description, i.reason as reason
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
