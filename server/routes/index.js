@@ -86,18 +86,18 @@ router.get('/user/:username', (req, res, next) => {
   })
 })
 
-// get items
-router.get('/item/:item_id', (req, res, next) => {
-  const sql = `
-  SELECT  items.*
-  FROM items 
-  WHERE item_id = ?
-  `
+// // get items
+// router.get('/item/:item_id', (req, res, next) => {
+//   const sql = `
+//   SELECT  items.*
+//   FROM items 
+//   WHERE item_id = ?
+//   `
 
-  conn.query(sql, [req.params.item_id], (err, results, fields) => {
-    res.json(results[0])
-  })
-})
+//   conn.query(sql, [req.params.item_id], (err, results, fields) => {
+//     res.json(results[0])
+//   })
+// })
 
 // get total amount of donations 
 router.get('/donation/:item_id', (req, res, next) => {
@@ -112,22 +112,22 @@ WHERE item_id = ?
   })
 })
 
-  // / donation page
+// / donation page
 // post new donation
 router.post("/donation", (req, res, next) => {
- // const sql = `
- // INSERT INTO donations (
- //   donor_id,
- //   requestor_id,
- //   item_id,
- //   amount,
- //   anon,
- //   payment_type
- // )
- // VALUES (?, ?, ?, ?, ?, ?)
- // `
+  // const sql = `
+  // INSERT INTO donations (
+  //   donor_id,
+  //   requestor_id,
+  //   item_id,
+  //   amount,
+  //   anon,
+  //   payment_type
+  // )
+  // VALUES (?, ?, ?, ?, ?, ?)
+  // `
 
- const sql = `
+  const sql = `
  INSERT INTO donations (
    item_id,
    amount,
@@ -151,7 +151,7 @@ conn.query(sql, [
     // anon: req.body.anon,
     // payment_type: req.body.payment_type
   })
-})
+  })
 })
 
 
@@ -198,7 +198,7 @@ router.post('/item', (req, res, next) => {
   `
   conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, Number(req.body.amount), req.body.picture_url, req.body.item_url], (err, results, fields) => {
 
-    console.log(err)
+    console.log(results.insertId)
     res.json({
       requestor_id: req.body.requestor_id,
       name: req.body.name,
@@ -207,10 +207,25 @@ router.post('/item', (req, res, next) => {
       reason: req.body.reason,
       amount: req.body.amount,
       pic_url: req.body.picture_url,
-      item_url: req.body.item_url
+      item_url: '',
+      id: results.insertId
     })
   })
 })
 
+
+// get last posted item
+router.get('/item/:user_id', (req, res, next) => {
+  const sql = `
+  SELECT  items.*
+  FROM items
+  ORDER BY item_id DESC
+  WHERE user_id  = ?
+  `
+
+  conn.query(sql, (err, results, fields) => {
+    res.json(results[0].item_id)
+  })
+})
 
 module.exports = router
