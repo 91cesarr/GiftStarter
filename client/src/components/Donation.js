@@ -34,13 +34,13 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 import { connect } from "react-redux"
 // Payment Module
 // import Payment from "../components/Payment"
-import { getUser, getItemData, getTotal, donation, donate, } from "../actions/actions";
+import { getUser, getItemData, getTotal, donation, donate } from "../actions/actions";
 import ReactStripeCheckout from 'react-stripe-checkout';
 
 
 const Donation = (props) => {
   const { user } = useContext(AuthContext)
-  const { item_id } = useContext(AuthContext)
+  // const { item_id } = useContext(AuthContext)
   const [value, setValue] = useState("")
 
   useEffect(() => {
@@ -48,16 +48,18 @@ const Donation = (props) => {
     getTotal(id)
     getItemData(id)
   }, [user, id])
-
+  const item_id = props.item.item_id
   const id = props.match.params.item_id
-  let requestor_id = props.requestor_id
+  // let requestor_id = props.requestor_id
   const url = 'http://localhost:3000' + props.match.url
   const shareText = 'Check this out! ' + props.name
+  const amount = value
   const rem = props.item.amount - props.total.total
-  
+  const donor_id = props.user.user_id
   const { classes, ...rest } = props;
+  console.log(props)
   const onToken = (token) => {
-    donation(value, item_id, requestor_id)
+    donation(amount,item_id,donor_id)
     fetch('/api/donation', {
       method: 'POST',
       body: JSON.stringify(token),
@@ -91,7 +93,7 @@ const Donation = (props) => {
                   <img src={props.item.picture} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
-                      <h1>{props.name}</h1>
+                      <h1>{props.item.name}</h1>
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
                       <div className="wrap_pricing">
@@ -217,12 +219,12 @@ const Donation = (props) => {
                                       <div className={classes.title}></div>
                                       <ReactStripeCheckout 
                                         disabled={(rem === 0 ? true : false)}
-                                        name={props.name}
+                                        name={props.item.name}
                                         label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
                                         amount={value*100}
-                                        item_id={props.item_id}
-                                        user_id={props.user_id}
-                                        requestor_id={props.requestor_id}
+                                        item_id={props.item.item_id}
+                                        // donor_id={props.user.user_id}
+                                        // requestor_id={props.requestor_id}
                                         stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                                         token={onToken}
                                       />

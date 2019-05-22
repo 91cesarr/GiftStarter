@@ -154,31 +154,7 @@ conn.query(sql, [
 })
 })
 
-// // post new item
-// router.post('/item', (req, res, next) => {
-//   const sql = `
-//   INSERT INTO items (
-//     requestor_id,  
-//     name,
-//     description,
-//     category,
-//     reason,
-//     amount,
-//     picture_url
-//   )
-//   VALUES (?, ?, ?, ?, ?, ?, ?)
-//   `
-//   conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, req.body.amount, req.body.pic_url], (err, results, fields) => {
 
-//     console.log(err)
-//     res.json({
-//       requestor_id: req.body.requestor_id,
-//       name: req.body.name,
-//       description: req.body.description,
-//       category: req.body.category,
-//       reason: req.body.reason,
-//       amount: req.body.amount,
-//       pic_url: req.body.pic_url
 // get the specific item
 router.get('/item/:item_id', (req, res, next) => {
   const sql = `
@@ -236,48 +212,5 @@ router.post('/item', (req, res, next) => {
   })
 })
 
-
-// // donation page
-// // post new donation
-// router.post('/donation', (req, res, next) => {
-//   // const sql = `
-//   // INSERT INTO donations (
-//   //   donor_id,
-//   //   requestor_id,  
-//   //   item_id,
-//   //   amount,
-//   //   anon,
-//   //   payment_type
-//   // )
-//   // VALUES (?, ?, ?, ?, ?, ?)
-//   // `
-
-//   const sql = `
-//   INSERT INTO donations (
-//     amount,
-//     payment_type
-//   )
-//   VALUES (?, ?)
-//   `
-//   conn.query(sql, [
-//     // Number(req.body.donor_id),
-//     // Number(req.body.requestor_id),
-//     // Number(req.body.item_id),
-//     Number(req.body.amount),
-//     // Number(req.body.anon),
-//     req.body.payment_type
-//   ], (err, results, fields) => {
-
-//     console.log(err)
-//     res.json({
-//       // donor_id: req.body.donor_id,
-//       // requestor_id: req.body.requestor_id,
-//       // item_id: req.body.item_id,
-//       amount: req.body.amount,
-//       // anon: req.body.anon,
-//       payment_type: req.body.payment_type
-//     })
-//   })
-// })
 
 module.exports = router
