@@ -25,6 +25,10 @@ export default function (state = initialState, action) {
       return { ...state, item: action.payload }
     case "GET_USER":
       return { ...state, user: action.payload }
+    case "GET_ITEM_LIST":
+      return { ...state, items: action.payload }
+    case "GET_DONATION_LIST":
+      return { ...state, donations: action.payload }
     case "GET_DONATION":
       return { ...state, donation: action.payload }
     case "GET_DONATION_TOTAL":
