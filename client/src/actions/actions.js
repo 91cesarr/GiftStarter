@@ -97,3 +97,13 @@ export function getDonList(item_id) {
 // export function sendDonation(donation) {
 //   axios.post('/api/donation', donation)
 // }
+
+// get newest item	
+export function getNewItem(user_id) {
+  axios.get('/api/item/' + user_id).then(resp => {
+    store.dispatch({
+      type: 'GET_NEW_ITEM',
+      payload: resp.data
+    })
+  })
+} 
