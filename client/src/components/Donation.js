@@ -93,23 +93,27 @@ const Donation = (props) => {
                   <img src={props.item.picture} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
-                      <h1>{props.item.name}</h1>
+                      <h2 className={classes.title}>{props.item.name}</h2>
+                      <div>
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
+                      </div>
                       <div className="wrap_pricing">
                       <div className="total_amount">
-                          <h3>Total Amount <Tooltip
+                          <h3 className={classes.title}>Total Amount <Tooltip
                             id="tooltip-top"
                             title="This is the total amount of the current item"
                             placement="top"
                             classes={{ tooltip: classes.tooltip }}
                           >
                             <i className={"fas fa-info-circle"} />
-                          </Tooltip></h3>                          
-                        <h5>${props.item.amount}</h5>
+                          </Tooltip></h3>  
+                          <div>                        
+                          <h4 className={classes.title}>${props.item.amount}</h4>
+                          </div>
                       </div>
                       <div className="remaining_amount">
-                          <h3>Remaining Amount <Tooltip
+                          <h3 className={classes.title}>Remaining Amount <Tooltip
                             id="tooltip-top"
                             title="This is the remaining amount left for the current item"
                             placement="top"
@@ -117,47 +121,12 @@ const Donation = (props) => {
                           >
                             <i className={"fas fa-info-circle"} />
                           </Tooltip></h3>
-                        <h5>${rem}</h5>
+                          <div>
+                          <h4 className={classes.title}>${rem}</h4>
+                          </div>
                       </div>
                       </div>
                     </div>
-                    <GridContainer>
-                      <GridItem>
-                        <CustomTabs
-                          headerColor="primary"
-                          tabs={[                      
-                            {
-                              tabName: "Recent Donations",
-                              tabIcon: Chat,
-                              tabContent: (
-                                <div>
-                                <p className={classes.textCenter}>
-                                  I think that’s a responsibility that I have, to push
-                                  possibilities, to show people, this is the level that
-                                  things could be at. I will be the leader of a company
-                                  that ends up being worth billions of dollars, because
-                                  I got the answers. I understand culture. I am the
-                                  nucleus. I think that’s a responsibility that I have,
-                                  to push possibilities, to show people, this is the
-                                  level that things could be at.
-                        </p>
-                                  <p className={classes.textCenter}>
-                                    I think that’s a responsibility that I have, to push
-                                    possibilities, to show people, this is the level that
-                                    things could be at. I will be the leader of a company
-                                    that ends up being worth billions of dollars, because
-                                    I got the answers. I understand culture. I am the
-                                    nucleus. I think that’s a responsibility that I have,
-                                    to push possibilities, to show people, this is the
-                                    level that things could be at.
-                        </p>
-                        </div>
-                              )
-                            }
-                          ]}
-                        />
-                      </GridItem>
-                    </GridContainer>
                     <GridContainer>
                     <GridItem>
                       <NavPills
@@ -172,8 +141,8 @@ const Donation = (props) => {
                             tabIcon: Dashboard,
                             tabContent: (
                               <span>
-                                <h5 className={classes.description}>
-                                  {props.item.description}{" "}</h5>
+                                <p className={classes.description}>
+                                  {props.item.description}{" "}</p>
                               </span>
                             )
                           },
@@ -182,8 +151,8 @@ const Donation = (props) => {
                             tabIcon: Schedule,
                             tabContent: (
                               <span>
-                                <h5 className={classes.description}>
-                                  {props.item.reason}{" "}</h5>
+                                <p className={classes.description}>
+                                  {props.item.reason}{" "}</p>
                               </span>
                             )
                           },
@@ -241,6 +210,9 @@ const Donation = (props) => {
                   </div>
                 </GridItem>
               </GridContainer>
+              <br/>
+              <br/>
+              <br/>
             </div>
           </div>
         </div>

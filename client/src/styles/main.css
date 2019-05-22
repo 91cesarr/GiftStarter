@@ -34,9 +34,9 @@ html {
 
 .itemIMG {
     width: 100%;
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 1440px;
-    transform: translate3d(0, -12%, 0);
+    /* transform: translate3d(0, -12%, 0); */
 } 
 
 .wrap_pricing {
