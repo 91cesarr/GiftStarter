@@ -33,7 +33,8 @@ router.post("/register", (req, res, next) => {
           console.log(err)
           throw new Error("register failed")
         } else {
-          const token = jwt.sign({ username }, config.get("secret"))
+          const user_id = results.insertId
+          const token = jwt.sign({ username, user_id }, config.get("secret"))
           res.json({
             token: token
           })
@@ -54,10 +55,14 @@ router.post("/login", (req, res, next) => {
     const count = results[0].count
 
     if (count >= 1) {
-      const token = jwt.sign({ username }, config.get("secret"))
+      const sql2 = 'SELECT user_id FROM users WHERE username = ?'
+      conn.query(sql2, [username], (err2, results2, fields2) => {
+        const user_id = results2[0].user_id
+        const token = jwt.sign({ username, user_id }, config.get("secret"))
 
-      res.json({
-        token
+        res.json({
+          token
+        })
       })
     } else {
       res.status(401).json({
@@ -113,52 +118,30 @@ router.post("/donation", (req, res, next) => {
   const sql = `
  INSERT INTO donations (
    item_id,
-   amount
+   amount,
+   requestor_id
  )
- VALUES (?, ?)
+ VALUES (?, ?, ?)
  `
-  conn.query(sql, [
-    req.body.item_id,
-    req.body.amount,
-  ], (err, results, fields) => {
+conn.query(sql, [
+  req.body.item_id,
+  req.body.amount,
+  req.body.requestor_id
+], (err, results, fields) => {
 
-    console.log(err)
-    res.json({
-      // donor_id: req.body.donor_id,
-      // requestor_id: req.body.requestor_id,
-      item_id: req.body.item_id,
-      amount: req.body.amount,
-      // anon: req.body.anon,
-      // payment_type: req.body.payment_type
-    })
+  console.log(err)
+  res.json({
+    // donor_id: req.body.donor_id,
+    // requestor_id: req.body.requestor_id,
+    item_id: req.body.item_id,
+    amount: req.body.amount,
+    requestor_id: req.body.requestor_id
+    // anon: req.body.anon,
+    // payment_type: req.body.payment_type
+  })
   })
 })
 
-// // post new item
-// router.post('/item', (req, res, next) => {
-//   const sql = `
-//   INSERT INTO items (
-//     requestor_id,  
-//     name,
-//     description,
-//     category,
-//     reason,
-//     amount,
-//     picture_url
-//   )
-//   VALUES (?, ?, ?, ?, ?, ?, ?)
-//   `
-//   conn.query(sql, [Number(req.body.requestor_id), req.body.name, req.body.description, req.body.category, req.body.reason, req.body.amount, req.body.pic_url], (err, results, fields) => {
-
-//     console.log(err)
-//     res.json({
-//       requestor_id: req.body.requestor_id,
-//       name: req.body.name,
-//       description: req.body.description,
-//       category: req.body.category,
-//       reason: req.body.reason,
-//       amount: req.body.amount,
-//       pic_url: req.body.pic_url
 
 // get the specific item
 router.get('/item/:item_id', (req, res, next) => {
@@ -172,6 +155,14 @@ router.get('/item/:item_id', (req, res, next) => {
     res.json(results[0])
   })
 })
+router.get('/dashboard/:item_id', (req, res, next) => {
+  const sql = `
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.description as description, i.reason as reason
+  FROM items i
+  LEFT JOIN donations d ON i.item_id = d.item_id
+  GROUP BY item_id DESC
+  HAVING item_id  = ?
+  `
 
 router.get('/dashboard/:item_id', (req, res, next) => {
   const sql = `
@@ -186,7 +177,6 @@ router.get('/dashboard/:item_id', (req, res, next) => {
     res.json(results[0])
   })
 })
-
 // post new item
 router.post('/item', (req, res, next) => {
   const sql = `

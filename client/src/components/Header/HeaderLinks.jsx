@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useContext } from "react"
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -16,23 +16,27 @@ import { Apps, CloudDownload } from "@material-ui/icons";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-
+import { AuthContext } from "../../lib/auth"
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
 
 function HeaderLinks({ ...props }) {
+  const { signout } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  const { user_id } = useContext(AuthContext)
   const { classes } = props;
-
-  function logout() {
-    signout()
-    props.history.push("/")
-  }
+  console.log(user_id)
+  // function logout() {
+  //   signout()
+  //   props.history.push("/")
+  // }
 
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Explore other donations"
+          buttonText={(isAuthenticated === true ? "Welcome " + user : "Welcome")}
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -40,14 +44,13 @@ function HeaderLinks({ ...props }) {
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
-              See More
+              Create
             </Link>,
             <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
-              target="_blank"
+              href="http://localhost:3000/dashboard/"
               className={classes.dropdownLink}
             >
-              Testing
+              Dashboard
             </a>
           ]}
         />
@@ -108,18 +111,20 @@ function HeaderLinks({ ...props }) {
       <ListItem className={classes.listItem}>
         <Tooltip
           id="logoutButton"
-          title="Logout"
+          title={(isAuthenticated === true ? "Logout" : "Login")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
-        >
+        >        
           <Button
             color="transparent"
             href="/login"
             target=""
             className={classes.navLink}
-            onClick={logout}
+            onClick={signout}
           >
-            <i className={classes.socialIcons + " fas fa-sign-out-alt"} />
+          
+
+            <i className={(isAuthenticated === true ? classes.socialIcons + " fas fa-sign-out-alt" : classes.socialIcons + " fas fa-sign-in-alt")} />
           </Button>
         </Tooltip>
       </ListItem>

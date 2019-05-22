@@ -1,4 +1,5 @@
-import React, { Component } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { AuthContext } from '../lib/auth'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -11,11 +12,17 @@ import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
+import CardGiftcardRounded from "@material-ui/icons/CardGiftcardRounded"
 import Schedule from "@material-ui/icons/Schedule";
 import NavPills from "components/NavPills/NavPills.jsx";
+import Chat from "@material-ui/icons/Chat";
+
+import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
+
 
 // share page buttons
 import { Facebook, Twitter } from 'react-sharingbuttons'
@@ -27,50 +34,43 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.js
 import { connect } from "react-redux"
 // Payment Module
 // import Payment from "../components/Payment"
-import { getItem, getTotal, donation, donate } from "../actions/actions";
+import { getUser, getItemData, getTotal, donation, donate } from "../actions/actions";
 import ReactStripeCheckout from 'react-stripe-checkout';
 
 
-class Donation extends Component {
-  state = {
-    // initial state
-    value: ""
-  }
+const Donation = (props) => {
+  const { user } = useContext(AuthContext)
+  // const { item_id } = useContext(AuthContext)
+  const [value, setValue] = useState("")
 
-  componentDidMount() {
-    const id = this.props.match.params.item_id
-    getItem(id)
+  useEffect(() => {
+    getUser(user)
     getTotal(id)
-    this.setState({
-      value: ""
-    })
-  }
-  componentWillMount() {
-
-  }
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  };
-  render() {
-    const value = this.state.value
-    const item_id = this.props.item_id
-    const url = 'http://localhost:3000' + this.props.match.url
-    const shareText = 'Check this out! ' + this.props.name
-    const rem = this.props.amount - this.props.total
-    const { classes, ...rest } = this.props;
-    const onToken = (token) => {
-      donation(value,item_id)
-      fetch('/api/donation', {
-        method: 'POST',
-        body: JSON.stringify(token),
-      }).then(response => {
-        response.json().then(data => {
-          alert(`Thank you for your donation!`
+    getItemData(id)
+  }, [user, id])
+  const item_id = props.item.item_id
+  const id = props.match.params.item_id
+  // let requestor_id = props.requestor_id
+  const url = 'http://localhost:3000' + props.match.url
+  const shareText = 'Check this out! ' + props.name
+  const amount = value
+  const rem = props.item.amount - props.total.total
+  const donor_id = props.user.user_id
+  const { classes, ...rest } = props;
+  console.log(props)
+  const onToken = (token) => {
+    donation(amount,item_id,donor_id)
+    fetch('/api/donation', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`Thank you for your donation!`
           //insert inside `` above  ${data.email}
-          );
-        });
+        );
       });
-    }
+    });
+  }
     return (
       <div>
         <Header
@@ -90,18 +90,40 @@ class Donation extends Component {
             <div className={classes.container}>
               <GridContainer>
                 <GridItem>
-                  <img src={this.props.picture_url} alt="..." className="itemIMG" />
+                  <h2 className={classes.title}>{props.item.name}</h2>
+                  <img src={props.item.picture} alt="..." className="itemIMG" />
                   <div className={classes.profile}>
                     <div className={classes.name}>
-                      <h1>{this.props.name}</h1>
+                      <div>
+                      <Facebook url={url} />
+                      <Twitter url={url} shareText={shareText} />
+                      </div>
                       <div className="wrap_pricing">
                       <div className="total_amount">
-                      <h3>Total Amount    <i className={"fas fa-info-circle"} /></h3>
-                        <h5>${this.props.amount}</h5>
+                          <h3 className={classes.title}>Total Amount <Tooltip
+                            id="tooltip-top"
+                            title="This is the total amount of the current item"
+                            placement="top"
+                            classes={{ tooltip: classes.tooltip }}
+                          >
+                            <i className={"fas fa-info-circle"} />
+                          </Tooltip></h3>  
+                          <div>                        
+                          <h4 className={classes.title}>${props.item.amount}</h4>
+                          </div>
                       </div>
                       <div className="remaining_amount">
-                      <h3>Remaining Amount    <i className={"fas fa-info-circle"} /></h3>
-                        <h5>${rem}</h5>
+                          <h3 className={classes.title}>Remaining Amount <Tooltip
+                            id="tooltip-top"
+                            title="This is the remaining amount left for the current item"
+                            placement="top"
+                            classes={{ tooltip: classes.tooltip }}
+                          >
+                            <i className={"fas fa-info-circle"} />
+                          </Tooltip></h3>
+                          <div>
+                          <h4 className={classes.title}>${rem}</h4>
+                          </div>
                       </div>
                       </div>
                     </div>
@@ -112,15 +134,15 @@ class Donation extends Component {
                         horizontal={{
                           tabsGrid: { xs: 12, sm: 4, md: 6 },
                           contentGrid: { xs: 12, sm: 8, md: 6 }
-                        }}
+                      }}
                         tabs={[
                           {
                             tabButton: "Description",
                             tabIcon: Dashboard,
                             tabContent: (
                               <span>
-                                <h5 className={classes.description}>
-                                  {this.props.description}{" "}</h5>
+                                <p className={classes.description}>
+                                  {props.item.description}{" "}</p>
                               </span>
                             )
                           },
@@ -129,43 +151,49 @@ class Donation extends Component {
                             tabIcon: Schedule,
                             tabContent: (
                               <span>
-                                <h5 className={classes.description}>
-                                  {this.props.reason}{" "}</h5>
-                                <Facebook url={url} />
-                                <Twitter url={url} shareText={shareText} />
+                                <p className={classes.description}>
+                                  {props.item.reason}{" "}</p>
                               </span>
                             )
                           },
                           {
                             tabButton: "Donate",
-                            tabIcon: Schedule,
+                            tabIcon: CardGiftcardRounded,
                             tabContent: (
                               <span>
-                                <form onSubmit={donate}>
+                                <form className="donate_form" onSubmit={donate}>
                                   <GridContainer>
-                                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                                   
+                                    <GridItem>
                                       <CustomInput
                                         labelText="Donation Amount"
-                                        name="category"
-                                        type="text"
-                                        id="float"
+                                        name="amount"
                                         formControlProps={{
                                           fullWidth: true
                                         }}
                                         inputProps={{
-                                          onChange: this.handleChange,
-                                          value: this.state.value,
+                                          type:"number",
+                                          inputProps: { min: 0,step: 1.00 },
+                                          disabled:(rem === 0 ? true : false),                                          
+                                          placeholder: "$",
+                                          value:value,
+                                          onChange: (e) => setValue(e.target.value),                                  
                                           autoComplete: "off"
-                                        }} />
+                        }} />               
+                                             
                                     </GridItem>
                                   </GridContainer>
                                   <GridContainer>
-                                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                                    <GridItem>
                                       <div className={classes.title}></div>
-                                      <ReactStripeCheckout
-                                        name={this.props.name}
-                                        amount={this.state.value*100}
-                                        item_id={this.props.item_id}
+                                      <ReactStripeCheckout 
+                                        disabled={(rem === 0 ? true : false)}
+                                        name={props.item.name}
+                                        label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
+                                        amount={value*100}
+                                        item_id={props.item.item_id}
+                                        // donor_id={props.user.user_id}
+                                        // requestor_id={props.requestor_id}
                                         stripeKey="pk_test_COhX3mfbC1fLgVYup2ylmIDk00dJeKzFpK"
                                         token={onToken}
                                       />
@@ -182,8 +210,9 @@ class Donation extends Component {
                   </div>
                 </GridItem>
               </GridContainer>
-              {/* Payment module goes here
-              <Payment /> */}
+              <br/>
+              <br/>
+              <br/>
             </div>
           </div>
         </div>
@@ -191,23 +220,11 @@ class Donation extends Component {
       </div>
     );
   }
-}
-
 function mapStateToProps(appState) {
   return {
-    id: appState.item.id,
     user: appState.user,
-    user_id: appState.user_id,
-    item_id: appState.item.item_id,
-    requestor_id: appState.item.requestor_id,
-    name: appState.item.name,
-    description: appState.item.description,
-    category: appState.item.category,
-    reason: appState.item.reason,
-    amount: appState.item.amount,
-    total: appState.donation_amount.total,
-    picture_url: appState.item.picture_url,
-    item_url: appState.item.item_url
-  };
+    item: appState.item,
+    total: appState.donation_amount
+    }
 }
 export default withStyles(profilePageStyle)(connect(mapStateToProps)(Donation))

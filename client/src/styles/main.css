@@ -3,6 +3,7 @@ html {
 }
 *,* ::after, *::before {
   box-sizing: inherit;
+  margin:0;
 }
 
 /* begin styles for login and registration */
@@ -33,9 +34,9 @@ html {
 
 .itemIMG {
     width: 100%;
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 1440px;
-    transform: translate3d(0, -12%, 0);
+    /* transform: translate3d(0, -12%, 0); */
 } 
 
 .wrap_pricing {
@@ -47,4 +48,9 @@ html {
 
 .total_amount,.remaining_amount {
   padding: 30px 85px;
+}
+
+/* donate form */
+.donate_form {
+  overflow: hidden;
 }

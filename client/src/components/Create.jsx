@@ -32,7 +32,7 @@ const CreateItem = props => {
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
+          height: 150,
           color: "white"
         }}
         {...rest}
