@@ -4,9 +4,9 @@ const initialState = {
   donation: {},
   donation_amount: {},
   user_id: {},
+  item_id: {},
   items: [],
   donations: [],
-  item_id: {},
 }
 
 export default function (state = initialState, action) {
