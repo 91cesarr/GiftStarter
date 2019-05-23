@@ -106,8 +106,9 @@ const CreateForm = props => {
               <GridItem xs={12} sm={12} md={6}>
                 <CustomSelect
                   labelText="Category"
+                  id="category"
                   value={values.category}
-                  input={<Input name="category" id="category" />}
+                  // input={<Input name="category" id="category" />}
                   name="category"
                   dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
                   formControlProps={{

@@ -11,7 +11,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 // import MenuList from "@material-ui/core/MenuList";
 
-import customSelectStyle from "assets/jss/material-kit-react/components/customSelectStyleNA.jsx";
+
+import customSelectStyleNA from "assets/jss/material-kit-react/components/customSelectStyleNA.jsx";
 
 function CustomSelect({ ...props }) {
   const {
@@ -78,6 +79,7 @@ function CustomSelect({ ...props }) {
         </InputLabel>
       ) : null}
       <Select
+        className="naSelect"
         value={props.value}
         classes={{
           // input: inputClasses,
@@ -129,4 +131,4 @@ CustomSelect.propTypes = {
   noLiPadding: PropTypes.bool,
 };
 
-export default withStyles(customSelectStyle)(CustomSelect);
+export default withStyles(customSelectStyleNA)(CustomSelect);

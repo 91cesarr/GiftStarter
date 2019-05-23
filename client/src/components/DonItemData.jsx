@@ -42,7 +42,7 @@ const DonItemData = (props) => {
   }, [user, props.item.item_id])
 
   // const item_id = props.item.item_id
-  const url = 'http://localhost:3000/donation/' + props.item.item_id
+  const url = 'http://wishbig.com/donation/' + props.item.item_id
   const shareText = 'Check this out! Help buy ' + props.item.name
   // const donor_id = props.user.user_id
   // const requestor_id = props.item.requestor_id
@@ -216,7 +216,6 @@ const DonItemData = (props) => {
 }
 
 function mapStateToProps(appState) {
-  console.log(appState)
   return {
     user: appState.user,
     item: appState.item,

@@ -5,7 +5,7 @@ import {
   defaultFont
 } from "assets/jss/material-kit-react.jsx";
 
-const customSelectStyle = {
+const customSelectStyleNA = {
   disabled: {
     "&:before": {
       borderColor: "transparent !important"
@@ -113,4 +113,4 @@ const customSelectStyle = {
   }
 };
 
-export default customSelectStyle;
+export default customSelectStyleNA;

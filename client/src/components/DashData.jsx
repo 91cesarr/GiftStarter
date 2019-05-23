@@ -48,7 +48,9 @@ const DashData = props => {
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["ID", "Name", "Amount", "Donated", "Remaining", "Status"]}
+                tableHead={["ID", "Name", "Amount", "Donated", "Remaining"
+                  // , "Status"
+                ]}
                 tableData={props.items}
               />
               <AuthRoute path="/dashboard/:item_id" component={DashItemData} />
@@ -73,8 +75,9 @@ function mapStateToProps(appState) {
       item.name,
       item.amount === "" ? "$0" : '' + '$' + item.amount,
       item.donAmount === null ? "$0" : '' + '$' + item.donAmount,
-      item.remainder === null ? "$0" : '' + '$' + item.remainder,
-      '' + item.status]),
+      item.remainder === null ? "$0" : '' + '$' + item.remainder
+      // ,'' + item.status
+    ]),
     donations: appState.donations
   }
 }
