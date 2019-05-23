@@ -33,10 +33,17 @@ export function getDonation(item_id) {
 }
 
 // Donation function
-export function donation(amount, item_id, requestor_id) {
+export function donation(donor_name, amount, item_id, requestor_id) {
+
+  // if (donor_name === '') {
+  //   donor_name = "Anonymous"
+  // } else {
+  //   donor_name
+  // }
+
   return new Promise((resolve, reject) => {
     axios
-      .post("/api/donation", { amount, item_id, requestor_id })
+      .post("/api/donation", { donor_name, amount, item_id, requestor_id })
       .then(function (response) {
       })
       .catch(function (error) {

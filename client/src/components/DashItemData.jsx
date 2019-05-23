@@ -26,7 +26,6 @@ const DashItemData = props => {
 
   useEffect(() => {
     getItemData(props.match.params.item_id)
-
   }, [props.match.params.item_id])
 
   return (
@@ -35,6 +34,7 @@ const DashItemData = props => {
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>{props.item.name}</h2>
           <h5 className={classes.description}>Progress toward goal: {props.item.percent}%</h5>
+          <br />
           <CustomLinearProgress
             variant="determinate"
             color="primary"
@@ -43,6 +43,7 @@ const DashItemData = props => {
           <h5 className={classes.description}>${props.item.donAmount} of ${props.item.amount}</h5>
         </GridItem>
       </GridContainer>
+      <br />
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
@@ -51,7 +52,7 @@ const DashItemData = props => {
                 <h4 className={classes.cardTitleWhite}>This wish</h4>
               </CardHeader>
               <CardBody>
-                <img src={props.item.picture} alt={props.item.name}></img>
+                <img src={props.item.picture} alt={props.item.name} className="itemIMG"></img>
               </CardBody>
             </Card>
           </GridItem>
@@ -80,7 +81,7 @@ function mapStateToProps(appState) {
   return {
     item: appState.item,
     donations: appState.donations,
-    donationData: appState.donations.map(don => ['' + don.donor_name, '' + '$' + don.amount]),
+    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0" : '' + '$' + don.amount]),
   }
 }
 

@@ -28,11 +28,11 @@ const CreateItem = props => {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Request Item"
+        brand="Wish Big"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 150,
+          height: 80,
           color: "white"
         }}
         {...rest}

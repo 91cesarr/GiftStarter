@@ -8,10 +8,9 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton/IconButton"
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
+import { Apps } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
@@ -25,11 +24,6 @@ function HeaderLinks({ ...props }) {
   const { user } = useContext(AuthContext)
   const { user_id } = useContext(AuthContext)
   const { classes } = props;
-  console.log(user_id)
-  // function logout() {
-  //   signout()
-  //   props.history.push("/")
-  // }
 
   return (
     <List className={classes.list}>
@@ -106,15 +100,13 @@ function HeaderLinks({ ...props }) {
           </Button>
         </Tooltip>
       </ListItem>
-
-
       <ListItem className={classes.listItem}>
         <Tooltip
           id="logoutButton"
           title={(isAuthenticated === true ? "Logout" : "Login")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
-        >        
+        >
           <Button
             color="transparent"
             href="/login"
@@ -122,8 +114,6 @@ function HeaderLinks({ ...props }) {
             className={classes.navLink}
             onClick={signout}
           >
-          
-
             <i className={(isAuthenticated === true ? classes.socialIcons + " fas fa-sign-out-alt" : classes.socialIcons + " fas fa-sign-in-alt")} />
           </Button>
         </Tooltip>

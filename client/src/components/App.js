@@ -6,8 +6,8 @@ import { AuthProvider, AuthRoute } from "../lib/auth"
 
 import Footer from './Footer/Footer.jsx'
 import Create from "./Create.jsx"
-import Donation from "./Donation"
-import Dashboard from "./Dashboard"
+import Donation from "./Donation.jsx"
+import Dashboard from "./Dashboard.jsx"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import "../styles/main.css"

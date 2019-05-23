@@ -68,10 +68,15 @@ function mapStateToProps(appState) {
   return {
     userData: appState.user,
     item: appState.item,
-    items: appState.items.map(item => ['' + item.item_id, item.name, '' + '$' + item.amount, '' + '$' + item.donAmount, '' + '$' + item.remainder, '' + item.status]),
+    items: appState.items.map(item => [
+      '' + item.item_id,
+      item.name,
+      item.amount === "" ? "$0" : '' + '$' + item.amount,
+      item.donAmount === null ? "$0" : '' + '$' + item.donAmount,
+      item.remainder === null ? "$0" : '' + '$' + item.remainder,
+      '' + item.status]),
     donations: appState.donations
   }
 }
 
 export default withStyles(dashboardStyle)(connect(mapStateToProps)(DashData))
-

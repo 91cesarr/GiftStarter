@@ -36,11 +36,11 @@ const Dashboard = props => {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Dashboard"
+        brand="Wish Big"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 150,
+          height: 80,
           color: "white"
         }}
         {...rest}
