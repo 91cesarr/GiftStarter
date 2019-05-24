@@ -62,11 +62,13 @@ const DashItemData = props => {
                 <h4 className={classes.cardTitleWhite}>Donors</h4>
               </CardHeader>
               <CardBody>
+                <div className="donor-list-dashboard">
                 <Table
                   tableHeaderColor="info"
                   tableHead={["Name", "Donation"]}
                   tableData={props.donationData}
                 />
+                </div>
               </CardBody>
             </Card>
           </GridItem>

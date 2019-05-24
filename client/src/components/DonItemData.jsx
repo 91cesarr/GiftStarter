@@ -30,11 +30,15 @@ import ReactStripeCheckout from 'react-stripe-checkout';
 
 import productStyle from "assets/jss/material-kit-react/views/landingPageSections/productStyle.jsx";
 
+// toast notification
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 const DonItemData = (props) => {
   const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState("")
   const [name, setName] = useState("")
-
+  const greeting = `Hello,` + name + ` has made a donation towards your gift`
   useEffect(() => {
     getUser(user)
     getItemData(props.item.item_id)
@@ -50,7 +54,14 @@ const DonItemData = (props) => {
 
   const onToken = (token) => {
     donation(name, amount, props.item.item_id, props.item.requestor_id)
-
+    toast(greeting, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    })
     fetch('/api/donation', {
       method: 'POST',
       body: JSON.stringify(token),
@@ -59,9 +70,9 @@ const DonItemData = (props) => {
         // reload the page
         .then(window.location.reload())
         .then(data => {
-          alert(`Thank you for your donation!`
-            //insert inside `` above  ${data.email}
-          );
+          // alert(`Thank you for your donation!`
+          //   //insert inside `` above  ${data.email}
+          // );
         });
     });
   }

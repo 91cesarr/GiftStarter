@@ -16,7 +16,7 @@ html {
   box-shadow:none!important;
 }
 .login {
-  padding: 110px 120px 0px 120px;
+  padding: 60px 120px;
       margin: 0 auto;
   display: inline;
     justify-content: center;
@@ -36,7 +36,7 @@ html {
  /* min-width 1024px and max-width 1440px laptop and desktop and bigger*/
 @media only screen and (min-width: 90em) { 
   .login {
-  padding: 120px 60px;
+  padding: 60px;
   display: inline;
   justify-content: space-around;
 }
@@ -60,7 +60,7 @@ html {
   display: flex;
   justify-content: space-around;
   padding:20px;
-  background:#A4C4B5;
+  /* background:#A4C4B5; */
   background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -88,6 +88,9 @@ html {
   color:#555;
   font-weight: lighter;
   padding:40px 0;
+}
+#lock_color {
+  background-color:#8e24aa;
 }
 /* end login and registration */
 
@@ -118,7 +121,7 @@ html {
   height:300px;
 }
 .donor-list-dashboard {
-  height:300px;
+  height:343px;
   overflow:scroll;
 }
 .Toastify__progress-bar--default {

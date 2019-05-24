@@ -35,9 +35,9 @@ const Login = props => {
       <div className="login">
         <div className="loginIcon">
           <div id="login_logo">WishBig</div>
-          {/* <Avatar>
+          <Avatar id="lock_color">
             <LockOutlinedIcon />
-          </Avatar> */}
+          </Avatar>
           <Typography id="welc_msg" component="h1" variant="h5">
             Welcome to WishBig
           </Typography>

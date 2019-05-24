@@ -41,7 +41,7 @@ function HeaderLinks({ ...props }) {
               Create
             </Link>,
             <a
-              href="http://localhost:3000/dashboard/"
+              href="/dashboard/"
               className={classes.dropdownLink}
             >
               Dashboard
