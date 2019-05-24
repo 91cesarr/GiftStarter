@@ -8,20 +8,69 @@ html {
 }
 
 /* begin styles for login and registration */
-.login {
-  width: 400px;
-  margin: 100px auto;
+.justify {
+  margin: 0 auto 40px auto;
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  box-shadow:none!important;
 }
-.pad {
-  padding: 20px;
+.login {
+  padding: 110px 120px 0px 120px;
+      margin: 0 auto;
+  display: inline;
+    justify-content: center;
+}
+.login form {
+      width: 450px;
+}
+.reg {
+  padding: 110px 120px 0px 120px;
+      margin: 0 auto;
+  display: inline;
+    justify-content: center;
+}
+.reg form {
+      width: 450px;
+}
+ /* min-width 1024px and max-width 1440px laptop and desktop and bigger*/
+@media only screen and (min-width: 90em) { 
+  .login {
+  padding: 120px 60px;
+  display: inline;
+  justify-content: space-around;
+}
+  .reg {
+  padding: 142px 60px;
+  display: inline;
+  justify-content: space-around;
+}
+.placeholder_login_img {
+  width:700px;
+  display: flex;
+  justify-content: space-around;
+  padding:20px;
+  background:#A4C4B5;
+  background-image:url("../assets/img/standing.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.placeholder_reg_img {
+  width:700px;
+  display: flex;
+  justify-content: space-around;
+  padding:20px;
+  background:#A4C4B5;
+  background-image:url("../assets/img/standing.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 }
 .loginIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.login .loginButton {
-  margin-top: 20px;
 }
 .or {
   margin: 30px 0;
@@ -54,6 +103,11 @@ html {
 /* donate form */
 .donate_form {
   overflow: hidden;
+}
+.Toastify__progress-bar--default {
+    background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));
+    background: -webkit-linear-gradient(left,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
+    background: linear-gradient(90deg,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
 }
 
 /* Create for select field */
