@@ -103,41 +103,28 @@ WHERE item_id = ?
 // / donation page
 // post new donation
 router.post("/donation", (req, res, next) => {
-  // const sql = `
-  // INSERT INTO donations (
-  //   donor_id,
-  //   requestor_id,
-  //   item_id,
-  //   amount,
-  //   anon,
-  //   payment_type
-  // )
-  // VALUES (?, ?, ?, ?, ?, ?)
-  // `
-
   const sql = `
  INSERT INTO donations (
-   item_id,
+   donor_name, 
    amount,
+   item_id,
    requestor_id
  )
- VALUES (?, ?, ?)
+ VALUES (?, ?, ?, ?)
  `
   conn.query(sql, [
-    req.body.item_id,
+    req.body.donor_name,
     req.body.amount,
+    req.body.item_id,
     req.body.requestor_id
   ], (err, results, fields) => {
 
     console.log(err)
     res.json({
-      // donor_id: req.body.donor_id,
-      // requestor_id: req.body.requestor_id,
-      item_id: req.body.item_id,
+      donor_name: req.body.donor_name,
       amount: req.body.amount,
+      item_id: req.body.item_id,
       requestor_id: req.body.requestor_id
-      // anon: req.body.anon,
-      // payment_type: req.body.payment_type
     })
   })
 })
@@ -156,9 +143,10 @@ router.get('/item/:item_id', (req, res, next) => {
   })
 })
 
+// URGENT!!! ADDED A FIELD: REQUESTOR_ID - UPDATE CODE!!!
 router.get('/dashboard/:item_id', (req, res, next) => {
   const sql = `
-  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status, i.description as description, i.reason as reason
+  SELECT  i.item_id as item_id, i.name as name, i.amount as amount, sum(d.amount) as donAmount, (i.amount-sum(d.amount)) as remainder, round((sum(d.amount)/i.amount),2)*100 as percent, i.picture_url as picture, i.status as status, i.description as description, i.reason as reason, i.requestor_id as requestor_id
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
@@ -224,7 +212,7 @@ router.get('/items/:requestor_id', (req, res, next) => {
   LEFT JOIN donations d ON i.item_id = d.item_id
   GROUP BY item_id DESC
   HAVING requestor_id  = ?
-  LIMIT 5
+  LIMIT 10
   `
 
   conn.query(sql, [req.params.requestor_id], (err, results, fields) => {

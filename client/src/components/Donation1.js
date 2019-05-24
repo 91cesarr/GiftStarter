@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useContext } from "react"
 import { AuthContext } from '../lib/auth'
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+
 // core components
 import Header from "components/Header/Header.jsx";
-import Footer from "components/Footer/Footer.jsx";
+// import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
@@ -86,70 +89,70 @@ const Donation = (props) => {
       });
     });
   }
-    return (
-      <div>
-        <Header
-          color="transparent"
-          brand="Donation Page"
-          rightLinks={<HeaderLinks />}
-          fixed
-          changeColorOnScroll={{
-            height: 200,
-            color: "white"
-          }}
-          {...rest}
-        />
-        <Parallax small filter image={require("assets/img/landing-bg.jpg")} />
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <div>
-            <div className={classes.container}>
-              <GridContainer>
-                <GridItem>
-                  <h2 className={classes.title}>{props.item.name}</h2>
-                  <img src={props.item.picture} alt="..." className="itemIMG" />
-                  <div className={classes.profile}>
-                    <div className={classes.name}>
-                      <div>
+  return (
+    <div>
+      <Header
+        color="transparent"
+        brand="Wish Big"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 80,
+          color: "white"
+        }}
+        {...rest}
+      />
+      <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+      <div className={classNames(classes.main, classes.mainRaised)}>
+        <div>
+          <div className={classes.container}>
+            <GridContainer>
+              <GridItem>
+                <h2 className={classes.title}>{props.item.name}</h2>
+                <img src={props.item.picture} alt="..." className="itemIMG" />
+                <div className={classes.profile}>
+                  <div className={classes.name}>
+                    <div>
                       <Facebook url={url} />
                       <Twitter url={url} shareText={shareText} />
-                      </div>
-                      <div className="wrap_pricing">
+                    </div>
+                    <div className="wrap_pricing">
                       <div className="total_amount">
-                          <h3 className={classes.title}>Total Amount <Tooltip
-                            id="tooltip-top"
-                            title="This is the total amount of the current item"
-                            placement="top"
-                            classes={{ tooltip: classes.tooltip }}
-                          >
-                            <i className={"fas fa-info-circle"} />
-                          </Tooltip></h3>  
-                          <div>                        
+                        <h3 className={classes.title}>Total Amount <Tooltip
+                          id="tooltip-top"
+                          title="This is the total amount of the current item"
+                          placement="top"
+                          classes={{ tooltip: classes.tooltip }}
+                        >
+                          <i className={"fas fa-info-circle"} />
+                        </Tooltip></h3>
+                        <div>
                           <h4 className={classes.title}>${props.item.amount}</h4>
-                          </div>
+                        </div>
                       </div>
                       <div className="remaining_amount">
-                          <h3 className={classes.title}>Remaining Amount <Tooltip
-                            id="tooltip-top"
-                            title="This is the remaining amount left for the current item"
-                            placement="top"
-                            classes={{ tooltip: classes.tooltip }}
-                          >
-                            <i className={"fas fa-info-circle"} />
-                          </Tooltip></h3>
-                          <div>
+                        <h3 className={classes.title}>Remaining Amount <Tooltip
+                          id="tooltip-top"
+                          title="This is the remaining amount left for the current item"
+                          placement="top"
+                          classes={{ tooltip: classes.tooltip }}
+                        >
+                          <i className={"fas fa-info-circle"} />
+                        </Tooltip></h3>
+                        <div>
                           <h4 className={classes.title}>${rem}</h4>
-                          </div>
-                      </div>
+                        </div>
                       </div>
                     </div>
-                    <GridContainer>
+                  </div>
+                  <GridContainer>
                     <GridItem>
                       <NavPills
                         color="primary"
                         horizontal={{
                           tabsGrid: { xs: 12, sm: 4, md: 6 },
                           contentGrid: { xs: 12, sm: 8, md: 6 }
-                      }}
+                        }}
                         tabs={[
                           {
                             tabButton: "Description",
@@ -178,6 +181,7 @@ const Donation = (props) => {
                               <span>
                                 <form className="donate_form" onSubmit={donate}>
                                   <GridContainer>
+
                                     <GridItem>
 
                                     <CustomInput
@@ -202,15 +206,15 @@ const Donation = (props) => {
                                           fullWidth: true
                                         }}
                                         inputProps={{
-                                          type:"number",
-                                          inputProps: { min: 0,step: 1.00 },
-                                          disabled:(rem === 0 ? true : false),                                          
+                                          type: "number",
+                                          inputProps: { min: 0, step: 1.00 },
+                                          disabled: (rem === 0 ? true : false),
                                           placeholder: "$",
-                                          value:value,
-                                          onChange: (e) => setValue(e.target.value),                                  
+                                          value: value,
+                                          onChange: (e) => setValue(e.target.value),
                                           autoComplete: "off"
-                        }} />               
-                                             
+                                        }} />
+
                                     </GridItem>
                                   </GridContainer>
                                   <GridContainer>
@@ -219,11 +223,11 @@ const Donation = (props) => {
                                       {/* <Button color="primary">
                                         Pay With Card
                                       </Button> */}
-                                      <ReactStripeCheckout 
+                                      <ReactStripeCheckout
                                         disabled={(rem === 0 ? true : false)}
                                         name={props.item.name}
                                         label={(rem === 0 ? 'Item amount met thank you' : 'Pay With Card')}
-                                        amount={value*100}
+                                        amount={value * 100}
                                         item_id={props.item.item_id}
                                         // donor_id={props.user.user_id}
                                         // requestor_id={props.requestor_id}
@@ -238,25 +242,26 @@ const Donation = (props) => {
                           },
                         ]}
                       />
-                      </GridItem>
-                    </GridContainer>
-                  </div>
-                </GridItem>
-              </GridContainer>
-              <br/>
-              <br/>
-              <br/>
-            </div>
+                    </GridItem>
+                  </GridContainer>
+                </div>
+              </GridItem>
+            </GridContainer>
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       </div>
-    );
-  }
+      <Footer />
+    </div>
+  );
+}
 function mapStateToProps(appState) {
   return {
     user: appState.user,
     item: appState.item,
     total: appState.donation_amount
-    }
+  }
 }
 export default withStyles(profilePageStyle)(connect(mapStateToProps)(Donation))
