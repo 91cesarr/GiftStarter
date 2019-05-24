@@ -129,15 +129,16 @@ html {
 
 /* Create for select field */
 .naSelect {
-  border-bottom: 1px solid #d2d2d2 !important;
+  border-bottom: 01px solid #d2d2d2 !important;
 }
 
 .naSelect::before {
-  border-bottom: 1px solid #d2d2d2 !important;
+  border-bottom: 0px solid #d2d2d2 !important;
 }
 
 .naSelect::after {
-  border-bottom: 2px solid #9c27b0 !important;
+  border-bottom: 0px solid #d2d2d2 !important;
+  /* #9c27b0 !important; */
 }
 
 .naSelect:hover{
