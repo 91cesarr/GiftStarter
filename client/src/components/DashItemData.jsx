@@ -33,7 +33,7 @@ const DashItemData = props => {
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>{props.item.name}</h2>
-          <h5 className={classes.description}>Progress toward goal: {props.item.percent}%</h5>
+          <h5 className={classes.description}>Progress toward goal: {props.percent}%</h5>
           <br />
           <CustomLinearProgress
             variant="determinate"
@@ -80,6 +80,7 @@ const DashItemData = props => {
 function mapStateToProps(appState) {
   return {
     item: appState.item,
+    percent: appState.item.percent > 0 ? appState.item.percent : 0,
     donations: appState.donations,
     donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
   }

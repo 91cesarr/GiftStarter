@@ -156,9 +156,11 @@ router.get('/dashboard/:item_id', (req, res, next) => {
   i.status as status, 
   i.description as description, 
   i.reason as reason, 
-  i.requestor_id as requestor_id
+  i.requestor_id as requestor_id,
+  u.username as requestor
   FROM items i
   LEFT JOIN donations d ON i.item_id = d.item_id
+  LEFT JOIN users u ON i.requestor_id = u.user_id
   GROUP BY item_id DESC
   HAVING item_id  = ?
   `

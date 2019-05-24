@@ -70,7 +70,7 @@ const DonItemData = (props) => {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>{props.item.name}</h2>
+          <h2 className={classes.title}>Why I want {props.item.name}:</h2>
           <h5 className={classes.description}>
             {props.item.reason}
           </h5>
@@ -200,11 +200,11 @@ const DonItemData = (props) => {
                   tabIcon: List,
                   tabContent: (
                     <div className="donor-list">
-                    <Table
-                      tableHeaderColor="primary"
-                      tableHead={["Name", "Donation"]}
-                      tableData={props.donationData}
-                    />
+                      <Table
+                        tableHeaderColor="primary"
+                        tableHead={["Name", "Donation"]}
+                        tableData={props.donationData}
+                      />
                     </div>
                   )
                 },
