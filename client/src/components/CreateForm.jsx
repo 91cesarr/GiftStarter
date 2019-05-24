@@ -99,7 +99,8 @@ const CreateForm = props => {
                     fullWidth: true
                   }}
                   inputProps={{
-                    onChange: handleChange('name')
+                    onChange: handleChange('name'),
+                    required : true
                   }}
                 />
               </GridItem>
@@ -162,7 +163,7 @@ const CreateForm = props => {
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Amount"
-                  id="amount"
+                  id="number"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -170,7 +171,7 @@ const CreateForm = props => {
                     onChange: handleChange('amount'),
                     placeholder: "$",
                     type: "number",
-                    inputProps: { min: 0, step: 1.00 }
+                    inputProps: { min: 0.00, step: 10.00 }
                   }}
                 />
               </GridItem>

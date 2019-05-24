@@ -13,6 +13,9 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
+import buttonStyle from "assets/jss/material-kit-react/components/buttonStyle.jsx";
+
 
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -22,7 +25,9 @@ import NavPills from "components/NavPills/NavPills.jsx";
 import Chat from "@material-ui/icons/Chat";
 
 import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
-
+// toast notification
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // share page buttons
 import { Facebook, Twitter } from 'react-sharingbuttons'
@@ -42,7 +47,8 @@ const Donation = (props) => {
   const { user } = useContext(AuthContext)
   // const { item_id } = useContext(AuthContext)
   const [value, setValue] = useState("")
-
+  const [name, setName] = useState("")
+  const greeting = `Hello,` + name + ` has made a donation towards your gift`
   useEffect(() => {
     getUser(user)
     getTotal(id)
@@ -56,18 +62,27 @@ const Donation = (props) => {
   const amount = value
   const rem = props.item.amount - props.total.total
   const donor_id = props.user.user_id
+  console.log(amount)
   const { classes, ...rest } = props;
   console.log(props)
   const onToken = (token) => {
-    donation(amount,item_id,donor_id)
+    donation(amount, item_id, donor_id)
+    toast(greeting, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    })
     fetch('/api/donation', {
       method: 'POST',
       body: JSON.stringify(token),
     }).then(response => {
       response.json().then(data => {
-        alert(`Thank you for your donation!`
-          //insert inside `` above  ${data.email}
-        );
+        // alert(`Thank you for your donation!`
+        //   //insert inside `` above  ${data.email}
+        // );
       });
     });
   }
@@ -84,7 +99,7 @@ const Donation = (props) => {
           }}
           {...rest}
         />
-        <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+        <Parallax small filter image={require("assets/img/landing-bg.jpg")} />
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
             <div className={classes.container}>
@@ -163,8 +178,23 @@ const Donation = (props) => {
                               <span>
                                 <form className="donate_form" onSubmit={donate}>
                                   <GridContainer>
-                                   
                                     <GridItem>
+
+                                    <CustomInput
+                                      labelText="Name"
+                                      id="name"
+                                      name="name"
+                                      type="text"
+                                      formControlProps={{
+                                        fullWidth: true
+                                      }}
+                                      inputProps={{
+                                        onChange: (e) => setName(e.target.name)
+                                      }}
+                                    />
+              </GridItem>
+                                    <GridItem>
+                                      
                                       <CustomInput
                                         labelText="Donation Amount"
                                         name="amount"
@@ -186,6 +216,9 @@ const Donation = (props) => {
                                   <GridContainer>
                                     <GridItem>
                                       <div className={classes.title}></div>
+                                      {/* <Button color="primary">
+                                        Pay With Card
+                                      </Button> */}
                                       <ReactStripeCheckout 
                                         disabled={(rem === 0 ? true : false)}
                                         name={props.item.name}

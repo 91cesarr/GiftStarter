@@ -14,6 +14,9 @@ import "../styles/main.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import { toast } from 'react-toastify';
+// Toast configure to be available in every page
+toast.configure()
 
 const theme = createMuiTheme({
   palette: {

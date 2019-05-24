@@ -37,8 +37,9 @@ const Register = props => {
   }
 
   return (
-    <div className="login">
-      <Paper className="pad">
+    <Paper className="justify">
+      <div className="placeholder_reg_img"></div>
+      <div className="reg">
         <div className="loginIcon">
           <Avatar>
             <LockOutlinedIcon />
@@ -90,8 +91,8 @@ const Register = props => {
             Register
           </Button>
         </form>
+      </div>
       </Paper>
-    </div>
   )
 }
 
