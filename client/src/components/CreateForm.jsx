@@ -8,7 +8,6 @@ import { withRouter } from 'react-router'
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
-import Input from "@material-ui/core/Input"
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -21,7 +20,7 @@ import workStyle from "assets/jss/material-kit-react/views/landingPageSections/w
 
 
 
-
+// picture upload to imgur - future
 // const fs = require('fs');
 // const imgurUploader = require('imgur-uploader');
 
@@ -47,22 +46,28 @@ const CreateForm = props => {
     getUser(user)
   }, [user])
 
-
   const [values, setValues] = useState({
     requestor_id: '',
     name: '',
+    amount: '',
     description: '',
     category: '',
     reason: '',
-    amount: '',
     picture_url: '',
   });
 
   const { classes } = props;
 
   const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value, requestor_id: props.userData.user_id });
-  };
+    if (prop === "amount") {
+      const regex = /^(\d*\.?(\d{1,2})?)?$/
+
+      if (regex.test(event.target.value))
+        setValues({ ...values, 'amount': event.target.value, requestor_id: props.userData.user_id });
+    } else {
+      setValues({ ...values, [prop]: event.target.value, requestor_id: props.userData.user_id });
+    }
+  }
 
   function sendItemCreated(e) {
     e.preventDefault()
@@ -70,7 +75,6 @@ const CreateForm = props => {
       props.history.push('/donation/' + resp.data.id)
     })
   }
-
 
   return (
     <div
@@ -99,7 +103,8 @@ const CreateForm = props => {
                     fullWidth: true
                   }}
                   inputProps={{
-                    onChange: handleChange('name')
+                    onChange: handleChange('name'),
+                    required: true
                   }}
                 />
               </GridItem>
@@ -108,7 +113,6 @@ const CreateForm = props => {
                   labelText="Category"
                   id="category"
                   value={values.category}
-                  // input={<Input name="category" id="category" />}
                   name="category"
                   dropdownList={['Birthday', 'Winter Holiday', 'Anniversary', 'Wedding', 'Other']}
                   formControlProps={{
@@ -116,6 +120,7 @@ const CreateForm = props => {
                   }}
                   inputProps={{
                     onChange: handleChange('category'),
+                    required: true
                   }}
                 >
                 </CustomSelect>
@@ -123,6 +128,7 @@ const CreateForm = props => {
               <CustomInput
                 labelText="Description"
                 id="description"
+                name="description"
                 formControlProps={{
                   fullWidth: true,
                   className: classes.textArea
@@ -136,6 +142,7 @@ const CreateForm = props => {
               <CustomInput
                 labelText="Reason"
                 id="reason"
+                name="reason"
                 formControlProps={{
                   fullWidth: true,
                   className: classes.textArea
@@ -164,14 +171,16 @@ const CreateForm = props => {
                 <CustomInput
                   labelText="Amount"
                   id="amount"
+                  name="amount"
                   formControlProps={{
                     fullWidth: true
                   }}
                   inputProps={{
                     onChange: handleChange('amount'),
                     placeholder: "$",
-                    type: "text",
-                    // inputProps: { min: 0, step: 1.00 }
+                    type: "tel",
+                    required: true,
+                    value: values.amount
                   }}
                 />
               </GridItem>
@@ -199,4 +208,3 @@ function mapStateToProps(appState) {
 }
 
 export default withStyles(workStyle)(connect(mapStateToProps)(withRouter(CreateForm)))
-

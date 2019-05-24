@@ -40,7 +40,7 @@ const DashItemData = props => {
             color="primary"
             value={props.item.percent}
           />
-          <h5 className={classes.description}>${props.item.donAmount} of ${props.item.amount}</h5>
+          <h5 className={classes.description}>${Number(props.item.donAmount).toFixed(2)} of ${Number(props.item.amount).toFixed(2)}</h5>
         </GridItem>
       </GridContainer>
       <br />
@@ -81,7 +81,7 @@ function mapStateToProps(appState) {
   return {
     item: appState.item,
     donations: appState.donations,
-    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0" : '' + '$' + don.amount]),
+    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
   }
 }
 

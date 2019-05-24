@@ -85,7 +85,7 @@ const DonItemData = (props) => {
                 <i className={"fas fa-info-circle"} />
               </Tooltip></h3>
               <div>
-                <h4 className={classes.title}>${props.item.amount}</h4>
+                <h4 className={classes.title}>${Number(props.item.amount).toFixed(2)}</h4>
               </div>
             </div>
             <div className="remaining_amount">
@@ -98,7 +98,7 @@ const DonItemData = (props) => {
                 <i className={"fas fa-info-circle"} />
               </Tooltip></h3>
               <div>
-                <h4 className={classes.title}>${props.item.remainder}</h4>
+                <h4 className={classes.title}>${Number(props.item.remainder).toFixed(2)}</h4>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ const DonItemData = (props) => {
                                 fullWidth: true
                               }}
                               inputProps={{
-                                type: "text",
+                                type: "number",
                                 // inputProps: { min: 0, step: 10.00 },
                                 disabled: (props.item.remainder === 0 ? true : false),
                                 placeholder: "$",
@@ -220,7 +220,7 @@ function mapStateToProps(appState) {
     user: appState.user,
     item: appState.item,
     donations: appState.donations,
-    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0" : '' + '$' + don.amount]),
+    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
   }
 }
 export default withStyles(productStyle)(connect(mapStateToProps)(DonItemData))

@@ -37,7 +37,7 @@ const CreateItem = props => {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax small filter image={require("assets/img/landing-bg.jpg")}>
         <div
           className={classes.container}
         >
