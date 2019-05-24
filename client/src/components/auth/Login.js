@@ -34,11 +34,12 @@ const Login = props => {
     <Paper className="justify">
       <div className="login">
         <div className="loginIcon">
-          <Avatar>
+          <div id="login_logo">WishBig</div>
+          {/* <Avatar>
             <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+          </Avatar> */}
+          <Typography id="welc_msg" component="h1" variant="h5">
+            Welcome to WishBig
           </Typography>
         </div>
         <form onSubmit={sendLogin}>
