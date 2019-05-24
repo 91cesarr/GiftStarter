@@ -170,8 +170,8 @@ const CreateForm = props => {
                   inputProps={{
                     onChange: handleChange('amount'),
                     placeholder: "$",
-                    type: "number",
-                    inputProps: { min: 0, step: 1.00 }
+                    type: "text",
+                    // inputProps: { min: 0, step: 1.00 }
                   }}
                 />
               </GridItem>

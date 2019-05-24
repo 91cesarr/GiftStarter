@@ -153,7 +153,7 @@ const DonItemData = (props) => {
                                 fullWidth: true
                               }}
                               inputProps={{
-                                type: "number",
+                                type: "text",
                                 // inputProps: { min: 0, step: 10.00 },
                                 disabled: (props.item.remainder === 0 ? true : false),
                                 placeholder: "$",

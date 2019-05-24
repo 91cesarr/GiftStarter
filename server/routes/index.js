@@ -114,7 +114,7 @@ router.post("/donation", (req, res, next) => {
  `
   conn.query(sql, [
     req.body.donor_name,
-    req.body.amount,
+    Number(req.body.amount),
     req.body.item_id,
     req.body.requestor_id
   ], (err, results, fields) => {
