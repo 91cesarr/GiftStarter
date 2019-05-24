@@ -24,7 +24,7 @@ const Register = props => {
       setPassError(false)
       register(username, password)
         .then(() => {
-          props.history.push("/")
+          props.history.push("/login")
         })
         .catch(err => {
           setUserError(true)

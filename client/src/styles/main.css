@@ -51,7 +51,7 @@ html {
   justify-content: space-around;
   padding:20px;
   background:#A4C4B5;
-  background-image:url("../assets/img/standing.png");
+  background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -61,7 +61,7 @@ html {
   justify-content: space-around;
   padding:20px;
   background:#A4C4B5;
-  background-image:url("../assets/img/standing.png");
+  background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -78,6 +78,16 @@ html {
   text-align: center;
   font-family: "Roboto";
   font-weight: lighter;
+}
+#login_logo {
+  color:#222;
+  font-style: italic;
+  padding:30px;
+}
+#welc_msg {
+  color:#555;
+  font-weight: lighter;
+  padding:40px 0;
 }
 /* end login and registration */
 
@@ -103,6 +113,13 @@ html {
 /* donate form */
 .donate_form {
   overflow: hidden;
+}
+.donor-list {
+  height:300px;
+}
+.donor-list-dashboard {
+  height:300px;
+  overflow:scroll;
 }
 .Toastify__progress-bar--default {
     background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));

@@ -46,6 +46,7 @@ const DashData = props => {
               </p>
             </CardHeader>
             <CardBody>
+              <div className="donor-list-dashboard">
               <Table
                 tableHeaderColor="primary"
                 tableHead={["ID", "Name", "Amount", "Donated", "Remaining"
@@ -53,6 +54,7 @@ const DashData = props => {
                 ]}
                 tableData={props.items}
               />
+              </div>
               <AuthRoute path="/dashboard/:item_id" component={DashItemData} />
             </CardBody>
           </Card>

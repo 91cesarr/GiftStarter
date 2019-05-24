@@ -199,11 +199,13 @@ const DonItemData = (props) => {
                   tabButton: "Donor List",
                   tabIcon: List,
                   tabContent: (
+                    <div className="donor-list">
                     <Table
                       tableHeaderColor="primary"
                       tableHead={["Name", "Donation"]}
                       tableData={props.donationData}
                     />
+                    </div>
                   )
                 },
               ]}
