@@ -38,7 +38,7 @@ const DonItemData = (props) => {
   const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState("")
   const [name, setName] = useState("")
-  const greeting = `Hello,` + name + ` has made a donation towards your gift`
+  const greeting = `Hello,` + name + ` Thank you for your donation!`
   useEffect(() => {
     getUser(user)
     getItemData(props.item.item_id)
