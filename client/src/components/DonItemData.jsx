@@ -55,7 +55,7 @@ const DonItemData = (props) => {
   const onToken = (token) => {
     donation(name, amount, props.item.item_id, props.item.requestor_id)
     toast(greeting, {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -151,7 +151,7 @@ const DonItemData = (props) => {
                               }}
                               inputProps={{
                                 type: "text",
-                                disabled: (props.item.remainder === 0 ? true : false),
+                                disabled: (props.item.remainder < 0 ? true : false),
                                 placeholder: "",
                                 value: name,
                                 onChange: (e) => setName(e.target.value),
@@ -166,7 +166,7 @@ const DonItemData = (props) => {
                               inputProps={{
                                 type: "number",
                                 // inputProps: { min: 0, step: 10.00 },
-                                disabled: (props.item.remainder === 0 ? true : false),
+                                disabled: (props.item.remainder < 0 ? true : false),
                                 placeholder: "$",
                                 value: amount,
                                 onChange: (e) => setAmount(e.target.value),
@@ -178,9 +178,9 @@ const DonItemData = (props) => {
                           <GridItem>
                             <div className={classes.title}></div>
                             <ReactStripeCheckout
-                              disabled={(props.item.remainder === 0 ? true : false)}
+                              disabled={(props.item.remainder < 0 ? true : false)}
                               name={props.item.name}
-                              label={(props.item.remainder === 0 ? 'Item amount met thank you' : 'Pay With Card')}
+                              label={(props.item.remainder < 0 ? 'Item amount met thank you' : 'Pay With Card')}
                               donor_name={name}
                               amount={amount * 100}
                               item_id={props.item.item_id}
