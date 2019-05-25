@@ -135,7 +135,8 @@ html {
 
 .itemIMG {
     width: 100%;
-    margin: 20px auto;
+    /* margin: 20px auto; */
+    max-height: 250px;
     max-width: 1440px;
 } 
 
@@ -161,6 +162,27 @@ html {
   height:343px;
   overflow:scroll;
 }
+
+/* donation ui */
+.title_name_image {
+      box-shadow: none!important;
+}
+.img_card {
+      background: #fdfcfc!important;
+      box-shadow: none!important;
+      border:1px solid #dfdfdf!important;
+}
+.NavPills-info-337{
+      box-shadow: none!important;
+}
+.CardBody-cardBody-323 {
+    padding: 0.4375rem 0.315rem!important;
+}
+
+.NavPills-pillsWithIcons-330 {
+    background: #fcfcfc;
+}
+
 .Toastify__progress-bar--default {
     background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));
     background: -webkit-linear-gradient(left,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
