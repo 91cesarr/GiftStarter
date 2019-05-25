@@ -184,12 +184,7 @@ const CreateForm = props => {
                   }}
                 />
               </GridItem>
-              <GridItem
-                xs={12}
-                sm={12}
-                md={4}
-                className={classes.textCenter}
-              >
+              <GridItem>
                 <Button type="submit" color="primary">Submit</Button>
               </GridItem>
             </GridContainer>

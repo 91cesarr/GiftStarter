@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { AuthContext } from '../lib/auth'
 import { connect } from "react-redux"
-import { getUser, getItemData, donate, donation, getDonList } from "../actions/actions";
+import { getUser, getItemData, donate, donation, getDonList, getTotal } from "../actions/actions";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -38,16 +38,20 @@ const DonItemData = (props) => {
   const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState("")
   const [name, setName] = useState("")
-  const greeting = `Hello,` + name + ` Thank you for your donation!`
   useEffect(() => {
     getUser(user)
     getItemData(props.item.item_id)
     getDonList(props.item.item_id)
-  }, [user, props.item.item_id])
-
+    getTotal(total)
+  }, [user, props.item.item_id, total])
+console.log("item",props.item)
   // const item_id = props.item.item_id
+  const total = props.item.item_id
+  const greeting = `Hello, ` + name + ` Thank you for your donation!`
+  const picture = props.item.picture
   const url = 'http://wishbig.com/donation/' + props.item.item_id
   const shareText = 'Check this out! Help buy ' + props.item.name
+  const rem = props.item.amount - props.total.total
   // const donor_id = props.user.user_id
   // const requestor_id = props.item.requestor_id
   const { classes } = props;
@@ -62,14 +66,14 @@ const DonItemData = (props) => {
         .then(data => {
           toast(greeting, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true
           })
             // sets a time out before reloading the page
-              setTimeout(function () { window.location.reload() }, 7000)
+              setTimeout(() => { window.location.reload() }, 2500)
         });
     });
   }
@@ -106,7 +110,7 @@ const DonItemData = (props) => {
                 <i className={"fas fa-info-circle"} />
               </Tooltip></h3>
               <div>
-                <h4 className={classes.title}>${Number(props.item.remainder).toFixed(2)}</h4>
+                <h4 className={classes.title}>${Number(rem).toFixed(2)}</h4>
               </div>
             </div>
           </div>
@@ -115,12 +119,12 @@ const DonItemData = (props) => {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>{props.item.name}</h4>
+            <Card className="img_card">
+              <CardHeader className="title_name_image" color="primary">
+                <h4>{props.item.name}</h4>
               </CardHeader>
               <CardBody>
-                <img src={props.item.picture} alt={props.item.name} className="itemIMG" />
+                <img src={picture} alt={props.item.name} className="itemIMG" />
               </CardBody>
             </Card>
           </GridItem>
@@ -148,7 +152,7 @@ const DonItemData = (props) => {
                               }}
                               inputProps={{
                                 type: "text",
-                                disabled: (props.item.remainder <= 0 ? true : false),
+                                disabled: (rem <= 0.00 ? true : false),
                                 placeholder: "",
                                 value: name,
                                 onChange: (e) => setName(e.target.value),
@@ -162,8 +166,8 @@ const DonItemData = (props) => {
                               }}
                               inputProps={{
                                 type: "number",
-                                // inputProps: { min: 0, step: 10.00 },
-                                disabled: (props.item.remainder <= 0 ? true : false),
+                                inputProps: { min: 0 },
+                                disabled: (rem <= 0.00 ? true : false),
                                 placeholder: "$",
                                 value: amount,
                                 onChange: (e) => setAmount(e.target.value),
@@ -175,9 +179,9 @@ const DonItemData = (props) => {
                           <GridItem>
                             <div className={classes.title}></div>
                             <ReactStripeCheckout
-                              disabled={(props.item.remainder <= 0 ? true : false)}
+                              disabled={(rem <= 0.00 ? true : false)}
                               name={props.item.name}
-                              label={(props.item.remainder <= 0 ? 'Item amount met thank you' : 'Pay With Card')}
+                              label={(rem <= 0.00 ? 'Funding is complete thank you!' : 'Pay With Card')}
                               donor_name={name}
                               amount={amount * 100}
                               item_id={props.item.item_id}
@@ -209,7 +213,7 @@ const DonItemData = (props) => {
                   tabContent: (
                     <div className="donor-list">
                       <Table
-                        tableHeaderColor="primary"
+                        tableHeaderColor="info"
                         tableHead={["Name", "Donation"]}
                         tableData={props.donationData}
                       />
@@ -231,6 +235,7 @@ function mapStateToProps(appState) {
     item: appState.item,
     donations: appState.donations,
     donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
+    total: appState.donation_amount
   }
 }
 export default withStyles(productStyle)(connect(mapStateToProps)(DonItemData))
