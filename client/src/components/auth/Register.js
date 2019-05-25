@@ -41,10 +41,11 @@ const Register = props => {
       <div className="placeholder_reg_img"></div>
       <div className="reg">
         <div className="loginIcon">
-          <Avatar>
+          <div id="login_logo">WishBig</div>
+          <Avatar id="lock_color">
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography id="welc_msg" component="h1" variant="h5">
             Registration
           </Typography>
         </div>

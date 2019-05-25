@@ -1,12 +1,12 @@
 import store from "../store"
 import axios from 'axios'
-// import io from "socket.io-client"
+import io from "socket.io-client"
 
-// let socket = null
-// export function connect(user) {
-//   // Socket io changes remote login
-//   socket = io.connect("http://localhost:3001")
-// }
+let socket = null
+export function connect(user) {
+  // Socket io changes remote login
+  socket = io.connect("http://10.68.0.125:3001")
+}
 
 // get user data
 export function getUser(username) {

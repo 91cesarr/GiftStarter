@@ -33,15 +33,53 @@ html {
 .reg form {
       width: 450px;
 }
+/* Small screens - MOBILE */
+@media only screen and (max-width: 40em) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.login {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    justify-content: center;
+}
+.justify {
+    margin: 0px 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    box-shadow: none!important;
+}
+.login form {
+    width: auto;
+}
+
+  .reg {
+  padding: 0;
+  display: inline;
+  justify-content: center;
+  margin: 22px 0;
+}
+.reg form {
+    width: auto;
+}
+/* .login form div,.login form button,.login form a {
+    width:25%;
+} */
+
+ } /* Define mobile styles - Mobile First */
+
  /* min-width 1024px and max-width 1440px laptop and desktop and bigger*/
 @media only screen and (min-width: 90em) { 
   .login {
-  padding: 60px;
+  padding: 140px 60px;
   display: inline;
   justify-content: space-around;
 }
   .reg {
-  padding: 142px 60px;
+  padding: 162px 60px;
   display: inline;
   justify-content: space-around;
 }
@@ -99,7 +137,6 @@ html {
     width: 100%;
     margin: 20px auto;
     max-width: 1440px;
-    /* transform: translate3d(0, -12%, 0); */
 } 
 
 .wrap_pricing {
