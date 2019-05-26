@@ -232,6 +232,9 @@ html {
 .NavPills-info-519{
      box-shadow: none!important;
 }
+.NavPills-info-568 {
+    box-shadow: none!important;
+}
 .CardBody-cardBody-323 {
     padding: 0.4375rem 0.315rem!important;
 }
@@ -241,14 +244,19 @@ html {
 } */
 
 .Toastify__progress-bar--default {
-    background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));
-    background: -webkit-linear-gradient(left,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
-    background: linear-gradient(90deg,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
+    background: #3da8c2;
+}
+
+/* chart  */
+.chart_wrapper {
+  width:100%;
+  height:300px;
+  padding-top:20px;
 }
 
 /* Create for select field */
 .naSelect {
-  border-bottom: 01px solid #d2d2d2 !important;
+  border-bottom: 1px solid #d2d2d2 !important;
 }
 
 .naSelect::before {

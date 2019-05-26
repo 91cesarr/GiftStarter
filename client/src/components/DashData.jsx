@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from "react";
+import { ResponsiveContainer, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
 import PropTypes from "prop-types";
 import moment from "moment"
-import { getUser, getItems, getDonList } from "../actions/actions"
+import { getUser, getItems, getDonList, getChartData } from "../actions/actions"
 import { AuthContext, AuthRoute } from '../lib/auth'
 import { connect } from 'react-redux'
 
@@ -22,16 +23,15 @@ import CardBody from "components/Card/CardBody.jsx";
 import DashItemData from "./DashItemData"
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-
 const DashData = props => {
   const { user } = useContext(AuthContext)
-
+  // Chart item data
   useEffect(() => {
     getUser(user)
     getItems(props.userData.user_id)
     getDonList(props.item.item_id)
+    getChartData(props.donations);
   }, [user, props.userData.user_id, props.item.item_id])
-
   const { classes } = props;
   return (
     <div>
@@ -46,6 +46,36 @@ const DashData = props => {
               </p>
             </CardHeader>
             <CardBody>
+              {/* start chart data */}
+              <div className="chart_wrapper" style={{ width: "100%", height: 300 }}>
+                <ResponsiveContainer>
+                  <ComposedChart
+                    width={500}
+                    height={400}
+                    data={props.donations}
+                    margin={{
+                      top: 20,
+                      right: 20,
+                      bottom: 20,
+                      left: 20
+                    }}
+                  >
+                    <CartesianGrid stroke="#f5f5f5" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Area
+                      type="monotone"
+                      dataKey="amount"
+                      fill="#63da42"
+                      stroke="#52c234"
+                    />
+                    <Bar dataKey={props.chart.requestor_id} barSize={20} fill="#11998e" />
+                    <Line type="monotone" dataKey={props.chart.amount} stroke="#11998e" />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+              {/* end chart data */}
               <Table
                 tableHeaderColor="primary"
                 tableHead={["ID", "Name", "Amount", "Donated", "Remaining"
@@ -59,6 +89,7 @@ const DashData = props => {
         </GridItem>
       </GridContainer>
     </div>
+    
   );
 }
 
@@ -75,10 +106,11 @@ function mapStateToProps(appState) {
       item.name,
       item.amount === "" ? "$0.00" : '$' + Number(item.amount).toFixed(2),
       item.donAmount === null ? "$0.00" : '$' + Number(item.donAmount).toFixed(2),
-      item.remainder === null ? "$0.00" : '$' + Number(item.remainder).toFixed(2)
+      item.remainder === null ? "$0.00" : '$' + Number(item.remainder).toFixed(2),
       // ,'' + item.status
     ]),
-    donations: appState.donations
+    donations: appState.donations,
+    chart: appState.chart
   }
 }
 
