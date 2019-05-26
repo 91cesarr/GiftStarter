@@ -65,7 +65,8 @@ const DonItemData = (props) => {
           }).then(response => {
             response.json().then(data => {
               toast(greeting, {
-                position: "top-right",
+                className: 'toast',
+                position: "bottom-right",
                 autoClose: 2800,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -103,7 +104,7 @@ const DonItemData = (props) => {
           <div className="wrap_pricing">
             <div className="total_amount">
               <h3 className={classes.title}>
-                Total Amount
+                Total Amount{" "}
                 <LightTooltip
                   id="tooltip-top"
                   title={"Total amount requested for " + props.item.name}
@@ -121,7 +122,7 @@ const DonItemData = (props) => {
             </div>
             <div className="remaining_amount">
               <h3 className={classes.title}>
-                Remaining Amount
+                Remaining Amount{" "}
                 <LightTooltip
                   id="tooltip-top"
                   title={"Remaining amount needed to fund " + props.item.name}

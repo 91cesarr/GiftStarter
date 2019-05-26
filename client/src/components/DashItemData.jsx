@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux'
 import { getItemData } from "../actions/actions"
-
+import { Link } from 'react-router-dom'
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.jsx";
@@ -33,6 +33,7 @@ const DashItemData = props => {
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>{props.item.name}</h2>
+          <Link to={"/donation/" + props.match.params.item_id}><h4 className={classes.title}>Go to donation page</h4></Link>
           <h5 className={classes.description}>Progress toward goal: {props.percent}%</h5>
           <br />
           <CustomLinearProgress

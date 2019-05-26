@@ -22,13 +22,10 @@ import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.js
 import DonItemData from "./DonItemData.jsx";
 
 const Donation = (props) => {
-  const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    getUser(user)
     getItemData(props.match.params.item_id)
-    getDonList(props.item.item_id)
-  }, [user, props.match.params.item_id, props.item.item_id])
+  }, [props.match.params.item_id])
 
   const { classes, ...rest } = props;
 
@@ -68,10 +65,7 @@ const Donation = (props) => {
 
 function mapStateToProps(appState) {
   return {
-    user: appState.user,
-    item: appState.item,
-    donations: appState.donations,
-    total: appState.donation_amount
+    item: appState.item
   }
 }
 export default withStyles(landingPageStyle)(connect(mapStateToProps)(Donation))

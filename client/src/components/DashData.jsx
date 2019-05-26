@@ -30,7 +30,6 @@ const DashData = props => {
     getUser(user)
     getItems(props.userData.user_id)
     getDonList(props.item.item_id)
-    getChartData(props.donations);
   }, [user, props.userData.user_id, props.item.item_id])
   const { classes } = props;
   return (
@@ -67,11 +66,10 @@ const DashData = props => {
                     <Area
                       type="monotone"
                       dataKey="amount"
-                      fill="#63da42"
-                      stroke="#52c234"
+                      fill="#26c6da"
+                      stroke="#26c6da"
                     />
-                    <Bar dataKey={props.chart.requestor_id} barSize={20} fill="#11998e" />
-                    <Line type="monotone" dataKey={props.chart.amount} stroke="#11998e" />
+                    <Line type="monotone" dataKey={props.donations.amount} stroke="#11998e" />
                   </ComposedChart>
                 </ResponsiveContainer>
               </div>
@@ -109,8 +107,7 @@ function mapStateToProps(appState) {
       item.remainder === null ? "$0.00" : '$' + Number(item.remainder).toFixed(2),
       // ,'' + item.status
     ]),
-    donations: appState.donations,
-    chart: appState.chart
+    donations: appState.donations
   }
 }
 

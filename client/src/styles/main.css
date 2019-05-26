@@ -235,6 +235,10 @@ html {
 .NavPills-info-568 {
     box-shadow: none!important;
 }
+.NavPills-info-446 {
+    box-shadow: none!important;
+
+}
 .CardBody-cardBody-323 {
     padding: 0.4375rem 0.315rem!important;
 }
@@ -244,9 +248,12 @@ html {
 } */
 
 .Toastify__progress-bar--default {
-    background: #3da8c2;
+    background: #46c1df;
 }
-
+.toast{
+  background: #f7feff;
+  color:#222;
+}
 /* chart  */
 .chart_wrapper {
   width:100%;
