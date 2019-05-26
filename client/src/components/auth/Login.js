@@ -38,8 +38,7 @@ const Login = props => {
       to={{ opacity: 1, marginRight: 0 }}
     >
       { props => (
-        <div style={props}>
-          <Paper className="justify">
+        <Paper className="justify" style={props}>
             <div className="login">
               <div className="loginIcon">
                 <div id="login_logo">WishBig</div>
@@ -97,8 +96,6 @@ const Login = props => {
             </div>
             <div className="placeholder_login_img"></div>
           </Paper>
-
-        </div>
       )}
       </Spring>
   )

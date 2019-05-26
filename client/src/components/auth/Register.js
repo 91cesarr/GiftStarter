@@ -8,6 +8,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import { AuthContext } from "../../lib/auth"
+import { Link } from 'react-router-dom'
 //spring.io transitions
 import { Spring } from 'react-spring/renderprops'
 const Register = props => {
@@ -43,8 +44,7 @@ const Register = props => {
       to={{ opacity: 1, marginLeft: 0 }}
     >
       {props => (
-        <div style={props}>
-    <Paper className="justify">
+        <Paper className="justify" style={props}>
       <div className="placeholder_reg_img"></div>
       <div className="reg">
         <div className="loginIcon">
@@ -55,6 +55,7 @@ const Register = props => {
           <Typography id="welc_msg" component="h1" variant="h5">
             Registration
           </Typography>
+          <Link to="/login"><h4 style={{ textAlign: 'center' }}>Already have an account?</h4></Link>
         </div>
         <form onSubmit={sendRegister}>
           {userError || passError ? (
@@ -101,7 +102,6 @@ const Register = props => {
         </form>
       </div>
       </Paper>
-        </div>
       )}
     </Spring>
   )
