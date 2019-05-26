@@ -9,8 +9,10 @@ import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../lib/auth"
-
+//spring.io transitions
+import { Spring } from 'react-spring/renderprops'
 const Login = props => {
+  //page transition
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
@@ -31,64 +33,74 @@ const Login = props => {
   }
 
   return (
-    <Paper className="justify">
-      <div className="login">
-        <div className="loginIcon">
-          <div id="login_logo">WishBig</div>
-          <Avatar id="lock_color">
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography id="welc_msg" component="h1" variant="h5">
-            Welcome to WishBig
+    <Spring
+      from={{ opacity: 0, marginRight: -500 }}
+      to={{ opacity: 1, marginRight: 0 }}
+    >
+      { props => (
+        <div style={props}>
+          <Paper className="justify">
+            <div className="login">
+              <div className="loginIcon">
+                <div id="login_logo">WishBig</div>
+                <Avatar id="lock_color">
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography id="welc_msg" component="h1" variant="h5">
+                  Welcome to WishBig
           </Typography>
+              </div>
+              <form onSubmit={sendLogin}>
+                {error ? <Typography color="error">{errorText}</Typography> : ""}
+                <FormControl error={error} margin="normal" required fullWidth>
+                  <InputLabel htmlFor="email">Username</InputLabel>
+                  <Input
+                    onChange={e => setUsername(e.target.value)}
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </FormControl>
+                <FormControl error={error} margin="normal" required fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    onChange={e => setPassword(e.target.value)}
+                    name="password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                  />
+                </FormControl>
+                <Button
+                  className="loginButton"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                >
+                  Sign in
+          </Button>
+                <div className="or">or</div>
+                <Button
+                  component={Link}
+                  to="/register"
+                  className="registerButton"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                >
+                  Register
+          </Button>
+              </form>
+            </div>
+            <div className="placeholder_login_img"></div>
+          </Paper>
+
         </div>
-        <form onSubmit={sendLogin}>
-          {error ? <Typography color="error">{errorText}</Typography> : ""}
-          <FormControl error={error} margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Username</InputLabel>
-            <Input
-              onChange={e => setUsername(e.target.value)}
-              id="email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-          </FormControl>
-          <FormControl error={error} margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              onChange={e => setPassword(e.target.value)}
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
-          <Button
-            className="loginButton"
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Sign in
-          </Button>
-          <div className="or">or</div>
-          <Button
-            component={Link}
-            to="/register"
-            className="registerButton"
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-          >
-            Register
-          </Button>
-        </form>
-      </div>
-      <div className="placeholder_login_img"></div>
-      </Paper>
+      )}
+      </Spring>
   )
 }
 

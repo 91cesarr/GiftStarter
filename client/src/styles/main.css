@@ -9,7 +9,7 @@ html {
 
 /* begin styles for login and registration */
 .justify {
-  margin: 0 auto 40px auto;
+  margin: 0 auto;
   display:flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -71,10 +71,10 @@ html {
 
  } /* Define mobile styles - Mobile First */
 
- /* min-width 1024px and max-width 1440px laptop and desktop and bigger*/
+ /* min-width 1024px and max-width 1440px laptop*/
 @media only screen and (min-width: 90em) { 
   .login {
-  padding: 140px 60px;
+  padding: 160px 60px;
   display: inline;
   justify-content: space-around;
 }
@@ -111,7 +111,7 @@ html {
   align-items: center;
 }
 .or {
-  margin: 30px 0;
+  margin: 10px 0;
   font-size: 18px;
   text-align: center;
   font-family: "Roboto";
@@ -130,6 +130,40 @@ html {
 #lock_color {
   background-color:#8e24aa;
 }
+
+/* Desktop xl */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { 
+.placeholder_login_img {
+    width: 960px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    /* background: #A4C4B5; */
+    background-image: url(/static/media/standing.b08234a2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.login {
+    padding: 213px 60px;
+    display: inline;
+    justify-content: space-around;
+}
+.placeholder_reg_img {
+    width: 960px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    /* background: #A4C4B5; */
+    background-image: url(/static/media/standing.b08234a2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.reg {
+    padding: 216px 60px;
+    display: inline;
+    justify-content: space-around;
+}
+} 
 /* end login and registration */
 
 

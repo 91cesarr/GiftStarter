@@ -66,14 +66,14 @@ console.log("item",props.item)
         .then(data => {
           toast(greeting, {
             position: "top-right",
-            autoClose: 2000,
+            autoClose: 2800,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true
           })
             // sets a time out before reloading the page
-              setTimeout(() => { window.location.reload() }, 2500)
+              setTimeout(() => { window.location.reload() }, 3500)
         });
     });
   }
@@ -181,7 +181,7 @@ console.log("item",props.item)
                             <ReactStripeCheckout
                               disabled={(rem <= 0.00 ? true : false)}
                               name={props.item.name}
-                              label={(rem <= 0.00 ? 'Funding is complete thank you!' : 'Pay With Card')}
+                              label={(rem <= 0.00 ? 'Donations have been met thank you!' : 'Pay With Card')}
                               donor_name={name}
                               amount={amount * 100}
                               item_id={props.item.item_id}
