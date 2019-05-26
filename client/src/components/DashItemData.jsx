@@ -84,7 +84,7 @@ function mapStateToProps(appState) {
     item: appState.item,
     percent: appState.item.percent > 0 ? appState.item.percent : 0,
     donations: appState.donations,
-    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
+    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '$' + don.amount.toFixed(2)]),
   }
 }
 

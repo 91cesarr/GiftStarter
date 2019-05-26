@@ -73,9 +73,9 @@ function mapStateToProps(appState) {
     items: appState.items.map(item => [
       '' + item.item_id,
       item.name,
-      item.amount === "" ? "$0.00" : '' + '$' + Number(item.amount).toFixed(2),
-      item.donAmount === null ? "$0.00" : '' + '$' + Number(item.donAmount).toFixed(2),
-      item.remainder === null ? "$0.00" : '' + '$' + Number(item.remainder).toFixed(2)
+      item.amount === "" ? "$0.00" : '$' + Number(item.amount).toFixed(2),
+      item.donAmount === null ? "$0.00" : '$' + Number(item.donAmount).toFixed(2),
+      item.remainder === null ? "$0.00" : '$' + Number(item.remainder).toFixed(2)
       // ,'' + item.status
     ]),
     donations: appState.donations

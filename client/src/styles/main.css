@@ -39,6 +39,9 @@ html {
     max-width: 100%;
     overflow-x: hidden;
 }
+.total_amount, .remaining_amount {
+    padding: 10px!important;
+}
 .login {
     padding: 0;
     margin: 0;
@@ -65,12 +68,29 @@ html {
 .reg form {
     width: auto;
 }
-/* .login form div,.login form button,.login form a {
-    width:25%;
-} */
-
- } /* Define mobile styles - Mobile First */
-
+}
+.text_left{
+  text-align: left;
+}
+/* donation button */
+.StripeCheckout {
+    position: relative!important;
+    font-size: 17px!important;
+    line-height: 21px!important;
+    /* height: 37px!important; */
+    font-weight: 700!important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.12)!important;
+    color: #fff!important;
+    cursor: pointer!important;
+    transition: all .2s ease-in-out!important;
+    border: 0px!important;
+    padding: 1px!important;
+    float:left;
+    outline:none!important;
+}
+.StripeCheckout:hover {
+  background-color:#333!important;
+}
  /* min-width 1024px and max-width 1440px laptop*/
 @media only screen and (min-width: 90em) { 
   .login {
@@ -88,7 +108,6 @@ html {
   display: flex;
   justify-content: space-around;
   padding:20px;
-  /* background:#A4C4B5; */
   background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -98,7 +117,6 @@ html {
   display: flex;
   justify-content: space-around;
   padding:20px;
-  /* background:#A4C4B5; */
   background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -168,7 +186,7 @@ html {
 
 
 .itemIMG {
-    width: 100%;
+    width: 80%;
     /* margin: 20px auto; */
     max-height: 250px;
     max-width: 1440px;
@@ -182,7 +200,7 @@ html {
 }
 
 .total_amount,.remaining_amount {
-  padding: 30px 85px;
+  padding: 30px 40px;
 }
 
 /* donate form */
@@ -199,23 +217,28 @@ html {
 
 /* donation ui */
 .title_name_image {
-      box-shadow: none!important;
+             box-shadow: none!important;
 }
 .img_card {
-      background: #fdfcfc!important;
       box-shadow: none!important;
-      border:1px solid #dfdfdf!important;
+      border:1px solid #f3f3f3!important;
 }
 .NavPills-info-337{
       box-shadow: none!important;
+}
+.NavPills-info-338 {
+     box-shadow: none!important;
+}
+.NavPills-info-519{
+     box-shadow: none!important;
 }
 .CardBody-cardBody-323 {
     padding: 0.4375rem 0.315rem!important;
 }
 
-.NavPills-pillsWithIcons-330 {
+/* .NavPills-pillsWithIcons-330 {
     background: #fcfcfc;
-}
+} */
 
 .Toastify__progress-bar--default {
     background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));
