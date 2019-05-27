@@ -97,7 +97,7 @@ const DonItemData = (props) => {
   return (
     <Spring
       from={{ opacity: 0, marginBottom: -500 }}
-      to={{ opacity: 1, marginBottom: 100 }}
+      to={{ opacity: 1, marginBottom: 25 }}
       delay='500'
       config={config.molasses}
     >
