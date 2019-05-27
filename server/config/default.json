@@ -1,9 +1,9 @@
 {
     "db": {
-        "hostname": "localhost",
-        "username": "cesarnova",
-        "password": "I<3punchc0de",
-        "database": "GiftStarter"
+        "hostname": "us-cdbr-iron-east-02.cleardb.net",
+        "username": "b87f0a8103fed1",
+        "password": "be522d18",
+        "database": "heroku_897b88fc06c20ba"
     },
     "secret": "N7vj.7ch?%Q%T*N’>28^YP$XW=a!",
     "salt": "r&5=g4dX.VrJYmT"
