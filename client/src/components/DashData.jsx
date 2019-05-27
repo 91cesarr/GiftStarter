@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
-import { ResponsiveContainer, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
+import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
 import PropTypes from "prop-types";
 import moment from "moment"
-import { getUser, getItems, getDonList, getChartData } from "../actions/actions"
+import { getUser, getItems, getDonList } from "../actions/actions"
 import { AuthContext, AuthRoute } from '../lib/auth'
 import { connect } from 'react-redux'
 
@@ -21,9 +21,6 @@ import CardBody from "components/Card/CardBody.jsx";
 
 // Sections for this page
 import DashItemData from "./DashItemData"
-
-//spring.io transitions
-import { Spring, config } from 'react-spring/renderprops'
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 const DashData = props => {
