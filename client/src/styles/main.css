@@ -88,6 +88,10 @@ html {
     height: 34px!important;
     font-weight: 400!important;
 }
+/* card for dashboard */
+.dash-card {
+margin-top:0!important;
+}
  /* min-width 1024px and max-width 1440px laptop*/
 @media only screen and (min-width: 90em) { 
   .login {
@@ -213,9 +217,6 @@ html {
 }
 
 /* donation ui */
-.title_name_image {
-             box-shadow: none!important;
-}
 .img_card {
       box-shadow: none!important;
       border:1px solid #f3f3f3!important;
