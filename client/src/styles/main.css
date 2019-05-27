@@ -229,8 +229,8 @@ margin-top:0!important;
     background: #46c1df;
 }
 .toast{
-  background: #f7feff;
-  color:#222;
+  background: linear-gradient(60deg, #26c6da, #00acc1);
+  color:#fff;
 }
 /* chart  */
 .chart_wrapper {
