@@ -22,6 +22,9 @@ import CardBody from "components/Card/CardBody.jsx";
 // Sections for this page
 import DashItemData from "./DashItemData"
 
+//spring.io transitions
+import { Spring, config } from 'react-spring/renderprops'
+
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 const DashData = props => {
   const { user } = useContext(AuthContext)

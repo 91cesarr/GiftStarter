@@ -18,12 +18,20 @@ import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.js
 // // Sections for this page
 import CreateForm from "./CreateForm.jsx";
 
+//spring.io transitions
+import { Spring } from 'react-spring/renderprops'
+
 const dashboardRoutes = [];
 
 const CreateItem = props => {
   const { classes, ...rest } = props;
 
   return (
+    <Spring
+      from={{ opacity: 0, marginLeft: -500 }}
+      to={{ opacity: 1, marginLeft: 0 }}
+    >
+      {props => (
     <div>
       <Header
         color="transparent"
@@ -42,7 +50,7 @@ const CreateItem = props => {
           className={classes.container}
         >
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={6} style={props}>
               <h1
                 className={classes.title}
               >What if you could have it all?</h1>
@@ -68,6 +76,8 @@ const CreateItem = props => {
         </div>
       </div>
     </div>
+      )}
+    </Spring>
   );
 
 }

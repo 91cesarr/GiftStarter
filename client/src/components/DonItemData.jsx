@@ -34,6 +34,9 @@ import productStyle from "assets/jss/material-kit-react/views/landingPageSection
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+//spring.io transitions
+import { Spring, config } from 'react-spring/renderprops'
+
 const DonItemData = (props) => {
   const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState("")
@@ -92,7 +95,14 @@ const DonItemData = (props) => {
   }))(Tooltip);
 
   return (
-    <div className={classes.section}>
+    <Spring
+      from={{ opacity: 0, marginBottom: -500 }}
+      to={{ opacity: 1, marginBottom: 0 }}
+      delay='500'
+      config={config.molasses}
+    >
+      {animStyle => (
+        <div className={classes.section} style={animStyle}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={6}>
           <h2 className={classes.title + " text_left"}>
@@ -254,6 +264,8 @@ const DonItemData = (props) => {
         </GridContainer>
       </div>
     </div>
+      )}
+    </Spring>
   );
 }
 

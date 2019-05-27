@@ -18,7 +18,8 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import workStyle from "assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
 
-
+//spring.io transitions
+import { Spring, config } from 'react-spring/renderprops'
 
 // picture upload to imgur - future
 // const fs = require('fs');
@@ -77,11 +78,18 @@ const CreateForm = props => {
   }
 
   return (
-    <div
-      className={classes.section}
+    <Spring
+      from={{ opacity: 0, marginBottom: -500 }}
+      to={{ opacity: 1, marginBottom: 0 }}
+      delay='500'
+      config={config.molasses}
     >
-      <GridContainer justify="center">
-        <GridItem cs={12} sm={12} md={8}>
+      {props => (
+    <div
+          className={classes.section} style={props}
+    >
+          <GridContainer justify="center">
+            <GridItem cs={12} sm={12} md={8}>
           <h2
             className={classes.title}
           >Tell us about your big wish</h2>
@@ -192,6 +200,8 @@ const CreateForm = props => {
         </GridItem>
       </GridContainer>
     </div>
+      )}
+    </Spring>
   );
 
 }

@@ -21,6 +21,9 @@ import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.js
 // Sections for this page
 import DashData from "./DashData.jsx";
 
+//spring.io transitions
+import { Spring } from 'react-spring/renderprops'
+
 const dashboardRoutes = [];
 
 const Dashboard = props => {
@@ -32,6 +35,11 @@ const Dashboard = props => {
   }, [user])
 
   return (
+    <Spring
+      from={{ opacity: 0, marginLeft: -500 }}
+      to={{ opacity: 1, marginLeft: 0 }}
+    >
+      {props => (
     <div>
       <Header
         color="transparent"
@@ -45,7 +53,9 @@ const Dashboard = props => {
         }}
         {...rest}
       />
-      <Parallax small filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax small filter image={require("assets/img/landing-bg.jpg")}
+      style={props}
+      >
         <div
           className={classes.container}
         >
@@ -64,6 +74,8 @@ const Dashboard = props => {
         </div>
       </div>
     </div>
+      )}
+    </Spring>
   );
 
 }

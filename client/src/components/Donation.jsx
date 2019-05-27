@@ -21,6 +21,9 @@ import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.js
 // Sections for this page
 import DonItemData from "./DonItemData.jsx";
 
+//spring.io transitions
+import { Spring } from 'react-spring/renderprops'
+
 const Donation = (props) => {
 
   useEffect(() => {
@@ -45,12 +48,21 @@ const Donation = (props) => {
       <Parallax small filter image={require("assets/img/landing-bg.jpg")}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>{props.item.requestor} is asking for {props.item.name}</h1>
-              <h4>
+            <Spring
+              from={{ opacity: 0, marginLeft: -500 }}
+              to={{ opacity: 1, marginLeft: 0 }}
+            >
+              {animStyle => (
+                <GridItem xs={12} sm={12} md={6} style={animStyle}>
+                  <div>
+                    <h1 className={classes.title}>{props.item.requestor} is asking for {props.item.name}</h1>
+                    <h4>
                 {props.item.description}
               </h4>
-            </GridItem>
+              </div>
+                </GridItem>
+              )}
+              </Spring>
           </GridContainer>
         </div>
       </Parallax>
