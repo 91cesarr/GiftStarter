@@ -49,7 +49,7 @@ const DashItemData = props => {
       <br />
       <div>
         <GridContainer>
-                    {/* start chart data */}
+          {/* start chart data */}
           <div className="chart_wrapper" style={{ width: "100%", height: 300 }}>
             <ResponsiveContainer>
               <ComposedChart
