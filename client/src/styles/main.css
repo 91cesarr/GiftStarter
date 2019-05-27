@@ -186,10 +186,9 @@ html {
 
 
 .itemIMG {
-    width: 70%;
-    /* margin: 20px auto; */
-    max-height: 250px;
-    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 160px;
 } 
 
 .wrap_pricing {
