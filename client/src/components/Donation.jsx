@@ -1,7 +1,6 @@
-import React, { useEffect, useContext } from "react"
-import { AuthContext } from '../lib/auth'
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
-import { getUser, getItemData, getDonList } from "../actions/actions";
+import { getItemData } from "../actions/actions";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";

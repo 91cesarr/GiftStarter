@@ -104,11 +104,21 @@ const DonItemData = (props) => {
       {animStyle => (
         <div className={classes.section} style={animStyle}>
       <GridContainer justify="center">
+            <GridItem xs={12} sm={12} md={6}>
+              <Card className="img_card">
+                <CardHeader className="title_name_image" color="info">
+                  <h4>{props.item.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <img src={picture} alt={props.item.name} className="itemIMG" />
+                </CardBody>
+              </Card>
+            </GridItem>
         <GridItem xs={12} sm={12} md={6}>
-          <h2 className={classes.title + " text_left"}>
+          <h2 className={classes.title}>
             Why I want {props.item.name}:
           </h2>
-          <p className={classes.description + " text_left"}>
+          <p className={classes.description}>
             {props.item.reason}
           </p>
           <div className="wrap_pricing">
@@ -148,22 +158,12 @@ const DonItemData = (props) => {
             </div>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card className="img_card">
-            <CardHeader className="title_name_image" color="primary">
-              <h4>{props.item.name}</h4>
-            </CardHeader>
-            <CardBody>
-              <img src={picture} alt={props.item.name} className="itemIMG" />
-            </CardBody>
-          </Card>
-        </GridItem>
       </GridContainer>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <NavPills
-              color="info"
+              color="primary"
               horizontal={{
                 tabsGrid: { xs: 12, sm: 4, md: 6 },
                 contentGrid: { xs: 12, sm: 8, md: 6 }
@@ -251,7 +251,7 @@ const DonItemData = (props) => {
                   tabContent: (
                     <div className="donor-list">
                       <Table
-                        tableHeaderColor="info"
+                        tableHeaderColor="primary"
                         tableHead={["Name", "Donation"]}
                         tableData={props.donationData}
                       />
