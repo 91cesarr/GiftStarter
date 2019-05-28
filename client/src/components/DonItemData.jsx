@@ -73,7 +73,7 @@ const DonItemData = (props) => {
                 autoClose: 2800,
                 hideProgressBar: false,
                 closeOnClick: true,
-                pauseOnHover: true,
+                pauseOnHover: false,
                 draggable: true
               });
               // sets a time out before reloading the page

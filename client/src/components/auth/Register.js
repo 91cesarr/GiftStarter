@@ -55,7 +55,7 @@ const Register = props => {
           <Typography id="welc_msg" component="h1" variant="h5">
             Registration
           </Typography>
-          <Link to="/login"><h4 style={{ textAlign: 'center' }}>Already have an account?</h4></Link>
+              <Link className="back-link" to="/login"><h4 style={{ textAlign: 'center' }}>Already have an account?</h4></Link>
         </div>
         <form onSubmit={sendRegister}>
           {userError || passError ? (

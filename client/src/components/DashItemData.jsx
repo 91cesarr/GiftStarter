@@ -23,19 +23,31 @@ import productStyle from "assets/jss/material-kit-react/views/landingPageSection
 
 import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
+
 const DashItemData = props => {
   const { classes } = props;
-
+  
   useEffect(() => {
     getItemData(props.match.params.item_id)
   }, [props.match.params.item_id])
+
+  const donations = props.donations.map(d => {
+    console.log(d)
+    if (d.donor_name === '') {
+      d.donor_name = 'Anonymous'
+    }
+
+    return d
+  })
+
+  console.log('donations', donations)
 
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>{props.item.name}</h2>
-          <Link to={"/donation/" + props.match.params.item_id}><h4 className={classes.title}>Go to donation page</h4></Link>
+          <Link className="back-link" to={"/donation/" + props.match.params.item_id}><h4 className={classes.title}>Go to donation page</h4></Link>
           <h5 className={classes.description}>Progress toward goal: {props.percent}%</h5>
           <br />
           <CustomLinearProgress
@@ -55,7 +67,7 @@ const DashItemData = props => {
               <ComposedChart
                 width={500}
                 height={400}
-                data={props.donations}
+                data={donations}
                 margin={{
                   top: 20,
                   right: 20,

@@ -92,6 +92,9 @@ html {
 .dash-card {
 margin-top:0!important;
 }
+.back-link {
+  text-decoration: none;
+}
  /* min-width 1024px and max-width 1440px laptop*/
 @media only screen and (min-width: 90em) { 
   .login {
@@ -232,12 +235,23 @@ margin-top:0!important;
   background: linear-gradient(60deg, #26c6da, #00acc1);
   color:#fff;
 }
+.CustomInput-underline-369:after {
+    border-bottom: 2px solid rgb(99, 25, 118);
+}
 /* chart  */
 .chart_wrapper {
   width:100%;
   height:300px;
   padding-top:20px;
 }
+
+.recharts-cartesian-axis-tick-value {
+    width:4px!important;
+        display:inline-block!important;
+        overflow: hidden!important;
+        white-space: nowrap!important;
+        text-overflow: ellipsis!important;
+    }
 
 /* Create for select field */
 .naSelect {

@@ -45,7 +45,7 @@ function CustomLinkTable({ ...props }) {
                   if (rowKey !== 0) {
                     return (
                       <TableCell className={classes.tableCell} key={'item-cell-' + rowKey}>
-                        <Link to={'/dashboard/' + tableData[tableKey][0]}>{prop}</Link>
+                        <Link className="back-link" to={'/dashboard/' + tableData[tableKey][0]}>{prop}</Link>
                       </TableCell>
                     );
                   } else {
