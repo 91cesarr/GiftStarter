@@ -7,27 +7,30 @@ const initialState = {
   item_id: {},
   items: [],
   donations: [],
-}
+  chart: []
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case "GET_ITEM":
-      return { ...state, item: action.payload }
+      return { ...state, item: action.payload };
     case "GET_ITEM_DATA":
-      return { ...state, item: action.payload }
+      return { ...state, item: action.payload };
     case "GET_USER":
-      return { ...state, user: action.payload }
+      return { ...state, user: action.payload };
     case "GET_ITEM_LIST":
-      return { ...state, items: action.payload }
+      return { ...state, items: action.payload };
     case "GET_DONATION_LIST":
-      return { ...state, donations: action.payload }
+      return { ...state, donations: action.payload };
+    case "GET_CHART_DATA":
+      return { ...state, chart: action.payload };
     case "GET_DONATION":
-      return { ...state, donation: action.payload }
+      return { ...state, donation: action.payload };
     case "GET_DONATION_TOTAL":
-      return { ...state, donation_amount: action.payload }
+      return { ...state, donation_amount: action.payload };
     case "GET_NEW_ITEM":
-      return { ...state, item_id: action.payload }
+      return { ...state, item_id: action.payload };
     default:
-      return state
+      return state;
   }
 }

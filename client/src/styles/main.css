@@ -9,7 +9,7 @@ html {
 
 /* begin styles for login and registration */
 .justify {
-  margin: 0 auto 40px auto;
+  margin: 0 auto;
   display:flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -33,15 +33,74 @@ html {
 .reg form {
       width: 450px;
 }
- /* min-width 1024px and max-width 1440px laptop and desktop and bigger*/
+/* Small screens - MOBILE */
+@media only screen and (max-width: 40em) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.total_amount, .remaining_amount {
+    padding: 10px!important;
+}
+.login {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    justify-content: center;
+}
+.justify {
+    margin: 0px 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    box-shadow: none!important;
+}
+.login form {
+    width: auto;
+}
+
+  .reg {
+  padding: 0;
+  display: inline;
+  justify-content: center;
+  margin: 22px 0;
+}
+.reg form {
+    width: auto;
+}
+}
+.text_left{
+  text-align: left;
+}
+/* donation button */
+.StripeCheckout {
+  float:left;
+  outline:none!important;
+}
+.StripeCheckout span {
+    background-color: #3ea8e5!important;
+    background-image: -webkit-gradient(linear,left top, left bottom,from(#44b1e8),to(#3098de))!important;
+    background-image: -webkit-linear-gradient(top,#44b1e8,#3098de)!important;
+    background-image: linear-gradient(-180deg,#44b1e8,#3098de)!important;
+    box-shadow: 0 1px 0 0 rgba(46,86,153,.15), inset 0 1px 0 0 rgba(46,86,153,.1), inset 0 0px 0 0 rgba(46,86,153,.4)!important;
+    font-size: 14px!important;
+    line-height: 34px!important;
+    height: 34px!important;
+    font-weight: 400!important;
+}
+/* card for dashboard */
+.dash-card {
+margin-top:0!important;
+}
+ /* min-width 1024px and max-width 1440px laptop*/
 @media only screen and (min-width: 90em) { 
   .login {
-  padding: 60px;
+  padding: 160px 60px;
   display: inline;
   justify-content: space-around;
 }
   .reg {
-  padding: 142px 60px;
+  padding: 162px 60px;
   display: inline;
   justify-content: space-around;
 }
@@ -50,7 +109,6 @@ html {
   display: flex;
   justify-content: space-around;
   padding:20px;
-  /* background:#A4C4B5; */
   background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -60,7 +118,6 @@ html {
   display: flex;
   justify-content: space-around;
   padding:20px;
-  /* background:#A4C4B5; */
   background-image:url("../assets/img/standing.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -73,7 +130,7 @@ html {
   align-items: center;
 }
 .or {
-  margin: 30px 0;
+  margin: 10px 0;
   font-size: 18px;
   text-align: center;
   font-family: "Roboto";
@@ -92,14 +149,48 @@ html {
 #lock_color {
   background-color:#8e24aa;
 }
+
+/* Desktop xl */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { 
+.placeholder_login_img {
+    width: 960px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    /* background: #A4C4B5; */
+    background-image: url(/static/media/standing.b08234a2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.login {
+    padding: 213px 60px;
+    display: inline;
+    justify-content: space-around;
+}
+.placeholder_reg_img {
+    width: 960px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    /* background: #A4C4B5; */
+    background-image: url(/static/media/standing.b08234a2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.reg {
+    padding: 216px 60px;
+    display: inline;
+    justify-content: space-around;
+}
+} 
 /* end login and registration */
 
 
 .itemIMG {
-    width: 100%;
-    margin: 20px auto;
+    width: 70%;
+    /* margin: 20px auto; */
+    max-height: 250px;
     max-width: 1440px;
-    /* transform: translate3d(0, -12%, 0); */
 } 
 
 .wrap_pricing {
@@ -110,7 +201,7 @@ html {
 }
 
 .total_amount,.remaining_amount {
-  padding: 30px 85px;
+  padding: 30px 20px;
 }
 
 /* donate form */
@@ -124,15 +215,33 @@ html {
   height:343px;
   overflow:scroll;
 }
+
+/* donation ui */
+.img_card {
+      box-shadow: none!important;
+      border:1px solid #f3f3f3!important;
+}
+.CardBody-cardBody-323 {
+    padding: 0.4375rem 0.315rem!important;
+}
+
 .Toastify__progress-bar--default {
-    background: -webkit-gradient(linear,left top, right top,from(#6dd5ed),color-stop(#6dd5ed),color-stop(#6dd5ed),color-stop(#3da8c2),color-stop(#3da8c2),to(#3da8c2));
-    background: -webkit-linear-gradient(left,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
-    background: linear-gradient(90deg,#6dd5ed,#6dd5ed,#6dd5ed,#3da8c2,#3da8c2,#3da8c2);
+    background: #46c1df;
+}
+.toast{
+  background: linear-gradient(60deg, #26c6da, #00acc1);
+  color:#fff;
+}
+/* chart  */
+.chart_wrapper {
+  width:100%;
+  height:300px;
+  padding-top:20px;
 }
 
 /* Create for select field */
 .naSelect {
-  border-bottom: 01px solid #d2d2d2 !important;
+  border-bottom: 1px solid #d2d2d2 !important;
 }
 
 .naSelect::before {

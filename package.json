@@ -17,6 +17,7 @@
     "imgur-uploader": "^4.2.1",
     "react-chartist": "^0.13.3",
     "react-moment": "^0.9.2",
+    "react-spring": "^8.0.20",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.0"
   },

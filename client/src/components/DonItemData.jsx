@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { AuthContext } from '../lib/auth'
 import { connect } from "react-redux"
-import { getUser, getItemData, donate, donation, getDonList } from "../actions/actions";
+import { getUser, getItemData, donate, donation, getDonList, getTotal } from "../actions/actions";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -34,82 +34,126 @@ import productStyle from "assets/jss/material-kit-react/views/landingPageSection
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+//spring.io transitions
+import { Spring, config } from 'react-spring/renderprops'
+
 const DonItemData = (props) => {
   const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState("")
   const [name, setName] = useState("")
-  const greeting = `Hello,` + name + ` has made a donation towards your gift`
+    const total = props.item.item_id;
+    const rem = props.item.amount - props.total.total;
+    const url = "http://wishbig.com/donation/" + props.item.item_id;
+    const { classes } = props;
+    const greeting = `Hello, ` + name + ` Thank you for your donation!`
+    const picture = props.item.picture
+    const shareText = "Check this out! Help buy " + props.item.name;
   useEffect(() => {
     getUser(user)
     getItemData(props.item.item_id)
     getDonList(props.item.item_id)
-  }, [user, props.item.item_id])
+    getTotal(total)
+  }, [user, props.item.item_id, total])
 
-  // const item_id = props.item.item_id
-  const url = 'http://wishbig.com/donation/' + props.item.item_id
-  const shareText = 'Check this out! Help buy ' + props.item.name
-  // const donor_id = props.user.user_id
-  // const requestor_id = props.item.requestor_id
-  const { classes } = props;
+        const onToken = token => {
+          donation(
+            name,
+            amount,
+            props.item.item_id,
+            props.item.requestor_id
+          );
+          fetch("/api/donation", {
+            method: "POST",
+            body: JSON.stringify(token)
+          }).then(response => {
+            response.json().then(data => {
+              toast(greeting, {
+                className: 'toast',
+                position: "bottom-right",
+                autoClose: 2800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+              });
+              // sets a time out before reloading the page
+              setTimeout(() => {
+                window.location.reload();
+              }, 3500);
+            });
+          });
+        };
 
-  const onToken = (token) => {
-    donation(name, amount, props.item.item_id, props.item.requestor_id)
-    toast(greeting, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true
-    })
-    fetch('/api/donation', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json()
-        // reload the page
-        .then(window.location.reload())
-        .then(data => {
-          // alert(`Thank you for your donation!`
-          //   //insert inside `` above  ${data.email}
-          // );
-        });
-    });
-  }
+  // Brings in light tooltip from material ui
+  const LightTooltip = withStyles(theme => ({
+    tooltip: {
+      backgroundColor: theme.palette.common.white,
+      color: "rgba(0, 0, 0, 0.87)",
+      boxShadow: theme.shadows[1],
+      fontSize: 11
+    }
+  }))(Tooltip);
 
   return (
-    <div className={classes.section}>
+    <Spring
+      from={{ opacity: 0, marginBottom: -500 }}
+      to={{ opacity: 1, marginBottom: 25 }}
+      delay='500'
+      config={config.molasses}
+    >
+      {animStyle => (
+        <div className={classes.section} style={animStyle}>
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Why I want {props.item.name}:</h2>
-          <h5 className={classes.description}>
+            <GridItem xs={12} sm={12} md={6}>
+              <Card className="img_card">
+                <CardHeader className="title_name_image" color="info">
+                  <h4>{props.item.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <img src={picture} alt={props.item.name} className="itemIMG" />
+                </CardBody>
+              </Card>
+            </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <h2 className={classes.title}>
+            Why I want {props.item.name}:
+          </h2>
+          <p className={classes.description}>
             {props.item.reason}
-          </h5>
+          </p>
           <div className="wrap_pricing">
             <div className="total_amount">
-              <h3 className={classes.title}>Total Amount <Tooltip
-                id="tooltip-top"
-                title="This is the total amount of the current item"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <i className={"fas fa-info-circle"} />
-              </Tooltip></h3>
+              <h3 className={classes.title}>
+                Total Amount{" "}
+                <LightTooltip
+                  id="tooltip-top"
+                  title={"Total amount requested for " + props.item.name}
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <i className={"fas fa-info-circle"} />
+                </LightTooltip>
+              </h3>
               <div>
-                <h4 className={classes.title}>${Number(props.item.amount).toFixed(2)}</h4>
+                <h4 className={classes.title}>
+                  ${Number(props.item.amount).toFixed(2)}
+                </h4>
               </div>
             </div>
             <div className="remaining_amount">
-              <h3 className={classes.title}>Remaining Amount <Tooltip
-                id="tooltip-top"
-                title="This is the remaining amount left for the current item"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <i className={"fas fa-info-circle"} />
-              </Tooltip></h3>
+              <h3 className={classes.title}>
+                Remaining Amount{" "}
+                <LightTooltip
+                  id="tooltip-top"
+                  title={"Remaining amount needed to fund " + props.item.name}
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <i className={"fas fa-info-circle"} />
+                </LightTooltip>
+              </h3>
               <div>
-                <h4 className={classes.title}>${Number(props.item.remainder).toFixed(2)}</h4>
+                <h4 className={classes.title}>${Number(rem).toFixed(2)}</h4>
               </div>
             </div>
           </div>
@@ -117,19 +161,9 @@ const DonItemData = (props) => {
       </GridContainer>
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>{props.item.name}</h4>
-              </CardHeader>
-              <CardBody>
-                <img src={props.item.picture} alt={props.item.name} className="itemIMG" />
-              </CardBody>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem xs={12} sm={12} md={12}>
             <NavPills
-              color="info"
+              color="primary"
               horizontal={{
                 tabsGrid: { xs: 12, sm: 4, md: 6 },
                 contentGrid: { xs: 12, sm: 8, md: 6 }
@@ -151,12 +185,13 @@ const DonItemData = (props) => {
                               }}
                               inputProps={{
                                 type: "text",
-                                disabled: (props.item.remainder === 0 ? true : false),
+                                disabled: rem <= 0.0 ? true : false,
                                 placeholder: "",
                                 value: name,
-                                onChange: (e) => setName(e.target.value),
+                                onChange: e => setName(e.target.value),
                                 autoComplete: "off"
-                              }} />
+                              }}
+                            />
                             <CustomInput
                               labelText="Donation Amount"
                               name="amount"
@@ -165,22 +200,26 @@ const DonItemData = (props) => {
                               }}
                               inputProps={{
                                 type: "number",
-                                // inputProps: { min: 0, step: 10.00 },
-                                disabled: (props.item.remainder === 0 ? true : false),
+                                inputProps: { min: 0 },
+                                disabled: rem <= 0.0 ? true : false,
                                 placeholder: "$",
                                 value: amount,
-                                onChange: (e) => setAmount(e.target.value),
+                                onChange: e => setAmount(e.target.value),
                                 autoComplete: "off"
-                              }} />
+                              }}
+                            />
                           </GridItem>
                         </GridContainer>
                         <GridContainer>
                           <GridItem>
-                            <div className={classes.title}></div>
                             <ReactStripeCheckout
-                              disabled={(props.item.remainder === 0 ? true : false)}
+                              disabled={rem <= 0.0 ? true : false}
                               name={props.item.name}
-                              label={(props.item.remainder === 0 ? 'Item amount met thank you' : 'Pay With Card')}
+                              label={
+                                rem <= 0.0
+                                  ? "Donations have been met thank you!"
+                                  : "Pay With Card"
+                              }
                               donor_name={name}
                               amount={amount * 100}
                               item_id={props.item.item_id}
@@ -218,13 +257,15 @@ const DonItemData = (props) => {
                       />
                     </div>
                   )
-                },
+                }
               ]}
             />
           </GridItem>
         </GridContainer>
       </div>
     </div>
+      )}
+    </Spring>
   );
 }
 
@@ -233,7 +274,8 @@ function mapStateToProps(appState) {
     user: appState.user,
     item: appState.item,
     donations: appState.donations,
-    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : '' + don.donor_name, don.amount === "" ? "$0.00" : '' + '$' + don.amount.toFixed(2)]),
+    donationData: appState.donations.map(don => [don.donor_name === "" ? "Anonymous" : don.donor_name, don.amount === "" ? "$0.00" : '$' + don.amount.toFixed(2)]),
+    total: appState.donation_amount
   }
 }
 export default withStyles(productStyle)(connect(mapStateToProps)(DonItemData))

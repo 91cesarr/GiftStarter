@@ -89,7 +89,6 @@ export function getTotal(item_id) {
       type: 'GET_DONATION_TOTAL',
       payload: resp.data
     })
-    console.log("this>", resp.data)
   })
 }
 
@@ -122,3 +121,13 @@ export function getNewItem(user_id) {
     })
   })
 } 
+
+// get chart data
+export function getChartData(item_id) {
+  axios.get('/api/donations/' + item_id).then(resp => {
+    store.dispatch({
+      type: 'GET_CHART_DATA',
+      payload: resp.data
+    })
+  })
+}

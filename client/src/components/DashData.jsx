@@ -22,23 +22,22 @@ import CardBody from "components/Card/CardBody.jsx";
 import DashItemData from "./DashItemData"
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-
 const DashData = props => {
   const { user } = useContext(AuthContext)
-
+  // Chart item data
   useEffect(() => {
     getUser(user)
     getItems(props.userData.user_id)
     getDonList(props.item.item_id)
   }, [user, props.userData.user_id, props.item.item_id])
-
+  console.log(props.donations)
   const { classes } = props;
   return (
     <div>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
+          <Card className="dash-card">
+            <CardHeader color="info">
               <h4 className={classes.cardTitleWhite}>My Wishes</h4><br />
               <p className={classes.cardCategoryWhite}>
                 Requested items as of&nbsp;
@@ -47,7 +46,7 @@ const DashData = props => {
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="primary"
+                tableHeaderColor="info"
                 tableHead={["ID", "Name", "Amount", "Donated", "Remaining"
                   // , "Status"
                 ]}
@@ -59,6 +58,7 @@ const DashData = props => {
         </GridItem>
       </GridContainer>
     </div>
+    
   );
 }
 
@@ -73,9 +73,9 @@ function mapStateToProps(appState) {
     items: appState.items.map(item => [
       '' + item.item_id,
       item.name,
-      item.amount === "" ? "$0.00" : '' + '$' + Number(item.amount).toFixed(2),
-      item.donAmount === null ? "$0.00" : '' + '$' + Number(item.donAmount).toFixed(2),
-      item.remainder === null ? "$0.00" : '' + '$' + Number(item.remainder).toFixed(2)
+      item.amount === "" ? "$0.00" : '$' + Number(item.amount).toFixed(2),
+      item.donAmount === null ? "$0.00" : '$' + Number(item.donAmount).toFixed(2),
+      item.remainder === null ? "$0.00" : '$' + Number(item.remainder).toFixed(2),
       // ,'' + item.status
     ]),
     donations: appState.donations
