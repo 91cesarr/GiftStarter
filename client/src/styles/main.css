@@ -216,7 +216,7 @@ margin-top:0!important;
 }
 .donor-list-dashboard {
   height:343px;
-  overflow:scroll;
+  overflow-y:auto;
 }
 
 /* donation ui */
