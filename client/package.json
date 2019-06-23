@@ -22,6 +22,7 @@
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "node-sass": "^4.11.0",
+    "nodemon": "^1.18.11",
     "nouislider": "13.1.0",
     "perfect-scrollbar": "1.4.0",
     "prettier": "1.16.4",
