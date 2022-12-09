@@ -12,7 +12,7 @@
     "chartist": "0.10.1",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "history": "^4.7.2",
     "imgur-uploader": "^4.2.1",
     "jsonwebtoken": "^8.5.1",
